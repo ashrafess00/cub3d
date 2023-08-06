@@ -31,11 +31,11 @@ void	draw_on_img(char *addr, int line_length, int bits_per_pixel, int endian, in
 
 int main(int c, char **args)
 {
-
+	//3ndak tkhl3 rah ghir kantl9 yddi 😪
 	int Map[4][4] = {{1, 1, 1, 1}, 
 					{1, 0, 1, 1},
-					{1, 0, 0, 1},
-					{1, 1, 1, 1},};
+					{1, 1, 0, 1},
+					{1, 1, 1, 1}};
 
 	void *mlx;
 	void *mlx_win;
@@ -57,7 +57,18 @@ int main(int c, char **args)
 		int j = -1;
 		while (++j < MAP_COLS)
 		{
-			draw_on_img(addr, line_length, bits_per_pixel, endian, j * TILE_SIZE, i * TILE_SIZE, 0x00FF0000);
+			int u = -1;
+			while (++u < TILE_SIZE)
+			{
+				int z = -1;
+				while (++z < TILE_SIZE)
+				{
+					if (Map[i][j] == 1)
+						draw_on_img(addr, line_length, bits_per_pixel, endian, j * TILE_SIZE + z, i * TILE_SIZE + u, 0x00FF0000);
+					else
+						draw_on_img(addr, line_length, bits_per_pixel, endian, j * TILE_SIZE + z, i * TILE_SIZE + u, 0x00000000);
+				}
+			}
 		}
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img, 0 , 0);
