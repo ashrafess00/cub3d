@@ -8,12 +8,13 @@ INCLUDE=-I$(LIBFT_DIR) -Iheaders/
 CC=cc
 # CFLAGS=-Wall -Wextra -Werro
 CFLAGS=
+MINILBX=-Lmlx -lmlx -framework OpenGL -framework AppKit
 RM=rm -rf
 
 all: $(OBJS_DIR) $(NAME)
 
 $(NAME): $(LIBFT_A) $(OBJS)  
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(INCLUDE) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(INCLUDE) $(MINILBX) -o $(NAME)
 	@echo $(NAME) was created :\)
 
 $(OBJS_DIR):

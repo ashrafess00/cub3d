@@ -4,5 +4,6 @@
 #include "libft.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include "mlx.h"
 
 #endif
