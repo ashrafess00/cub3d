@@ -123,11 +123,8 @@ int main(int c, char **args)
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
 	//draw player
-	draw_filled_circle(mlx_data, 50, 50, 15, 0xFF0000);
->>>>>>> test
+	draw_filled_circle(mlx_data, 150, 150, 10, 0xFF0000);
 	mlx_put_image_to_window(mlx_data.mlx, mlx_data.mlx_win, mlx_data.img, 0 , 0);
 
 	//close window with red x
