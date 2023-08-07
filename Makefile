@@ -21,17 +21,17 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 $(LIBFT_A):
-	$(MAKE) -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 $(OBJS_DIR)%.o:%.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $^
 
 clean:
-	$(MAKE) clean -C $(LIBFT_DIR)
+	make clean -C $(LIBFT_DIR)
 	$(RM) $(OBJS_DIR)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
+	make fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

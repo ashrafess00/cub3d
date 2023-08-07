@@ -33,6 +33,60 @@ void	draw_on_img(t_mlx_data mlx_data, int x, int y, int color)
 	}
 }
 
+//these two functions are from chatgpt
+void draw_line(t_mlx_data mlx_data, int x1, int y1, int x2, int y2, int color)
+{
+    int dx = abs(x2 - x1);
+    int dy = abs(y2 - y1);
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+    int err = dx - dy;
+
+    while (1)
+    {
+        draw_on_img(mlx_data, x1, y1, color);
+
+        if (x1 == x2 && y1 == y2)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x1 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y1 += sy;
+        }
+    }
+}
+
+void draw_filled_circle(t_mlx_data mlx_data, int center_x, int center_y, int radius, int color)
+{
+    int x = 0;
+    int y = radius;
+    int d = 1 - radius;
+
+    while (y >= x)
+    {
+        draw_line(mlx_data, center_x + x, center_y + y, center_x - x, center_y + y, color);
+        draw_line(mlx_data, center_x + y, center_y + x, center_x - y, center_y + x, color);
+        draw_line(mlx_data, center_x + x, center_y - y, center_x - x, center_y - y, color);
+        draw_line(mlx_data, center_x + y, center_y - x, center_x - y, center_y - x, color);
+
+        if (d < 0)
+            d += 2 * x + 3;
+        else
+        {
+            d += 2 * (x - y) + 5;
+            y--;
+        }
+        x++;
+    }
+}
+
 int main(int c, char **args)
 {
 	//3ndak tkhl3 rah ghir kantl9 yddi 😪
@@ -69,6 +123,11 @@ int main(int c, char **args)
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+	//draw player
+	draw_filled_circle(mlx_data, 50, 50, 15, 0xFF0000);
+>>>>>>> test
 	mlx_put_image_to_window(mlx_data.mlx, mlx_data.mlx_win, mlx_data.img, 0 , 0);
 
 	//close window with red x
