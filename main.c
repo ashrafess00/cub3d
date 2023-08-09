@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/09 13:19:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/09 22:03:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int c, char **args)
 	// //3ndak tkhl3 rah ghir kantl9 yddi 😪
 
 	//init mlx window
-	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "bosa fl fmm khayron mina donya wama fiha", true);
+	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	
