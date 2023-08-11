@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/10 21:41:19 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:32:20 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,17 @@ void move_mama(mlx_key_data_t keydata, void *param)
 {
 	t_all *all = param;
 
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+	printf("\n%d\n", keydata.key);
+	if(keydata.key == ESC_KEY)
+		exit(0);
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 		all->player.walk_direction += 1;
-	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE )
 		all->player.walk_direction -= 1;
-	else if (keydata.key == MLX_KEY_D)
+	else if (keydata.key == MLX_KEY_D  && keydata.action == MLX_RELEASE)
 		all->player.turn_direction += 1;
-	else if (keydata.key == MLX_KEY_A)
+	else if (keydata.key == MLX_KEY_A  && keydata.action == MLX_RELEASE)
 		all->player.turn_direction -= 1;
-
-
 	// else if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
 	// 	all->player.walk_direction = 0;
 	// else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
@@ -62,10 +63,41 @@ void move_mama(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_RIGHT)
 		printf("R\n");
 }
-
+void werror(int i)
+{
+	if(i == 1)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+}
 int main(int c, char **args)
 {
 	// //3ndak tkhl3 rah ghir kantl9 yddi 😪
+	struct s_map map;
+	if(checker_1(args) == -1)
+		werror(1);
+	map.tmp = 1;
+	int fd = open(args[1], O_RDONLY);
+	if(fd < 0)
+		werror(1);
+	char s[120];
+	while(map.tmp != 0)
+	{
+		map.tmp = read(fd, s, 100);
+		map.char_in_map += map.tmp;
+	}
+	close(fd);
+	fd = open(args[1], O_RDONLY);
+	map.whole_map = malloc(map.char_in_map * sizeof(char) + 1);
+	map.index = read(fd, map.whole_map, map.char_in_map);
+	map.whole_map[map.char_in_map] = '\0';
+	map.my_map = ft_split(map.whole_map, '\n');
+	if(checker_2(&map) == -1)
+		werror(1);
+
+
+
 
 	t_all all;
 	//init mlx window

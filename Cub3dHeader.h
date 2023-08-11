@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3dHeader.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/10 21:27:01 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:31:05 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 #define DOWN_KEY 125
 #define LEFT_KEY 123
 #define RIGHT_KEY 124
-
+#define ESC_KEY	256
+#define READING 10000000
 
 typedef struct s_player
 {
@@ -52,6 +53,18 @@ typedef struct s_all {
 	mlx_image_t *mlx_img;
 }	t_all;
 
+struct s_map
+{
+	char *first_line;
+	char *whole_map;
+	char **my_map;
+	int index;
+	int char_in_map;
+	int tmp;
+};
+void werror(int i);
+int checker_2(struct s_map *map);
+int checker_1(char **args);
 void draw_map(mlx_image_t *mlx_img);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color);
 int get_rgba(int r, int g, int b, int a);
