@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/11 18:48:42 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/11 19:34:37 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,14 @@ int check_color(struct s_map *map, int i, char c)
         tmp = j;
         while(map->my_map[i][tmp] != ',' && map->my_map[i][tmp] != '\0')
             tmp++;
-        if(!(map->my_map[i][j] >= 48 && map->my_map[i][j] <= 50) && tmp - j == 3 && map->my_map[i][j] != ',' && (!ft_isdigit(map->my_map[i][j]) && map->my_map[i][tmp] != '\0'))
-        {
+        if(!(map->my_map[i][j] >= 48 && map->my_map[i][j] <= 50) && tmp - j == 3 && map->my_map[i][j] != ',' && ft_isdigit(map->my_map[i][j])==1  && map->my_map[i][j] != '\0')
             werror(1);
-        }
         if(tmp - j == 3)
         {
             while(map->my_map[i][j] != ',' && map->my_map[i][j + 1] != '\0')
             {
                 if(!(map->my_map[i][j] >= 48 && map->my_map[i][j] <= 53))
-                {
                     werror(1);
-                }
                 j++;
             }
         }
@@ -83,8 +79,6 @@ int check_color(struct s_map *map, int i, char c)
                 j++;
         j++;
     }
-        
-    
     return 0;
 }
 int checker_2(struct s_map *map)
@@ -112,7 +106,7 @@ int checker_2(struct s_map *map)
             we++;
         else if(map->my_map[i][j] == 'E' && map->my_map[i][j+1] == 'A' && map->my_map[i][j+2] == ' ')
             ea++;
-        else if(map->my_map[i][j] == 'C')
+        else if(map->my_map[i][j] == 'C' )
             check_color(map, i, 'C');
         else if(map->my_map[i][j] == 'F')
             check_color(map, i, 'F');
