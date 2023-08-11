@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/11 18:14:13 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/11 18:48:42 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int check_color(struct s_map *map, int i, char c)
     char q;
     while(map->my_map[i][j] == ' ')
         j++;
-    if(map->my_map[i][j] == c)
+    if(map->my_map[i][j] == c && map->my_map[i][j+1] == ' ')
         j++;
     else
         werror(1);
@@ -104,13 +104,13 @@ int checker_2(struct s_map *map)
         j = 0;
         while(map->my_map[i][j] == ' ')
             j++;
-        if(map->my_map[i][j] == 'N' && map->my_map[i][j+1] == 'O')
+        if(map->my_map[i][j] == 'N' && map->my_map[i][j+1] == 'O' && map->my_map[i][j+2] == ' ')
             n++;
-        else if(map->my_map[i][j] == 'S' && map->my_map[i][j+1] == 'O')
+        else if(map->my_map[i][j] == 'S' && map->my_map[i][j+1] == 'O' && map->my_map[i][j+2] == ' ')
             s++;
-        else if(map->my_map[i][j] == 'W' && map->my_map[i][j+1] == 'E')
+        else if(map->my_map[i][j] == 'W' && map->my_map[i][j+1] == 'E' && map->my_map[i][j+2] == ' ')
             we++;
-        else if(map->my_map[i][j] == 'E' && map->my_map[i][j+1] == 'A')
+        else if(map->my_map[i][j] == 'E' && map->my_map[i][j+1] == 'A' && map->my_map[i][j+2] == ' ')
             ea++;
         else if(map->my_map[i][j] == 'C')
             check_color(map, i, 'C');

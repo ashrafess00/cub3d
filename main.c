@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/11 12:32:20 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/11 18:46:47 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,9 @@ int main(int c, char **args)
 	map.index = read(fd, map.whole_map, map.char_in_map);
 	map.whole_map[map.char_in_map] = '\0';
 	map.my_map = ft_split(map.whole_map, '\n');
-	if(checker_2(&map) == -1)
-		werror(1);
-
-
-
+	checker_2(&map);
+	// checker_3(&map);
+	
 
 	t_all all;
 	//init mlx window

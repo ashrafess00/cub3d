@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/11 12:31:05 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/11 18:33:53 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
 void draw_map(mlx_image_t *mlx_img);
+int checker_3(struct s_map *map);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color);
 int get_rgba(int r, int g, int b, int a);
 void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
