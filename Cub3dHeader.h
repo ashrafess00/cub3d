@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/10 21:27:01 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:15:06 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void draw_map(mlx_image_t *mlx_img);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color);
 int get_rgba(int r, int g, int b, int a);
 void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
-// void	draw_on_img(t_mlx_data mlx_data, int x, int y, int color);
-// int	close_win(t_mlx_data *mlx_data);
-// int	move(int key, t_mlx_data *mlx_data);
+void move_mama(mlx_key_data_t keydata, void *param);
+void update_player(t_all *all);
 
 #endif

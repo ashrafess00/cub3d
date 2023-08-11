@@ -6,11 +6,26 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/11 11:04:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:37:21 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3dHeader.h"
+
+bool in_the_wall(int x, int y)
+{
+	int Map[MAP_ROWS][MAP_COLS] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
+									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1},
+									{1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1},
+									{1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1},
+									{1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1},
+									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+
+	int map_grip_index_x = floor(x / TILE_SIZE);
+	int map_grip_index_y = floor(y / TILE_SIZE);
+
+	return (Map[map_grip_index_y][map_grip_index_x] != 0);
+}
 
 void update_player(t_all *all)
 {
@@ -19,9 +34,15 @@ void update_player(t_all *all)
 	//walk
 	int move_step = all->player.walk_direction * all->player.move_speed;
 	
-	all->player.x += cos(all->player.rotation_angle) * move_step;
-	all->player.y += sin(all->player.rotation_angle) * move_step;
+	int new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
+	int new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
 	
+	//check the wall collision
+	if (in_the_wall(new_player_x, new_player_y))
+	{
+		all->player.x = new_player_x;
+		all->player.y = new_player_y;
+	}
 	
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all->mlx_img);
@@ -29,41 +50,6 @@ void update_player(t_all *all)
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 30, all->player.y + sin(all->player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
-}
-
-void move_mama(mlx_key_data_t keydata, void *param)
-{
-	t_all *all = param;
-
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		all->player.walk_direction += 1;
-	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		all->player.walk_direction -= 1;
-	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		all->player.turn_direction += 1;
-	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		all->player.turn_direction -= 1;
-
-
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		all->player.walk_direction = 0;
-	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		all->player.walk_direction = 0;
-	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		all->player.turn_direction = 0;
-	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE )
-		all->player.turn_direction = 0;
-
-	update_player(all);
-	printf("walk directio: %d\n", all->player.walk_direction);
-	
-	
-	if (keydata.key == MLX_KEY_D)
-		printf("D\n");
-	if (keydata.key == MLX_KEY_LEFT)
-		printf("L\n");
-	if (keydata.key == MLX_KEY_RIGHT)
-		printf("R\n");
 }
 
 int main(int c, char **args)
@@ -85,7 +71,7 @@ int main(int c, char **args)
 	player.turn_direction = 0;
 	player.walk_direction = 0;
 	player.rotation_angle = M_PI / 2;
-	player.move_speed = 5.0;
+	player.move_speed = 8.0;
 	player.rotation_speed = 5 * (M_PI / 180); //convert to radian
 
 	all.mlx = mlx;
