@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/09 13:19:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:26:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,56 @@ int get_rgba(int r, int g, int b, int a)
 }
 
 //these two functions are from chatgpt
-static void draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
-{
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
-    int err = dx - dy;
+void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color) {
+    int x = radius;
+    int y = 0;
+    int err = 0;
 
-    while (1)
-    {
-        mlx_put_pixel(mlx_img, x1, x2, color);
+    while (x >= y) {
+        mlx_put_pixel(mlx_img, center_x + x, center_y + y, color);
+        mlx_put_pixel(mlx_img, center_x + y, center_y + x, color);
+        mlx_put_pixel(mlx_img, center_x - y, center_y + x, color);
+        mlx_put_pixel(mlx_img, center_x - x, center_y + y, color);
+        mlx_put_pixel(mlx_img, center_x - x, center_y - y, color);
+        mlx_put_pixel(mlx_img, center_x - y, center_y - x, color);
+        mlx_put_pixel(mlx_img, center_x + y, center_y - x, color);
+        mlx_put_pixel(mlx_img, center_x + x, center_y - y, color);
 
-        if (x1 == x2 && y1 == y2)
-            break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x1 += sx;
+        if (err <= 0) {
+            y += 1;
+            err += 2 * y + 1;
         }
-        if (e2 < dx)
-        {
-            err += dx;
-            y1 += sy;
+
+        if (err > 0) {
+            x -= 1;
+            err -= 2 * x + 1;
         }
     }
 }
 
-void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color)
+void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 {
-    int x = 0;
-    int y = radius;
-    int d = 1 - radius;
+	int delta_x = abs(x2 - x1);
+	int delta_y = abs(y2 - y1);
+	int sign_x = x1 < x2 ? 1 : -1;
+	int sign_y = y1 < y2 ? 1 : -1;
+	int error = delta_x - delta_y;
 
-    while (y >= x)
-    {
-        draw_line(mlx_img, center_x + x, center_y + y, center_x - x, center_y + y, color);
-        draw_line(mlx_img, center_x + y, center_y + x, center_x - y, center_y + x, color);
-        draw_line(mlx_img, center_x + x, center_y - y, center_x - x, center_y - y, color);
-        draw_line(mlx_img, center_x + y, center_y - x, center_x - y, center_y - x, color);
-
-        if (d < 0)
-            d += 2 * x + 3;
-        else
-        {
-            d += 2 * (x - y) + 5;
-            y--;
-        }
-        x++;
-    }
+	// mlx_put_pixel(data->mlx, data->mlx_win, x2, y2, color);
+    mlx_put_pixel(mlx_img, x2, y2, color);
+	while (x1 != x2 || y1 != y2) {
+		mlx_put_pixel(mlx_img, x1, y1, color);
+		int error2 = error * 2;
+		if (error2 > -delta_y) {
+			error -= delta_y;
+			x1 += sign_x;
+		}
+		if (error2 < delta_x) {
+			error += delta_x;
+			y1 += sign_y;
+		}
+	}
 }
-
 
 //draw the map
 void draw_map(mlx_image_t *mlx_img)
@@ -95,7 +92,7 @@ void draw_map(mlx_image_t *mlx_img)
 				while (++z < TILE_SIZE)
 				{
 					if (Map[i][j] == 1)
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 0, 0, 255));
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 255, 255, 255));
                     else
                         mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(0, 0, 0, 255));
 				}
