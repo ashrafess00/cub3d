@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/09 13:18:18 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:27:01 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "MLX42/MLX42.h"
 #include <math.h>
 
-#define TILE_SIZE 32
+#define TILE_SIZE 60
 #define MAP_COLS 14
 #define MAP_ROWS 6
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
@@ -33,16 +33,6 @@
 #define LEFT_KEY 123
 #define RIGHT_KEY 124
 
-typedef struct s_mlx_data
-{
-    void *mlx;
-	void *mlx_win;
-	void *img;
-	char *addr;
-	int line_length;
-	int bits_per_pixel;
-	int endian;
-}   t_mlx_data;
 
 typedef struct s_player
 {
@@ -56,9 +46,16 @@ typedef struct s_player
 	float rotation_speed;
 }	t_player;
 
+typedef struct s_all {
+	t_player player;
+	mlx_t *mlx;
+	mlx_image_t *mlx_img;
+}	t_all;
+
 void draw_map(mlx_image_t *mlx_img);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color);
 int get_rgba(int r, int g, int b, int a);
+void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
 // void	draw_on_img(t_mlx_data mlx_data, int x, int y, int color);
 // int	close_win(t_mlx_data *mlx_data);
 // int	move(int key, t_mlx_data *mlx_data);
