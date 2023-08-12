@@ -14,11 +14,14 @@
 
 void update_player(t_all *all)
 {
+	//rotation_angle
 	all->player.rotation_angle += all->player.turn_direction * all->player.rotation_speed;
-	// int move_step = all->player.walk_direction * move_speed;
-	// all->player.x += move
+	//walk
+	int move_step = all->player.walk_direction * all->player.move_speed;
 	
-	// mlx_delete_image(all->mlx, all->mlx_img);
+	all->player.x += cos(all->player.rotation_angle) * move_step;
+	all->player.y += sin(all->player.rotation_angle) * move_step;
+	
 	
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all->mlx_img);
@@ -39,21 +42,23 @@ void move_mama(mlx_key_data_t keydata, void *param)
 		all->player.walk_direction += 1;
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE )
 		all->player.walk_direction -= 1;
-	else if (keydata.key == MLX_KEY_D  && keydata.action == MLX_RELEASE)
+
+	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		all->player.turn_direction += 1;
-	else if (keydata.key == MLX_KEY_A  && keydata.action == MLX_RELEASE)
+	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 		all->player.turn_direction -= 1;
-	// else if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-	// 	all->player.walk_direction = 0;
-	// else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-	// 	all->player.walk_direction = 0;
-	// else if (keydata.key == MLX_KEY_D)
-	// 	all->player.turn_direction = 0;
-	// else if (keydata.key == MLX_KEY_A)
-	// 	all->player.turn_direction = 0;
+
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
+		all->player.walk_direction = 0;
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
+		all->player.walk_direction = 0;
+	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
+		all->player.turn_direction = 0;
+	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE )
+		all->player.turn_direction = 0;
 
 	update_player(all);
-	printf("walk directio: %d", all->player.walk_direction);
+	printf("walk directio: %d\n", all->player.walk_direction);
 	
 	
 	if (keydata.key == MLX_KEY_D)
@@ -112,8 +117,8 @@ int main(int c, char **args)
 	player.turn_direction = 0;
 	player.walk_direction = 0;
 	player.rotation_angle = M_PI / 2;
-	player.move_speed = 2.0;
-	player.rotation_speed = 3 * (M_PI / 180); //convert to radian
+	player.move_speed = 5.0;
+	player.rotation_speed = 5 * (M_PI / 180); //convert to radian
 
 	all.mlx = mlx;
 	all.player = player;
@@ -123,7 +128,7 @@ int main(int c, char **args)
 
 	//draw player
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 30, player.y + sin(player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
+	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 40, player.y + sin(player.rotation_angle) * 40, get_rgba(255, 0, 0, 255));
 
 
 	mlx_key_hook(mlx, move_mama, &all);
