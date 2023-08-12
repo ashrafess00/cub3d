@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/11 19:34:37 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/12 17:31:15 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,43 @@ int checker_1(char **args)
 int check_color(struct s_map *map, int i, char c)
 {
     int j = 0;
-    int fl = 0;
+    int nmb = 0;
     int tmp = 0;
-    char q;
+    int comma = 0;
+    int vld  =0;
+    char *q;
     while(map->my_map[i][j] == ' ')
         j++;
     if(map->my_map[i][j] == c && map->my_map[i][j+1] == ' ')
         j++;
-    else
-        werror(1);
     while(map->my_map[i][j] == ' ')
         j++;
-    while(map->my_map[i][j + 1] != '\0')
+    while(map->my_map[i][j] != '\0')
     {
         tmp = j;
-        while(map->my_map[i][tmp] != ',' && map->my_map[i][tmp] != '\0')
-            tmp++;
-        if(!(map->my_map[i][j] >= 48 && map->my_map[i][j] <= 50) && tmp - j == 3 && map->my_map[i][j] != ',' && ft_isdigit(map->my_map[i][j])==1  && map->my_map[i][j] != '\0')
-            werror(1);
-        if(tmp - j == 3)
+        while(map->my_map[i][j] != ',' && map->my_map[i][j] != '\0')
         {
-            while(map->my_map[i][j] != ',' && map->my_map[i][j + 1] != '\0')
+            if(map->my_map[i][j] > 33 && map->my_map[i][j] < 126 && map->my_map[i][j+1] != '\0')
             {
-                if(!(map->my_map[i][j] >= 48 && map->my_map[i][j] <= 53))
+                if(map->my_map[i][j] < 48 || map->my_map[i][j] > 57)
                     werror(1);
-                j++;
             }
+            j++;
         }
+        if(map->my_map[i][j] == ',')
+            comma++;
+        q = ft_substr(map->my_map[i], tmp , j-tmp);
+        nmb = ft_atoi(q);
+        if(nmb > 255 || nmb < 0)
+            werror(1);
         else 
-            while(map->my_map[i][j] != ',' && map->my_map[i][j] != '\0')
-                j++;
-        j++;
+            vld++;
+        if(map->my_map[i][j] == ',')
+            j++;
     }
-    return 0;
+    if(comma != 2 || vld != 3)
+        werror(1);
+    return 1;
 }
 int checker_2(struct s_map *map)
 {
@@ -90,8 +94,11 @@ int checker_2(struct s_map *map)
     int we = 0;
     int ea = 0;
     int  j = 0;
-    while(map->my_map[k][0] != '1')
+    int c = 0;
+    int f = 0;
+    while(map->my_map[k] != '\0')
         k++;
+    ea = 0;
     i = 0;
     while(i < k)
     {
@@ -106,13 +113,14 @@ int checker_2(struct s_map *map)
             we++;
         else if(map->my_map[i][j] == 'E' && map->my_map[i][j+1] == 'A' && map->my_map[i][j+2] == ' ')
             ea++;
-        else if(map->my_map[i][j] == 'C' )
-            check_color(map, i, 'C');
-        else if(map->my_map[i][j] == 'F')
-            check_color(map, i, 'F');
+        else if(map->my_map[i][j] == 'C' && map->my_map[i][j+1] == ' ')
+            c += check_color(map, i, 'C');
+        else if(map->my_map[i][j] == 'F' && map->my_map[i][j+1] == ' ')
+            f += check_color(map, i, 'F');
         i++;
     }
-    if(n != 1 || s != 1 ||we != 1 ||ea != 1)
+    
+    if(n != 1 || s != 1 ||we != 1 ||ea != 1 || c != 1|| f != 1)
         werror(1);
     return 1;
 }
