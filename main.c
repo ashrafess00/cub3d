@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 10:49:15 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/12 13:20:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 bool in_the_wall(int x, int y)
 {
 	int Map[MAP_ROWS][MAP_COLS] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1},
-									{1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1},
-									{1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1},
-									{1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1},
+									{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+									{1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+									{1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1},
+									{1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
 									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
 	int map_grip_index_x = floor(x / TILE_SIZE);
 	int map_grip_index_y = floor(y / TILE_SIZE);
 
-	return (Map[map_grip_index_y][map_grip_index_x] != 0);
+	return (Map[map_grip_index_y][map_grip_index_x] != 1);
 }
 
 
@@ -96,9 +96,22 @@ void werror(int i)
 		exit(1);
 	}
 }
+
+void	init_player(t_player *player)
+{
+	player->x = WINDOW_WIDTH / 2;
+	player->y = WINDOW_HEIGHT / 2;
+	player->radius = 15;
+	player->turn_direction = 0;
+	player->walk_direction = 0;
+	player->rotation_angle = M_PI / 2;
+	player->move_speed = 15.0;
+	player->rotation_speed = 15 * (M_PI / 180); //convert to radian
+}
+
 int main(int c, char **args)
 {
-	// //3ndak tkhl3 rah ghir kantl9 yddi 😪
+	t_player player;
 	struct s_map map;
 	if(checker_1(args) == -1)
 		werror(1);
@@ -124,21 +137,13 @@ int main(int c, char **args)
 
 	t_all all;
 	//init mlx window
-	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "awllah 7tta drrya zwina, w3ndha a7san trma ftarikh, hyydha li mn fmmi", true);
+	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	
 	
 	//init player
-	t_player player;
-	player.x = WINDOW_WIDTH / 2;
-	player.y = WINDOW_HEIGHT / 2;
-	player.radius = 15;
-	player.turn_direction = 0;
-	player.walk_direction = 0;
-	player.rotation_angle = M_PI / 2;
-	player.move_speed = 10.0;
-	player.rotation_speed = 10 * (M_PI / 180); //convert to radian
+	init_player(&player);
 
 	all.mlx = mlx;
 	all.player = player;
