@@ -6,11 +6,15 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/11 11:37:21 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:43:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3dHeader.h"
+
+const float FOV_ANGLE = 60 * (M_PI / 180);
+const int WALL_STRIP = 1;
+const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 
 bool in_the_wall(int x, int y)
 {
@@ -26,6 +30,8 @@ bool in_the_wall(int x, int y)
 
 	return (Map[map_grip_index_y][map_grip_index_x] != 0);
 }
+
+
 
 void update_player(t_all *all)
 {
@@ -49,7 +55,38 @@ void update_player(t_all *all)
 	//draw player
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 30, all->player.y + sin(all->player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
+	cast_rays(all);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
+}
+
+void render_ray(t_all *all, int rayAngle)
+{
+	draw_line(all->mlx_img,
+				all->player.x,
+				all->player.y,
+				all->player.x + cos(rayAngle) * 30,
+				all->player.y + sin(rayAngle) * 30,
+				get_rgba(0, 0, 0, 255));
+}
+
+void cast_rays(t_all *all)
+{
+	t_player player = all->player;
+	int column = 0;
+
+	// start first ray substracting half of the fov
+	float rayAngle = player.rotation_angle - (FOV_ANGLE / 2);
+
+	//loop all comuns casting the rays
+	int i = -1;
+	while (++i < NUM_RAYS)
+	{
+		render_ray(all, rayAngle);
+		printf("%f\n", rayAngle);
+		rayAngle += FOV_ANGLE / NUM_RAYS;
+		column++;
+	}
+	
 }
 
 int main(int c, char **args)
@@ -71,8 +108,8 @@ int main(int c, char **args)
 	player.turn_direction = 0;
 	player.walk_direction = 0;
 	player.rotation_angle = M_PI / 2;
-	player.move_speed = 8.0;
-	player.rotation_speed = 5 * (M_PI / 180); //convert to radian
+	player.move_speed = 10.0;
+	player.rotation_speed = 10 * (M_PI / 180); //convert to radian
 
 	all.mlx = mlx;
 	all.player = player;
@@ -83,7 +120,7 @@ int main(int c, char **args)
 	//draw player
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 40, player.y + sin(player.rotation_angle) * 40, get_rgba(255, 0, 0, 255));
-
+	cast_rays(&all);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);
@@ -91,3 +128,15 @@ int main(int c, char **args)
 	mlx_terminate(mlx);
 	return (0);
 }
+
+
+ 
+//ray casting steps
+
+//1- substract 30 degrees from player rotaion angle fov/2
+//2- start at column 0
+//3- while(column < 320)
+	// *cast a ray
+	// tracet he rau until it intersects with a wall(map[i][j] == 1)
+	//record the intersection (x, y) and the distance (ray lenght)
+		//rayAngle += 60 / 320;  (60 will be converted to rad)

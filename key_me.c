@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:44:19 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/11 11:14:47 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:42:55 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void move_mama(mlx_key_data_t keydata, void *param)
 		all->player.turn_direction = 0;
 
 	update_player(all);
+	
 	printf("walk directio: %d\n", all->player.walk_direction);
 	
 	
