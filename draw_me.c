@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 10:34:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/12 13:18:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 void draw_map(mlx_image_t *mlx_img)
 {
     int Map[MAP_ROWS][MAP_COLS] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1},
-									{1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1},
-									{1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1},
-									{1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1},
+									{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+									{1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+									{1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1},
+									{1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1},
 									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
                                     
     int i = -1;
@@ -92,9 +92,9 @@ void draw_map(mlx_image_t *mlx_img)
 				while (++z < TILE_SIZE)
 				{
 					if (Map[i][j] == 1)
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 255, 255, 255));
-                    else
                         mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(0, 0, 0, 255));
+                    else
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 255, 255, 255));
 				}
 			}
 		}
