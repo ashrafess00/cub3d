@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 10:25:05 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/12 10:34:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void draw_map(mlx_image_t *mlx_img)
                                     
     int i = -1;
 	while (++i < MAP_ROWS)
-	{
+	{  
 		int j = -1;
 		while (++j < MAP_COLS)
 		{

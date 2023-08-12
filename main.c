@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 10:23:33 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/12 10:49:15 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int main(int c, char **args)
 
 	t_all all;
 	//init mlx window
-	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
+	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "awllah 7tta drrya zwina, w3ndha a7san trma ftarikh, hyydha li mn fmmi", true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	
