@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 10:37:10 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 10:42:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int main(int c, char **args)
 	map.whole_map[map.char_in_map] = '\0';
 	map.my_map = ft_split(map.whole_map, '\n');
 	checker_2(&map);
-	// checker_3(&map);
+	exctract(&map);
 	
 
 
