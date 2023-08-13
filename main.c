@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 13:20:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 09:15:58 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void cast_rays(t_all *all)
 	while (++i < NUM_RAYS)
 	{
 		render_ray(all, rayAngle);
-		printf("%f\n", rayAngle);
+		// printf("%f\n", rayAngle);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		column++;
 	}
@@ -135,6 +135,7 @@ int main(int c, char **args)
 	// checker_3(&map);
 	
 
+
 	t_all all;
 	//init mlx window
 	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
@@ -155,6 +156,11 @@ int main(int c, char **args)
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 40, player.y + sin(player.rotation_angle) * 40, get_rgba(255, 0, 0, 255));
 	cast_rays(&all);
+
+
+	int i = -1;
+	while(map.my_map[++i])
+		printf("%s\n", map.my_map[i]);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);
