@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:44:19 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/12 10:47:46 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 09:14:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,4 @@ void move_mama(mlx_key_data_t keydata, void *param)
 		mlx_close_window(all->mlx);
 
 	update_player(all);
-	
-	// printf("walk directio: %d\n", all->player.walk_direction);
-	
-	
-	if (keydata.key == MLX_KEY_D)
-		printf("D\n");
-	if (keydata.key == MLX_KEY_LEFT)
-		printf("L\n");
-	if (keydata.key == MLX_KEY_RIGHT)
-		printf("R\n");
 }
