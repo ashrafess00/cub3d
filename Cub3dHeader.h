@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 13:03:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:18:02 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ struct s_map
 	int tmp;
 	char **pure_map;
 };
+
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
@@ -66,4 +67,5 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void update_player(t_all *all);
 void cast_rays(t_all *all);
+bool in_the_wall(int x, int y);
 #endif

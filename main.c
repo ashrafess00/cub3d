@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 13:14:17 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:16:58 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void update_player(t_all *all)
 	draw_map(all->mlx_img);
 	//draw player
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 30, all->player.y + sin(all->player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
 	cast_rays(all);
+	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 30, all->player.y + sin(all->player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
 
@@ -118,7 +118,7 @@ int main(int c, char **args)
 	map.my_map = ft_split(map.whole_map, '\n');
 	checker_2(&map);
 	exctract(&map);
-	
+	// exit(0);
 
 
 	t_all all;
@@ -143,9 +143,9 @@ int main(int c, char **args)
 	cast_rays(&all);
 
 
-	int i = -1;
-	while(map.my_map[++i])
-		printf("%s\n", map.my_map[i]);
+	// int i = -1;
+	// while(map.my_map[++i])
+	// 	printf("%s\n", map.my_map[i]);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);
