@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 09:27:52 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/13 10:42:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3dHeader.h"
 
 const float FOV_ANGLE = 60 * (M_PI / 180);
-const int WALL_STRIP = 1;
+const int WALL_STRIP = 3;
 const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 
 bool in_the_wall(int x, int y)
@@ -59,8 +59,18 @@ void update_player(t_all *all)
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
 
-void render_ray(t_all *all, int rayAngle)
+
+void render_ray(t_all *all, float rayAngle, int column)
 {
+	int wallHitx = 0;
+	int wallHity = 0;
+	int distance = 0;
+	
+	int xIntercept, yIntercept;
+	int xStep,
+
+
+	// rayAngle = normalize_angle(rayAngle);
 	draw_line(all->mlx_img,
 				all->player.x,
 				all->player.y,
@@ -81,7 +91,7 @@ void cast_rays(t_all *all)
 	int i = -1;
 	while (++i < NUM_RAYS)
 	{
-		render_ray(all, rayAngle);
+		render_ray(all, rayAngle, column);
 		// printf("%f\n", rayAngle);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		column++;
