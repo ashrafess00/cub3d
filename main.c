@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 10:42:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 12:12:38 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int main(int c, char **args)
 	map.my_map = ft_split(map.whole_map, '\n');
 	checker_2(&map);
 	exctract(&map);
-	
+	exit(0);
 
 
 	t_all all;
@@ -168,9 +168,9 @@ int main(int c, char **args)
 	cast_rays(&all);
 
 
-	int i = -1;
-	while(map.my_map[++i])
-		printf("%s\n", map.my_map[i]);
+	// int i = -1;
+	// while(map.my_map[++i])
+	// 	printf("%s\n", map.my_map[i]);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);
