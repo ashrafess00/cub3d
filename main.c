@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 10:42:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:04:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,35 @@ const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 
 bool in_the_wall(int x, int y)
 {
-	int Map[MAP_ROWS][MAP_COLS] = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-									{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-									{1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-									{1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1},
-									{1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
-									{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+	int Map[MAP_ROWS][MAP_COLS] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};;
 
 	int map_grip_index_x = floor(x / TILE_SIZE);
 	int map_grip_index_y = floor(y / TILE_SIZE);
 
-	return (Map[map_grip_index_y][map_grip_index_x] != 1);
+	return (Map[map_grip_index_y][map_grip_index_x] == 0);
 }
 
 
@@ -59,6 +77,21 @@ void update_player(t_all *all)
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
 
+int is_ray_facing_down(float rayAngle)
+{
+	if (rayAngle > 0 && rayAngle < M_PI)
+		return (1);
+	return (0);	
+}
+int is_ray_facing_up(float rayAngle)
+{
+	return (!is_ray_facing_down(rayAngle));
+}
+
+// int is_ray_facing_right(float rayAngle)
+// {
+	
+// }
 
 void render_ray(t_all *all, float rayAngle, int column)
 {
@@ -66,10 +99,18 @@ void render_ray(t_all *all, float rayAngle, int column)
 	int wallHity = 0;
 	int distance = 0;
 	
+	
+
+	//////// horizontal ray-grid intersection
 	int xIntercept, yIntercept;
-	int xStep,
+	int xStep, yStep;
+	
+	//find y cordinate at the closet horizontal grid
+	yIntercept = (all->player.y / TILE_SIZE) * TILE_SIZE;
 
-
+	//find y cordinate at the closet horizontal grid
+	xIntercept = all->player.x + (yIntercept - all->player.y) / tan(rayAngle);
+	
 	// rayAngle = normalize_angle(rayAngle);
 	draw_line(all->mlx_img,
 				all->player.x,

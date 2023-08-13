@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kslik <kslik@student.42.fr>                +#+  +:+       +#+         #
+#    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/13 09:28:47 by kslik            ###   ########.fr        #
+#    Updated: 2023/08/13 13:03:37 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"
 all: $(OBJS_DIR) $(NAME)
 
 
-$(NAME): $(LIBFT_A) $(OBJS)  
+$(NAME): $(LIBFT_A) $(OBJS) Cub3dHeader.h
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) -o $(NAME) 
 	@echo $(NAME) was created :\)
 
