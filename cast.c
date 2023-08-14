@@ -6,15 +6,15 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 23:48:17 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:00:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3dHeader.h"
 
-const float FOV_ANGLE = 60 * (M_PI / 180);
-const int WALL_STRIP = 3;
-const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
+// const float FOV_ANGLE = 60 * (M_PI / 180);
+// const int WALL_STRIP = 3;
+// const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 
 
 int is_ray_facing_down(float rayAngle)
@@ -51,176 +51,239 @@ float distanceBetweenPiints(int x1, int y1, int x2, int y2)
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-
-void render_ray(t_all *all, float rayAngle, int column)
+void print_face(float rayAngle)
 {
-	int wallHitx = 0;
-	int wallHity = 0;
-	int distance = 0;
-	int wasHitVertical = 0;
-	rayAngle = adjastAngle(rayAngle);
-	
-	////////////////////////////////////////////
-	//////// horizontal ray-grid intersection//
-	////////////////////////////////////////////
-	int xIntercept, yIntercept;
-	int xStep, yStep;
-	
-	printf("is ray facing down: %d\n", is_ray_facing_down(rayAngle));
-	//find y-cordinate at the closet horizontal grid
-	yIntercept = floor((all->player.y / TILE_SIZE))  * TILE_SIZE;
-    if(is_ray_facing_down(rayAngle))
-		yIntercept += TILE_SIZE;
-	//find x -cordinate at the closet horizontal grid
-	xIntercept = all->player.x + (yIntercept - all->player.y) / tan(rayAngle);
-	
-	//calculate the increment xstep and ystep
-	yStep = TILE_SIZE;
+	if (is_ray_facing_down(rayAngle))
+		printf("is facing down\n");
 	if (is_ray_facing_up(rayAngle))
+		printf("is facing up\n");
+	if (is_ray_facing_left(rayAngle))
+		printf("is facing left\n");
+	if (is_ray_facing_right(rayAngle))
+		printf("is facing right\n");
+	printf("-------\n");
+}
+// 18:53
+// 22:31
+float distanceBetweenPoint(int x1, int y1, int x2, int y2)
+{
+	return sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+}
+
+
+int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *horzWallHitY)
+{
+	//////////////////////////////////////
+	//------------horizontal ray-grid intersection code------------//
+	//////////////////////////////////////
+	t_player player = all->player;
+	int wallHitX = 0;
+	int wallHitY = 0;
+	int distance = 0;
+
+	int xIntercept;
+	int yIntercept;
+	int xStep;
+	int yStep;
+
+	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
+	int isRayFacingUp = !isRayFacingDown;
+	int isRayFacingRight = rayAngle < (M_PI / 2) || rayAngle > 1.5 * M_PI;
+	int isRayFacingLeft = !isRayFacingRight;
+
+	
+	//find the y-coordinate of the closest horizontal grid intersections
+	yIntercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
+	if (isRayFacingDown)
+		yIntercept += TILE_SIZE;
+	//find the x-coordinate of the closest horizontal grid intersections
+	xIntercept = player.x + (yIntercept - player.y) / tan(rayAngle);//warning
+
+	//calculate the increment xStep and yStep
+	yStep = TILE_SIZE;                //ystep
+	if (isRayFacingUp)
 		yStep *= -1;
-	xStep = TILE_SIZE / tan(rayAngle);
-    if (is_ray_facing_left(rayAngle) && xStep > 0)
+	xStep = TILE_SIZE / tan(rayAngle);//xstep
+	if (isRayFacingLeft && xStep > 0)
 		xStep *= -1;
-	if (is_ray_facing_right(rayAngle) && xStep < 0)
+	if (isRayFacingRight && xStep < 0)
 		xStep *= -1;
 	
 	int nextHorzTouchX = xIntercept;
 	int nextHorzTouchY = yIntercept;
-	if(is_ray_facing_up(rayAngle))
+	if (isRayFacingUp)
 		nextHorzTouchY--;
-
-	//increment xstep and ystep until we find a wall
+	
 	int foundHorzWallHit = 0;
-	int HorzwallHitX = 0;
-	int HorzwallHitY = 0;
-	while (nextHorzTouchX >= 0 &&
-			nextHorzTouchX <= WINDOW_WIDTH &&
-			nextHorzTouchY >= 0 &&
-			nextHorzTouchY <= WINDOW_HEIGHT) {
-		if (!in_the_wall(nextHorzTouchX, nextHorzTouchY)) {
+	//incremet xstep and ystep until we find a wall
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH
+		&& nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
+	{
+		if (in_the_wall(nextHorzTouchX, nextHorzTouchY))
+		{
+			//we found a wall hit
 			foundHorzWallHit = 1;
-			HorzwallHitX = nextHorzTouchX;
-			HorzwallHitY = nextHorzTouchY;
+			wallHitX = nextHorzTouchX;
+			wallHitY = nextHorzTouchY;
 
 			// draw_line(all->mlx_img,
-			// 	all->player.x,
-			// 	all->player.y,
-			// 	HorzwallHitX,
-			// 	HorzwallHitY,
-			// 	get_rgba(0, 0, 0, 255));
-			
+			// all->player.x,
+			// all->player.y,
+			// wallHitX,
+			// wallHitY,
+			// get_rgba(0, 0, 0, 255));
 			break;
 		}
-		else {
+		else
+		{
 			nextHorzTouchX += xStep;
 			nextHorzTouchY += yStep;
 		}
 	}
-
+	*horzWallHitX = wallHitX;
+	*horzWallHitY = wallHitY;
 	
-
-	////////////////////////////////////////////
-	//////// vertical ray-grid intersection//
-	////////////////////////////////////////////
+	return (foundHorzWallHit);
+}
+int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *verWallHitY)
+{
+	//////////////////////////////////////
+	//------------vertical ray-grid intersection code------------//
+	//////////////////////////////////////
 	int foundVerWallHit = 0;
-	int VerwallHitX = 0;
-	int VerwallHitY = 0;
+	t_player player = all->player;
+	int wallHitX = 0;
+	int wallHitY = 0;
+	int distance = 0;
+
+	int xIntercept;
+	int yIntercept;
+	int xStep;
+	int yStep;
+
+	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
+	int isRayFacingUp = !isRayFacingDown;
+	int isRayFacingRight = rayAngle < (M_PI / 2) || rayAngle > 1.5 * M_PI;
+	int isRayFacingLeft = !isRayFacingRight;
+
 	
-	//find x-cordinate at the closet vertical grid
-	xIntercept = floor((all->player.x / TILE_SIZE))  * TILE_SIZE;
-    if(is_ray_facing_right(rayAngle))
-		yIntercept += TILE_SIZE;
-	//find y -cordinate at the closet vertical grid
-	yIntercept = all->player.y + (xIntercept - all->player.x) * tan(rayAngle);
-	
-	//calculate the increment xstep and ystep
-	xStep = TILE_SIZE;
-	if (is_ray_facing_left(rayAngle))
+	//find the x-coordinate of the closest horizontal grid intersections
+	xIntercept = floor(all->player.x / TILE_SIZE) * TILE_SIZE;
+	if (isRayFacingRight)
+		xIntercept += TILE_SIZE;
+	//find the y-coordinate of the closest horizontal grid intersections
+	yIntercept = player.y + (xIntercept - player.x) * tan(rayAngle);//warning
+
+	//calculate the increment xStep and yStep
+	xStep = TILE_SIZE;             //xstep
+	if (isRayFacingLeft)
 		xStep *= -1;
-	yStep = TILE_SIZE / tan(rayAngle);
-    if (is_ray_facing_up(rayAngle) && yStep > 0)
+	yStep = TILE_SIZE * tan(rayAngle);//ystep
+	if (isRayFacingUp && yStep > 0)
 		yStep *= -1;
-	if (is_ray_facing_down(rayAngle) && yStep < 0)
+	if (isRayFacingDown && yStep < 0)
 		yStep *= -1;
 	
 	int nextVerTouchX = xIntercept;
 	int nextVerTouchY = yIntercept;
-	if(is_ray_facing_left(rayAngle))
+	if (isRayFacingLeft)
 		nextVerTouchX--;
-
-	//increment xstep and ystep until we find a wall
 	
-	while (nextVerTouchX >= 0 &&
-			nextVerTouchX <= WINDOW_WIDTH &&
-			nextVerTouchY >= 0 &&
-			nextVerTouchY <= WINDOW_HEIGHT) {
-		if (in_the_wall(nextVerTouchX, nextVerTouchY)) {
+	
+	//incremet xstep and ystep until we find a wall
+	while (nextVerTouchX >= 0 && nextVerTouchX <= WINDOW_WIDTH
+		&& nextVerTouchY >= 0 && nextVerTouchY <= WINDOW_HEIGHT)
+	{
+		if (in_the_wall(nextVerTouchX, nextVerTouchY))
+		{
+			//we found a wall hit
 			foundVerWallHit = 1;
-			VerwallHitX = nextVerTouchX;
-			VerwallHitY = nextVerTouchY;
-
-			// draw_line(all->mlx_img,
-			// 	all->player.x,
-			// 	all->player.y,
-			// 	VerwallHitX,
-			// 	VerwallHitY,
-			// 	get_rgba(0, 0, 0, 255));
-			
+			wallHitX = nextVerTouchX;
+			wallHitY = nextVerTouchY;			
 			break;
 		}
-		else {
+		else
+		{
 			nextVerTouchX += xStep;
 			nextVerTouchY += yStep;
 		}
 	}
-
-
-	//calculate both horz and ver distances and chose the smallest value
-	float horzHitDistance = (foundHorzWallHit) ? distanceBetweenPiints(
-		all->player.x,
-		all->player.y,
-		HorzwallHitX,
-		HorzwallHitY
-	) : 11111111111;
-
-	float VerHitDistance = (foundHorzWallHit) ? distanceBetweenPiints(
-		all->player.x,
-		all->player.y,
-		VerwallHitX,
-		VerwallHitY
-	) : 11111111111;
+	*verWallHitX = wallHitX;
+	*verWallHitY = wallHitY;
 	
-	//only store the smallest distances
-	wallHitx = (horzHitDistance < VerHitDistance) ? HorzwallHitX : VerwallHitX;
-	wallHity = (horzHitDistance < VerHitDistance) ? HorzwallHitY : VerwallHitY;
-	distance = (horzHitDistance < VerHitDistance) ? horzHitDistance : VerHitDistance;
-	wasHitVertical = (VerHitDistance < horzHitDistance);
-	
-	
-	//draw line
-	draw_line(all->mlx_img,
-				all->player.x,
-				all->player.y,
-				wallHitx,
-				wallHity,
-				get_rgba(0, 0, 0, 255));
+	return (foundVerWallHit);
 }
+void render_ray(t_all *all, float rayAngle, int column)
+{
+	int horzWallHitX;
+	int horzWallHitY;
+	int verWallHitX;
+	int verWallHitY;
+	int foundHorzWallHit = horizontal_intersection(all, rayAngle, &horzWallHitX, &horzWallHitY);
+	int founVerWallHit = vertical_intersection(all, rayAngle, &verWallHitX, &verWallHitY);
+	int horzHitDistance;
+	int verHitDistance;
+	int wallHitX;
+	int wallHitY;
+	float distance;
+	if (foundHorzWallHit)
+	{
+		horzHitDistance = distanceBetweenPiints(all->player.x,
+													all->player.y,
+													horzWallHitX,
+													horzWallHitY);
+	}
+	else
+		horzHitDistance = 1111111111;
+	if (founVerWallHit)
+	{
+		verHitDistance = distanceBetweenPiints(all->player.x,
+													all->player.y,
+													verWallHitX,
+													verWallHitY);
+	}
+	else
+		verHitDistance = 1111111111;
+
+	if (horzHitDistance < verHitDistance)
+	{
+		wallHitX = horzWallHitX;
+		wallHitY = horzWallHitY;
+		distance = horzHitDistance;
+	}
+	else
+	{
+		wallHitX = verWallHitX;
+		wallHitY = verWallHitY;
+		distance = verHitDistance;
+	}
+	
+	// printf("%d - %d\n", wallHitX, wallHitY);
+	draw_line(all->mlx_img,
+			all->player.x,
+			all->player.y,
+			wallHitX,
+			wallHitY,
+			get_rgba(0, 0, 0, 255));
+}
+
 
 
 void cast_rays(t_all *all)
 {
-	t_player player = all->player;
 	int column = 0;
 
 	// start first ray substracting half of the fov
-	float rayAngle = player.rotation_angle - (FOV_ANGLE / 2);
+	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
 
 	//loop all comuns casting the rays
 	int i = -1;
 	while (++i < NUM_RAYS)
 	{
 		render_ray(all, rayAngle, column);
-		rayAngle += FOV_ANGLE / NUM_RAYS;
+		rayAngle += (FOV_ANGLE / NUM_RAYS);
+		printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
+		// break;
 	}	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/13 12:21:49 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/14 08:37:05 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int checker_map(struct s_map *map)
         werror(1);
     return 0;
 }
-int check_valid(struct s_map *map)
-{
+// int check_valid(struct s_map *map)
+// {
     
-}
+// }
 int exctract(struct s_map *map)
 {
     int i = 6;
