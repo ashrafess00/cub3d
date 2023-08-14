@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 22:16:58 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:10:30 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ bool in_the_wall(int x, int y)
 
 	int map_grip_index_x = floor(x / TILE_SIZE);
 	int map_grip_index_y = floor(y / TILE_SIZE);
-
-	return (Map[map_grip_index_y][map_grip_index_x] == 0);
+	// printf("[]: %d\n", Map[map_grip_index_y][map_grip_index_x]);
+	return (Map[map_grip_index_y][map_grip_index_x] != 0);
 }
-
 
 
 void update_player(t_all *all)
 {
 	//rotation_angle
+	all->player.rotation_angle = adjastAngle(all->player.rotation_angle);
 	all->player.rotation_angle += all->player.turn_direction * all->player.rotation_speed;
 	//walk
 	int move_step = all->player.walk_direction * all->player.move_speed;
@@ -58,18 +58,20 @@ void update_player(t_all *all)
 	int new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
 	
 	//check the wall collision
-	if (in_the_wall(new_player_x, new_player_y))
+	if (!in_the_wall(new_player_x, new_player_y))
 	{
 		all->player.x = new_player_x;
 		all->player.y = new_player_y;
+		printf("[[%d]]\n", in_the_wall(new_player_x, new_player_y));
 	}
 	
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all->mlx_img);
 	//draw player
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
+	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
+	printf("[%f]\n", all->player.rotation_angle);
 	cast_rays(all);
-	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 30, all->player.y + sin(all->player.rotation_angle) * 30, get_rgba(255, 0, 0, 255));
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
 
@@ -127,7 +129,6 @@ int main(int c, char **args)
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	
-	
 	//init player
 	init_player(&player);
 
@@ -139,7 +140,7 @@ int main(int c, char **args)
 
 	//draw player
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 40, player.y + sin(player.rotation_angle) * 40, get_rgba(255, 0, 0, 255));
+	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 60, player.y + sin(player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
 	cast_rays(&all);
 
 

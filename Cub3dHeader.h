@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 22:18:02 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:22:51 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 #define MAP_ROWS 24
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
 #define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
-
+#define FOV_ANGLE (60 * (M_PI / 180))
+#define WALL_STRIP 5
+#define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
 
 
 typedef struct s_player
@@ -68,4 +70,5 @@ void move_mama(mlx_key_data_t keydata, void *param);
 void update_player(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y);
+float adjastAngle(float rayAngle);
 #endif
