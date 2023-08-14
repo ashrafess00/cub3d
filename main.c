@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 12:10:30 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:39:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ bool in_the_wall(int x, int y)
 	// printf("[]: %d\n", Map[map_grip_index_y][map_grip_index_x]);
 	return (Map[map_grip_index_y][map_grip_index_x] != 0);
 }
-
 
 void update_player(t_all *all)
 {
@@ -98,7 +97,6 @@ void	init_player(t_player *player)
 
 int main(int c, char **args)
 {
-	t_player player;
 	struct s_map map;
 	if(checker_1(args) == -1)
 		werror(1);
@@ -124,6 +122,7 @@ int main(int c, char **args)
 
 
 	t_all all;
+	t_player player;
 	//init mlx window
 	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);

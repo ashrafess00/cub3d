@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 12:22:51 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:01:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
 #define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
 #define FOV_ANGLE (60 * (M_PI / 180))
-#define WALL_STRIP 5
+#define WALL_STRIP 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
 
 
