@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:07:50 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/06/06 13:57:14 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 12:13:22 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		i++;
 	}
 	p[i] = '\0';
-	free((char *)s);
 	return (p);
 }

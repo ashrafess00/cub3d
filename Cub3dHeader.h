@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 10:21:49 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/14 12:37:46 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_map
 	int char_in_map;
 	int tmp;
 	char **pure_map;
+	int last_line;
 };
 void werror(int i);
 int checker_2(struct s_map *map);
