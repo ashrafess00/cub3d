@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 15:39:50 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:59:17 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ void	init_player(t_player *player)
 
 int main(int c, char **args)
 {
+
+	if(c != 2)
+		werror(1);
+	t_player player;
+
+
 	struct s_map map;
 	if(checker_1(args) == -1)
 		werror(1);
@@ -115,10 +121,15 @@ int main(int c, char **args)
 	map.whole_map = malloc(map.char_in_map * sizeof(char) + 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
 	map.whole_map[map.char_in_map] = '\0';
+	map.my_map = malloc(1 * sizeof(char*));
+	map.my_map[0] = NULL;
 	map.my_map = ft_split(map.whole_map, '\n');
+	int i = -1;
 	checker_2(&map);
 	exctract(&map);
+
 	// exit(0);
+
 
 
 	t_all all;
