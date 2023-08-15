@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:26:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:54:23 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void draw_update_all(t_all *all)
 		all->player.y = new_player_y;
 	}
 	
+	mlx_delete_image(all->mlx, all->mlx_img);
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all->mlx_img);
 	//draw player

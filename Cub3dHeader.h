@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:29:13 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:30:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 #include "MLX42/MLX42.h"
 #include <math.h>
 
-#define TILE_SIZE 60
+#define TILE_SIZE 32
 #define MAP_COLS 24
 #define MAP_ROWS 24
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
 #define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
+#define WALL_STRIP_WIDTH 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
 #define MINIMAP_SCALE_FACTOR 0.3
 
@@ -72,4 +73,5 @@ void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y);
 float adjastAngle(float rayAngle);
+void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
 #endif

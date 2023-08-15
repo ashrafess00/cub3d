@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:28:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:21:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	
 	return (foundVerWallHit);
 }
-void render_ray(t_all *all, float rayAngle, int column)
+void render_ray(t_all *all, float rayAngle, int column, int i)
 {
 	int horzWallHitX;
 	int horzWallHitY;
@@ -258,12 +258,13 @@ void render_ray(t_all *all, float rayAngle, int column)
 		distance = verHitDistance;
 	}
 	
-	draw_line(all->mlx_img,
-			all->player.x,
-			all->player.y,
-			wallHitX,
-			wallHitY,
-			get_rgba(255, 0, 0, 100));
+	render_3d_project_walls(all->mlx_img, distance, i);
+	// draw_line(all->mlx_img,
+	// 		all->player.x,
+	// 		all->player.y,
+	// 		wallHitX,
+	// 		wallHitY,
+	// 		get_rgba(255, 0, 0, 100));
 }
 
 
@@ -279,7 +280,7 @@ void cast_rays(t_all *all)
 	int i = -1;
 	while (++i < NUM_RAYS)
 	{
-		render_ray(all, rayAngle, column);
+		render_ray(all, rayAngle, column, i);
 		rayAngle += (FOV_ANGLE / NUM_RAYS);
 		printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
