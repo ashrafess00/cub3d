@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 12:21:37 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 21:44:48 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,13 +258,16 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 		distance = verHitDistance;
 	}
 	
+	//to fix the distortion
+	distance = distance * cos(rayAngle - all->player.rotation_angle);
+	//render walls
 	render_3d_project_walls(all->mlx_img, distance, i);
-	// draw_line(all->mlx_img,
-	// 		all->player.x,
-	// 		all->player.y,
-	// 		wallHitX,
-	// 		wallHitY,
-	// 		get_rgba(255, 0, 0, 100));
+	draw_line(all->mlx_img,
+			all->player.x,
+			all->player.y,
+			wallHitX,
+			wallHitY,
+			get_rgba(255, 0, 0, 100));
 }
 
 
@@ -282,7 +285,7 @@ void cast_rays(t_all *all)
 	{
 		render_ray(all, rayAngle, column, i);
 		rayAngle += (FOV_ANGLE / NUM_RAYS);
-		printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
+		// printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
 		// break;
 	}	
