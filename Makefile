@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kslik <kslik@student.42.fr>                +#+  +:+       +#+         #
+#    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
 #    Updated: 2023/08/14 15:10:50 by kslik            ###   ########.fr        #
@@ -15,7 +15,7 @@ LIBFT_DIR=libft/
 
 HEADERS=  -I$(LIBFT_DIR)
 LIBS=MLX42/libmlx42.a
-SRCS=main.c draw_me.c key_me.c checker.c extract_map.c
+SRCS=main.c draw_me.c key_me.c checker.c extract_map.c cast.c
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
@@ -29,7 +29,7 @@ MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"
 all: $(OBJS_DIR) $(NAME)
 
 
-$(NAME): $(LIBFT_A) $(OBJS)  
+$(NAME): $(LIBFT_A) $(OBJS) Cub3dHeader.h
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) -o $(NAME) 
 	@echo $(NAME) was created :\)
 
