@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 10:37:10 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:29:13 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "MLX42/MLX42.h"
 #include <math.h>
 
-#define TILE_SIZE 32
+#define TILE_SIZE 60
 #define MAP_COLS 24
 #define MAP_ROWS 24
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
@@ -68,7 +68,7 @@ void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, i
 int get_rgba(int r, int g, int b, int a);
 void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
-void update_player(t_all *all);
+void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y);
 float adjastAngle(float rayAngle);

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 20:00:39 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:28:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,13 +258,12 @@ void render_ray(t_all *all, float rayAngle, int column)
 		distance = verHitDistance;
 	}
 	
-	// printf("%d - %d\n", wallHitX, wallHitY);
 	draw_line(all->mlx_img,
 			all->player.x,
 			all->player.y,
 			wallHitX,
 			wallHitY,
-			get_rgba(0, 0, 0, 255));
+			get_rgba(255, 0, 0, 100));
 }
 
 

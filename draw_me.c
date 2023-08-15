@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:17:22 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:51:03 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, i
     int y = 0;
     int err = 0;
 
+    center_x *= MINIMAP_SCALE_FACTOR;
+    center_y *= MINIMAP_SCALE_FACTOR;
     while (x >= y) {
         mlx_put_pixel(mlx_img, center_x + x, center_y + y, color);
         mlx_put_pixel(mlx_img, center_x + y, center_y + x, color);
@@ -56,10 +58,10 @@ static int	get_steps(int dx, int dy)
 
 void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 {
-    // x1 *= MINIMAP_SCALE_FACTOR;
-    // x2 *= MINIMAP_SCALE_FACTOR;
-    // y1 *= MINIMAP_SCALE_FACTOR;
-    // y2 *= MINIMAP_SCALE_FACTOR;
+    x1 *= MINIMAP_SCALE_FACTOR;
+    x2 *= MINIMAP_SCALE_FACTOR;
+    y1 *= MINIMAP_SCALE_FACTOR;
+    y2 *= MINIMAP_SCALE_FACTOR;
     // printf("x1 : %d - x2 : %d\n", x1, x2);
     // printf("y1 : %d - y2 : %d\n", y1, y2);
 	float	incx;
@@ -77,46 +79,12 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 	i = -1;
 	while (++i <= steps)
 	{
-		// if (x1 < x2)
-		// 	x1 += incx;
-		// else
-		// 	x1 -= incx;
-		// if (y1 < y2)
-		// 	y1 += incy;
-		// else
-		// 	y1 -= incy;
-        // // printf("%d", x1);
 		mlx_put_pixel(mlx_img, (int)round(x), (int)round(y), color);
         x += incx;
         y += incy;
     }
 }
 
-
-// void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
-// {
-// 	int delta_x = abs(x2 - x1);
-// 	int delta_y = abs(y2 - y1);
-// 	int sign_x = x1 < x2 ? 1 : -1;
-// 	int sign_y = y1 < y2 ? 1 : -1;
-// 	int error = delta_x - delta_y;
-
-
-// 	// mlx_put_pixel(data->mlx, data->mlx_win, x2, y2, color);
-//     mlx_put_pixel(mlx_img, x2, y2, color);
-// 	while (x1 != x2 || y1 != y2) {
-// 		mlx_put_pixel(mlx_img, x1, y1, color);
-// 		int error2 = error * 2;
-// 		if (error2 > -delta_y) {
-// 			error -= delta_y;
-// 			x1 += sign_x;
-// 		}
-// 		if (error2 < delta_x) {
-// 			error += delta_x;
-// 			y1 += sign_y;
-// 		}
-// 	}
-// }
 
 //draw the map
 void draw_map(mlx_image_t *mlx_img)
@@ -152,16 +120,17 @@ void draw_map(mlx_image_t *mlx_img)
 		int j = -1;
 		while (++j < MAP_COLS)
 		{
+            //here we draw the square
 			int u = -1;
-			while (++u < TILE_SIZE)
+			while (++u < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 			{
 				int z = -1;
-				while (++z < TILE_SIZE)
+				while (++z < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 				{
 					if (Map[i][j] != 0)
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(0, 0, 0, 255));
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(0, 0, 0, 255));
                     else
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 255, 255, 255));
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(255, 255, 255, 255));
 				}
 			}
 		}

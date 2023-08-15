@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:19:57 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:26:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool in_the_wall(int x, int y)
 	return (Map[map_grip_index_y][map_grip_index_x] != 0);
 }
 
-void update_player(t_all *all)
+void draw_update_all(t_all *all)
 {
 	//rotation_angle
 	all->player.rotation_angle = adjastAngle(all->player.rotation_angle);
@@ -61,15 +61,13 @@ void update_player(t_all *all)
 	{
 		all->player.x = new_player_x;
 		all->player.y = new_player_y;
-		printf("[[%d]]\n", in_the_wall(new_player_x, new_player_y));
 	}
 	
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all->mlx_img);
 	//draw player
-	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
+	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 40, 255));
 	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
-	// printf("[%f]\n", all->player.rotation_angle);
 	cast_rays(all);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
@@ -132,7 +130,7 @@ int main(int c, char **args)
 	t_all all;
 	t_player player;
 	//init mlx window
-	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "بوسة فالفم خير من الدنيا وما فيها", true);
+	mlx_t *mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "GALBI KHASSAH MOULAH", true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	
@@ -143,14 +141,10 @@ int main(int c, char **args)
 	all.player = player;
 	all.mlx_img = mlx_img;
 	//draw map
-	draw_map(mlx_img);
+	// draw_map(mlx_img);
 
-	//draw player
-	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 60, player.y + sin(player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
-	cast_rays(&all);
-
-
+	//draw all
+	draw_update_all(&all);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);
