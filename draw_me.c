@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 10:53:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:17:22 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int get_rgba(int r, int g, int b, int a)
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color) {
     int x = radius;
     int y = 0;
-    // center_x *= MINIMAP_SCALE_FACTOR;
-    // center_y *= MINIMAP_SCALE_FACTOR;
     int err = 0;
 
     while (x >= y) {
@@ -50,10 +48,10 @@ void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, i
 
 static int	get_steps(int dx, int dy)
 {
-	if (dx > dy)
-		return (dx);
+	if (abs(dx) > abs(dy))
+		return (abs(dx));
 	else
-		return (dy);
+		return (abs(dy));
 }
 
 void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
@@ -62,7 +60,8 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
     // x2 *= MINIMAP_SCALE_FACTOR;
     // y1 *= MINIMAP_SCALE_FACTOR;
     // y2 *= MINIMAP_SCALE_FACTOR;
-    
+    // printf("x1 : %d - x2 : %d\n", x1, x2);
+    // printf("y1 : %d - y2 : %d\n", y1, y2);
 	float	incx;
 	float	incy;
 	int		steps;
@@ -73,19 +72,24 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 	steps = get_steps(dx, dy);
 	incx = dx / (float) steps;
 	incy = dy / (float) steps;
+    float x = x1;
+    float y = y1;
 	i = -1;
 	while (++i <= steps)
 	{
-		if (x1 < x2)
-			x1 += incx;
-		else
-			x1 -= incx;
-		if (y1 < y2)
-			y1 += incy;
-		else
-			y1 -= incy;
-		mlx_put_pixel(mlx_img, (int)round(x1), (int)round(y1), color);
-	}
+		// if (x1 < x2)
+		// 	x1 += incx;
+		// else
+		// 	x1 -= incx;
+		// if (y1 < y2)
+		// 	y1 += incy;
+		// else
+		// 	y1 -= incy;
+        // // printf("%d", x1);
+		mlx_put_pixel(mlx_img, (int)round(x), (int)round(y), color);
+        x += incx;
+        y += incy;
+    }
 }
 
 
