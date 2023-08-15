@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/13 13:02:52 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:44:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int get_rgba(int r, int g, int b, int a)
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y, int radius, int color) {
     int x = radius;
     int y = 0;
+    center_x *= MINIMAP_SCALE_FACTOR;
+    center_y *= MINIMAP_SCALE_FACTOR;
     int err = 0;
 
     while (x >= y) {
@@ -52,6 +54,7 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 	int sign_x = x1 < x2 ? 1 : -1;
 	int sign_y = y1 < y2 ? 1 : -1;
 	int error = delta_x - delta_y;
+
 
 	// mlx_put_pixel(data->mlx, data->mlx_win, x2, y2, color);
     mlx_put_pixel(mlx_img, x2, y2, color);
@@ -104,15 +107,15 @@ void draw_map(mlx_image_t *mlx_img)
 		while (++j < MAP_COLS)
 		{
 			int u = -1;
-			while (++u < TILE_SIZE)
+			while (++u < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 			{
 				int z = -1;
-				while (++z < TILE_SIZE)
+				while (++z < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 				{
 					if (Map[i][j] != 0)
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(0, 0, 0, 255));
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(0, 0, 0, 255));
                     else
-                        mlx_put_pixel(mlx_img, j * TILE_SIZE + z, i * TILE_SIZE + u, get_rgba(255, 255, 255, 255));
+                        mlx_put_pixel(mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(255, 255, 255, 255));
 				}
 			}
 		}

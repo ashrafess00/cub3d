@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 15:39:50 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:23:54 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void update_player(t_all *all)
 	//draw player
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
-	printf("[%f]\n", all->player.rotation_angle);
-	cast_rays(all);
+	// printf("[%f]\n", all->player.rotation_angle);
+	// cast_rays(all);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
 
@@ -140,12 +140,9 @@ int main(int c, char **args)
 	//draw player
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
 	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 60, player.y + sin(player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
-	cast_rays(&all);
+	// cast_rays(&all);
 
 
-	// int i = -1;
-	// while(map.my_map[++i])
-	// 	printf("%s\n", map.my_map[i]);
 
 	mlx_key_hook(mlx, move_mama, &all);
 	mlx_image_to_window(mlx, mlx_img, 0, 0);

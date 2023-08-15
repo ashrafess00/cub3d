@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 20:01:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:39:55 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
-
+#define MINIMAP_SCALE_FACTOR 0.3
 
 typedef struct s_player
 {
