@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 10:23:54 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:50:57 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void update_player(t_all *all)
 	draw_map(all->mlx_img);
 	//draw player
 	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
+	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(255, 0, 0, 255));
 	// printf("[%f]\n", all->player.rotation_angle);
 	// cast_rays(all);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
@@ -97,6 +97,9 @@ void	init_player(t_player *player)
 
 int main(int c, char **args)
 {
+
+	if(c != 2)
+		werror(1);
 	struct s_map map;
 	if(checker_1(args) == -1)
 		werror(1);
@@ -115,10 +118,15 @@ int main(int c, char **args)
 	map.whole_map = malloc(map.char_in_map * sizeof(char) + 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
 	map.whole_map[map.char_in_map] = '\0';
+	map.my_map = malloc(1 * sizeof(char*));
+	map.my_map[0] = NULL;
 	map.my_map = ft_split(map.whole_map, '\n');
+	int i = -1;
 	checker_2(&map);
 	exctract(&map);
+
 	// exit(0);
+
 
 
 	t_all all;
@@ -139,7 +147,7 @@ int main(int c, char **args)
 
 	//draw player
 	draw_player(mlx_img, player.x, player.y, player.radius, get_rgba(0, 255, 0, 255));
-	draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 60, player.y + sin(player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
+	// draw_line(mlx_img, player.x, player.y, player.x + cos(player.rotation_angle) * 100, player.y + sin(player.rotation_angle) * 100, get_rgba(255, 0, 0, 255));
 	// cast_rays(&all);
 
 

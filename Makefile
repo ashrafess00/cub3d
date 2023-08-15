@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/14 20:53:19 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/08/15 10:37:07 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS=main.c draw_me.c key_me.c checker.c extract_map.c cast.c render_wall.c
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
+# CFLAGS = -fsanitize=address
 
 CC=cc
 RM=rm -rf

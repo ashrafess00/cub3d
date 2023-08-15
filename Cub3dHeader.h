@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 09:39:55 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:37:10 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ struct s_map
 	int char_in_map;
 	int tmp;
 	char **pure_map;
+	int last_line;
 };
 
 void werror(int i);
