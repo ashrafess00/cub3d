@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 11:20:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:03:15 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int is_ray_facing_left(float rayAngle)
 
 float adjastAngle(float rayAngle)
 {
-	rayAngle = fmod(rayAngle, (int)(2 * M_PI));
+	rayAngle = fmod(rayAngle, (2 * M_PI));
 	if (rayAngle < 0)
 		rayAngle = (2 * M_PI) + rayAngle;
 	return (rayAngle);
@@ -254,7 +254,7 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 	//to fix the distortion
 	distance = distance * cos(rayAngle - all->player.rotation_angle);
 	//render walls
-	// render_3d_project_walls(all->mlx_img, distance, i);
+	render_3d_project_walls(all->mlx_img, distance, i);
 	if(foundHorzWallHit)
 	{
 		
@@ -294,7 +294,7 @@ void cast_rays(t_all *all)
 		// printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
 		// break;
-		printf("[ray count : %d]\n", i);
+		// printf("[ray count : %d]\n", i);
 	}	
 }
 

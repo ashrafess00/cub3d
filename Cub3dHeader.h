@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 11:03:41 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:54:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
 void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
+void draw_update_all(t_all *all);
 #endif
