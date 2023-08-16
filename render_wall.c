@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 09:55:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:02:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)
                     (WINDOW_HEIGHT / 2) - (wall_strip_height / 2),
                     WALL_STRIP_WIDTH,
                     wall_strip_height,
-                    get_rgba(255, 255, 255, 255));
+                    get_rgba(255, 128, 0, 255));
 }

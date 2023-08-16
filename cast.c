@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 08:16:41 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:02:04 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH
 		&& nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
 	{
-		if (in_the_wall(nextHorzTouchX, nextHorzTouchY))
+		if (in_the_wall(nextHorzTouchX, nextHorzTouchY, all))
 		{
 			//we found a wall hit
 			foundHorzWallHit = 1;
@@ -187,7 +187,7 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	while (nextVerTouchX >= 0 && nextVerTouchX <= WINDOW_WIDTH
 		&& nextVerTouchY >= 0 && nextVerTouchY <= WINDOW_HEIGHT)
 	{
-		if (in_the_wall(nextVerTouchX, nextVerTouchY))
+		if (in_the_wall(nextVerTouchX, nextVerTouchY, all))
 		{
 			//we found a wall hit
 			foundVerWallHit = 1;
