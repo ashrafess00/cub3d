@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/15 10:37:07 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/08/16 10:16:54 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFT_A=$(LIBFT_DIR)libft.a
 CC=cc
 RM=rm -rf
 GLFW = $(shell brew --prefix glfw)
-MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib" 
+MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"$(GLFW)/lib" -O3
 
 all: $(OBJS_DIR) $(NAME)
 
@@ -40,7 +40,7 @@ $(LIBFT_A):
 	make -C $(LIBFT_DIR)
 
 $(OBJS_DIR)%.o:%.c
-	$(CC) $(CFLAGS) $(HEADERS) -c -o $@ $^
+	$(CC) $(CFLAGS) $(HEADERS) -O3 -c -o $@ $^
 
 clean:
 	make clean -C $(LIBFT_DIR)

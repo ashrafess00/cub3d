@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 10:02:14 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:18:20 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, i
 {
 	int x_end = x + width;
 	int y_end = y + height;
-    mlx_texture_t *texture = mlx_load_png("./wall.png");
+    // mlx_texture_t *texture = mlx_load_png("./wall.png");
 
     
     if (x_end >= 0 && x_end <= WINDOW_WIDTH &&
@@ -53,8 +53,7 @@ void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)
     float distance_projection_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
     //projected wall height
     int wall_strip_height = (TILE_SIZE /  ray_distance) * distance_projection_plane;
-    // if (wall_strip_height >= WINDOW_HEIGHT)
-    //     return;
+    //draw rectangle
     draw_rectangle(mlx_img, i * WALL_STRIP_WIDTH,
                     (WINDOW_HEIGHT / 2) - (wall_strip_height / 2),
                     WALL_STRIP_WIDTH,
