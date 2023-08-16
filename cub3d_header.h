@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_header.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 12:43:26 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:33:55 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ typedef struct s_player
 	float rotation_speed;
 }	t_player;
 
+struct s_rgb
+{
+	int f[3];
+	int c[3];	
+};
 struct s_map
 {
 	char *first_line;
@@ -59,14 +64,15 @@ struct s_map
 	int last_line;
 	int window_wid;
 	int window_heig;
+	struct s_rgb rgb;
 };
-
 typedef struct s_all
 {
 	t_player player;
 	mlx_t *mlx;
 	mlx_image_t *mlx_img;
 	struct s_map map;
+	struct s_rgb rgb;
 }	t_all;
 
 typedef struct s_rays
@@ -96,7 +102,7 @@ void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
-void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
+void render_3d_project_walls(t_all *all, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
 
@@ -107,4 +113,5 @@ bool is_ray_facing_left(float ray_angle);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
 float distance_between_points(int x1, int y1, int x2, int y2);
+void render_3d_project_walls(t_all *all, float ray_distance, int i);
 #endif

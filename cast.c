@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 16:06:46 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:28:10 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 		rays.wall_hit_y = rays.verWallHitY;
 		rays.ray_distance = verHitDistance;
 	}
+	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);
 }
-
 
 
 void cast_rays(t_all *all)
@@ -76,9 +76,7 @@ void cast_rays(t_all *all)
 	//render walls
 	i = -1;
 	while (++i < NUM_RAYS)
-	{
-		render_3d_project_walls(all->mlx_img, rays[i].ray_distance, i);
-	}
+		render_3d_project_walls(all, rays[i].ray_distance, i);
 }
 
 //horizontal and verical 

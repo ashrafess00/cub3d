@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 15:23:08 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:23:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,13 @@ int main(int c, char **args)
 	int i = -1;
 	checker_2(&map);
 	exctract(&map);
-
-
-
 	t_all all;
 	t_player player;
 	//init mlx window
 	mlx_t *mlx = mlx_init(WINDOW_WIDTH,WINDOW_HEIGHT, WINDOW_TITLE, true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	all.map = map;
+	all.rgb = map.rgb;
 	//init player
 	init_player(&player);
 

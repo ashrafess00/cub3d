@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 15:19:44 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:15:02 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,18 @@ void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, i
     }
 }
 
-
-
-/*
-------depends on this equetion------
-actual wall height    projected wall height
------------------- = ------------------------
-distance to wall     distance from player to project plane
-*/
-
-void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)
+void render_3d_project_walls(t_all *all, float ray_distance, int i)
 {
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
+    int j = -1;
     float distance_projection_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
     //projected wall height
     int wall_strip_height = (TILE_SIZE /  ray_distance) * distance_projection_plane;
     //draw rectangle
-    draw_rectangle(mlx_img, i * WALL_STRIP_WIDTH,
+    draw_rectangle(all->mlx_img, i * WALL_STRIP_WIDTH,
                     (WINDOW_HEIGHT / 2) - (wall_strip_height / 2),
                     WALL_STRIP_WIDTH,
                     wall_strip_height,
-                    get_rgba(255, 128, 0, 255));
+                    get_rgba(236, 120, 160, 255));
 }

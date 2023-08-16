@@ -6,13 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 16:02:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:21:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-int horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
+void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
 	t_player player = all->player;
 	int wallHitX = 0;
