@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 11:54:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:43:26 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,20 @@ struct s_map
 	int window_heig;
 };
 
-typedef struct s_all {
+typedef struct s_all
+{
 	t_player player;
 	mlx_t *mlx;
 	mlx_image_t *mlx_img;
 	struct s_map map;
 }	t_all;
 
+typedef struct s_rays
+{
+	float ray_distance;
+	int wall_hit_x;
+	int wall_hit_y;
+}	t_rays;
 
 void werror(int i);
 int checker_2(struct s_map *map);
@@ -84,4 +91,9 @@ float adjastAngle(float rayAngle);
 void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
+
+bool is_ray_facing_down(float ray_angle);
+bool is_ray_facing_up(float ray_angle);
+bool is_ray_facing_right(float ray_angle);
+bool is_ray_facing_left(float ray_angle);
 #endif

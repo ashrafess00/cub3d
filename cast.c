@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 12:03:15 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:41:15 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 // const float NUM_RAYS = WINDOW_WIDTH / WALL_STRIP;
 
 
-int is_ray_facing_down(float rayAngle)
-{
-	if (rayAngle > 0 && rayAngle < M_PI)
-		return (1);
-	return (0);	
-}
-int is_ray_facing_up(float rayAngle)
-{
-	return (!is_ray_facing_down(rayAngle));
-}
-int is_ray_facing_right(float rayAngle)
-{
-    if (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI)
-        return (1);
-    return 0;
-}
-int is_ray_facing_left(float rayAngle)
-{
-    return (!is_ray_facing_right(rayAngle));
-}
+// int is_ray_facing_down(float rayAngle)
+// {
+// 	if (rayAngle > 0 && rayAngle < M_PI)
+// 		return (1);
+// 	return (0);	
+// }
+// int is_ray_facing_up(float rayAngle)
+// {
+// 	return (!is_ray_facing_down(rayAngle));
+// }
+// int is_ray_facing_right(float rayAngle)
+// {
+//     if (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI)
+//         return (1);
+//     return 0;
+// }
+// int is_ray_facing_left(float rayAngle)
+// {
+//     return (!is_ray_facing_right(rayAngle));
+// }
 
 float adjastAngle(float rayAngle)
 {
@@ -86,32 +86,26 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	float xStep;
 	float yStep;
 
-	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
-	int isRayFacingUp = !isRayFacingDown;
-	int isRayFacingRight = rayAngle < (M_PI / 2) || rayAngle > 1.5 * M_PI;
-	int isRayFacingLeft = !isRayFacingRight;
-
-	
 	//find the y-coordinate of the closest horizontal grid intersections
 	yIntercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
-	if (isRayFacingDown)
+	if (is_ray_facing_down(rayAngle))
 		yIntercept += TILE_SIZE;
 	//find the x-coordinate of the closest horizontal grid intersections
 	xIntercept = player.x + (yIntercept - player.y) / tan(rayAngle);//warning
 
 	//calculate the increment xStep and yStep
 	yStep = TILE_SIZE;                //ystep
-	if (isRayFacingUp)
+	if (is_ray_facing_up(rayAngle))
 		yStep *= -1;
 	xStep = TILE_SIZE / tan(rayAngle);//xstep
-	if (isRayFacingLeft && xStep > 0)
+	if (is_ray_facing_left(rayAngle) && xStep > 0)
 		xStep *= -1;
-	if (isRayFacingRight && xStep < 0)
+	if (is_ray_facing_right(rayAngle) && xStep < 0)
 		xStep *= -1;
 	
 	float nextHorzTouchX = xIntercept;
 	float nextHorzTouchY = yIntercept;
-	if (isRayFacingUp)
+	if (is_ray_facing_up(rayAngle))
 		nextHorzTouchY--;
 	
 	int foundHorzWallHit = 0;
@@ -154,34 +148,28 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	float xStep;
 	float yStep;
 
-	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
-	int isRayFacingUp = !isRayFacingDown;
-	int isRayFacingRight = rayAngle < (M_PI / 2) || rayAngle > 1.5 * M_PI;
-	int isRayFacingLeft = !isRayFacingRight;
-
 	
 	//find the x-coordinate of the closest horizontal grid intersections
 	xIntercept = floor(all->player.x / TILE_SIZE) * TILE_SIZE;
-	if (isRayFacingRight)
+	if (is_ray_facing_right(rayAngle))
 		xIntercept += TILE_SIZE;
 	//find the y-coordinate of the closest horizontal grid intersections
 	yIntercept = player.y + (xIntercept - player.x) * tan(rayAngle);//warning
 
 	//calculate the increment xStep and yStep
 	xStep = TILE_SIZE;             //xstep
-	if (isRayFacingLeft)
+	if (is_ray_facing_left(rayAngle))
 		xStep *= -1;
 	yStep = TILE_SIZE * tan(rayAngle);//ystep
-	if (isRayFacingUp && yStep > 0)
+	if (is_ray_facing_up(rayAngle) && yStep > 0)
 		yStep *= -1;
-	if (isRayFacingDown && yStep < 0)
+	if (is_ray_facing_down(rayAngle) && yStep < 0)
 		yStep *= -1;
 	
 	float nextVerTouchX = xIntercept;
 	float nextVerTouchY = yIntercept;
-	if (isRayFacingLeft)
+	if (is_ray_facing_left(rayAngle))
 		nextVerTouchX--;
-	
 	
 	//incremet xstep and ystep until we find a wall
 	while (nextVerTouchX >= 0 && nextVerTouchX <= WINDOW_WIDTH
