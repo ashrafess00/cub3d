@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 10:02:04 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:20:03 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	t_player player = all->player;
 	int wallHitX = 0;
 	int wallHitY = 0;
-	int distance = 0;
+	float distance = 0;
 
-	int xIntercept;
-	int yIntercept;
-	int xStep;
-	int yStep;
+	float xIntercept;
+	float yIntercept;
+	float xStep;
+	float yStep;
 
 	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
 	int isRayFacingUp = !isRayFacingDown;
@@ -109,8 +109,8 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	if (isRayFacingRight && xStep < 0)
 		xStep *= -1;
 	
-	int nextHorzTouchX = xIntercept;
-	int nextHorzTouchY = yIntercept;
+	float nextHorzTouchX = xIntercept;
+	float nextHorzTouchY = yIntercept;
 	if (isRayFacingUp)
 		nextHorzTouchY--;
 	
@@ -149,10 +149,10 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	int wallHitY = 0;
 	int distance = 0;
 
-	int xIntercept;
-	int yIntercept;
-	int xStep;
-	int yStep;
+	float xIntercept;
+	float yIntercept;
+	float xStep;
+	float yStep;
 
 	int isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
 	int isRayFacingUp = !isRayFacingDown;
@@ -177,8 +177,8 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	if (isRayFacingDown && yStep < 0)
 		yStep *= -1;
 	
-	int nextVerTouchX = xIntercept;
-	int nextVerTouchY = yIntercept;
+	float nextVerTouchX = xIntercept;
+	float nextVerTouchY = yIntercept;
 	if (isRayFacingLeft)
 		nextVerTouchX--;
 	
@@ -254,13 +254,26 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 	//to fix the distortion
 	distance = distance * cos(rayAngle - all->player.rotation_angle);
 	//render walls
-	render_3d_project_walls(all->mlx_img, distance, i);
-	draw_line(all->mlx_img,
-			all->player.x,
-			all->player.y,
-			wallHitX,
-			wallHitY,
-			get_rgba(255, 0, 0, 100));
+	// render_3d_project_walls(all->mlx_img, distance, i);
+	if(foundHorzWallHit)
+	{
+		
+		draw_line(all->mlx_img,
+				all->player.x,
+				all->player.y,
+				wallHitX,
+				wallHitY,
+				get_rgba(255, 0, 0, 100));
+	}
+	else
+	{		
+		draw_line(all->mlx_img,
+				all->player.x,
+				all->player.y,
+				wallHitX,
+				wallHitY,0x00000FF);
+		
+	}
 }
 
 
@@ -281,5 +294,10 @@ void cast_rays(t_all *all)
 		// printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
 		// break;
+		printf("[ray count : %d]\n", i);
 	}	
 }
+
+//horizontal and verical 
+//horizontal -> up and down
+//vertical -> left or right

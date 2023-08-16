@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 10:12:25 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 11:03:41 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
-#define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
+
+#define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP)
 
 #define MINIMAP_SCALE_FACTOR 0.2
 #define PLAYER_RADIUS 10
