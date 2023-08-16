@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 08:44:25 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 11:17:42 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 		distance = verHitDistance;
 	}
 	
-	render_3d_project_walls(all->mlx_img, distance, i);
+	render_3d_project_walls(all, distance, i);
 	draw_line(all->mlx_img,
 			all->player.x,
 			all->player.y,

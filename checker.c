@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/14 12:15:54 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 11:08:20 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,14 @@ int check_color(struct s_map *map, int i, char c)
         nmb = ft_atoi(q);
         if(nmb > 255 || nmb < 0)
             werror(1);
-        else 
+        else
+        {
+            if(c == 'F')
+                map->rgb.f[vld] = nmb;
+            else if(c == 'C')
+                map->rgb.c[vld] = nmb;
             vld++;
+        }
         if(map->my_map[i][j] == ',')
             j++;
     }

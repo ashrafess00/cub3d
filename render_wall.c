@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 08:52:35 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 11:18:52 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, i
 	}
 }
 
-void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)
+void render_3d_project_walls(t_all *all, float ray_distance, int i)
 {
     printf("{ray distance : %f}\n", ray_distance);
 
@@ -39,9 +39,9 @@ void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)
     int wall_strip_height = (TILE_SIZE /  ray_distance) * distance_projection_plane;
     if (wall_strip_height >= WINDOW_HEIGHT)
         return;
-    draw_rectangle(mlx_img, i * WALL_STRIP_WIDTH,
+    draw_rectangle(all->mlx_img, i * WALL_STRIP_WIDTH,
                     (WINDOW_HEIGHT / 2) - (wall_strip_height / 2),
                     WALL_STRIP_WIDTH,
                     wall_strip_height,
-                    get_rgba(255, 128, 0, 255));
+                    get_rgba(all->rgb.f[0],all->rgb.f[1],all->rgb.f[2], 255));
 }

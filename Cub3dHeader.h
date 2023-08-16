@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 08:38:38 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 11:18:13 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ typedef struct s_player
 	float rotation_speed;
 }	t_player;
 
+struct s_rgb
+{
+	int f[3];
+	int c[3];	
+};
 struct s_map
 {
 	char *first_line;
@@ -54,13 +59,14 @@ struct s_map
 	int last_line;
 	int window_wid;
 	int window_heig;
+	struct s_rgb rgb;
 };
-
 typedef struct s_all {
 	t_player player;
 	mlx_t *mlx;
 	mlx_image_t *mlx_img;
 	struct s_map map;
+	struct s_rgb rgb;
 }	t_all;
 
 
@@ -77,6 +83,6 @@ void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
-void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
+void render_3d_project_walls(t_all *all, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
 #endif
