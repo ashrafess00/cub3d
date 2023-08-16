@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3dHeader.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 21:54:19 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:08:36 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
-#define MINIMAP_SCALE_FACTOR 0.3
+
+#define MINIMAP_SCALE_FACTOR 0.9
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
 
@@ -44,12 +45,6 @@ typedef struct s_player
 	float rotation_speed;
 }	t_player;
 
-typedef struct s_all {
-	t_player player;
-	mlx_t *mlx;
-	mlx_image_t *mlx_img;
-}	t_all;
-
 struct s_map
 {
 	char *first_line;
@@ -60,12 +55,22 @@ struct s_map
 	int tmp;
 	char **pure_map;
 	int last_line;
+	int window_wid;
+	int window_heig;
 };
+
+typedef struct s_all {
+	t_player player;
+	mlx_t *mlx;
+	mlx_image_t *mlx_img;
+	struct s_map map;
+}	t_all;
+
 
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
-void draw_map(mlx_image_t *mlx_img);
+void draw_map(t_all *all);
 int exctract(struct s_map *map);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
 int get_rgba(int r, int g, int b, int a);
@@ -76,4 +81,5 @@ void cast_rays(t_all *all);
 bool in_the_wall(int x, int y);
 float adjastAngle(float rayAngle);
 void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
+int get_wi_he(struct s_map *map);
 #endif

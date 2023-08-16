@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/14 20:10:41 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 08:05:21 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,23 @@ int check_mty_line(struct s_map *map, int start)
     }
     return 0;
 }
+int get_wi_he(struct s_map *map)
+{
+    int i = 0;
+    int j=0;
+    map->window_wid = 0;
+    while(map->pure_map[i])
+    {
+        j=0;
+        while(map->pure_map[i][j])
+            j++;
+        if(j > map->window_wid)
+            map->window_wid = j * TILE_SIZE;
+        i++;
+    }
+    map->window_heig = i * TILE_SIZE;
+    return 0;
+}
 int exctract(struct s_map *map)
 {
     int i = 6;
@@ -150,5 +167,6 @@ int exctract(struct s_map *map)
     checker_map(map);
     check_valid(map);
     check_mty_line(map, start);
+    get_wi_he(map);
     return 0;
 }
