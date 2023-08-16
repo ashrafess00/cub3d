@@ -6,80 +6,53 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:52:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:06:46 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-void render_ray(t_all *all, float rayAngle, int column, int i)
+t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 {
-	int horzWallHitX;
-	int horzWallHitY;
-	int verWallHitX;
-	int verWallHitY;
-	int foundHorzWallHit = horizontal_intersection(all, rayAngle, &horzWallHitX, &horzWallHitY);
-	int founVerWallHit = vertical_intersection(all, rayAngle, &verWallHitX, &verWallHitY);
 	int horzHitDistance;
 	int verHitDistance;
-	int wallHitX;
-	int wallHitY;
-	float distance;
-	if (foundHorzWallHit)
-	{
-		horzHitDistance = distanceBetweenPiints(all->player.x,
-													all->player.y,
-													horzWallHitX,
-													horzWallHitY);
-	}
-	else
-		horzHitDistance = 1111111111;
-	if (founVerWallHit)
-	{
-		verHitDistance = distanceBetweenPiints(all->player.x,
-													all->player.y,
-													verWallHitX,
-													verWallHitY);
-	}
-	else
-		verHitDistance = 1111111111;
 
-	if (horzHitDistance < verHitDistance)
+	horizontal_intersection(all, rayAngle, &rays);
+	vertical_intersection(all, rayAngle, &rays);
+	if (rays.found_horz_wall_hit)
 	{
-		wallHitX = horzWallHitX;
-		wallHitY = horzWallHitY;
-		distance = horzHitDistance;
+		horzHitDistance = distance_between_points(all->player.x,
+													all->player.y,
+													rays.horzWallHitX,
+													rays.horzWallHitY);
+		rays.found_horz_wall_hit = 1;
+	}
+	else
+		horzHitDistance = 11111110;
+	if (rays.found_ver_wall_hit)
+	{
+		verHitDistance = distance_between_points(all->player.x,
+													all->player.y,
+													rays.verWallHitX,
+													rays.verWallHitY);
+		rays.found_horz_wall_hit = 0;
+	}
+	else
+		verHitDistance = 11111110;
+
+	if (horzHitDistance <= verHitDistance)
+	{
+		rays.wall_hit_x = rays.horzWallHitX;
+		rays.wall_hit_y = rays.horzWallHitY;
+		rays.ray_distance = horzHitDistance;
 	}
 	else
 	{
-		wallHitX = verWallHitX;
-		wallHitY = verWallHitY;
-		distance = verHitDistance;
+		rays.wall_hit_x = rays.verWallHitX;
+		rays.wall_hit_y = rays.verWallHitY;
+		rays.ray_distance = verHitDistance;
 	}
-	
-	//to fix the distortion
-	distance = distance * cos(rayAngle - all->player.rotation_angle);
-	//render walls
-	render_3d_project_walls(all->mlx_img, distance, i);
-	if(foundHorzWallHit)
-	{
-		
-		draw_line(all->mlx_img,
-				all->player.x,
-				all->player.y,
-				wallHitX,
-				wallHitY,
-				get_rgba(255, 0, 0, 100));
-	}
-	else
-	{		
-		draw_line(all->mlx_img,
-				all->player.x,
-				all->player.y,
-				wallHitX,
-				wallHitY,0x00000FF);
-		
-	}
+	return (rays);
 }
 
 
@@ -87,21 +60,25 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 void cast_rays(t_all *all)
 {
 	int column = 0;
-
+	t_rays rays[NUM_RAYS];
 	// start first ray substracting half of the fov
 	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
 
-	//loop all comuns casting the rays
+	//fill rays with info
 	int i = -1;
 	while (++i < NUM_RAYS)
 	{
-		render_ray(all, rayAngle, column, i);
+		rays[i] = render_ray(all, rayAngle, column, i, rays[i]);
 		rayAngle += (FOV_ANGLE / NUM_RAYS);
-		// printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
-		// break;
-		// printf("[ray count : %d]\n", i);
-	}	
+	}
+
+	//render walls
+	i = -1;
+	while (++i < NUM_RAYS)
+	{
+		render_3d_project_walls(all->mlx_img, rays[i].ray_distance, i);
+	}
 }
 
 //horizontal and verical 

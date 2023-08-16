@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:53:18 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:19:24 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ float adjastAngle(float rayAngle)
 	return (rayAngle);
 }
 
-float distanceBetweenPiints(int x1, int y1, int x2, int y2)
+float distance_between_points(int x1, int y1, int x2, int y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }

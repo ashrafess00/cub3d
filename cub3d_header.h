@@ -34,6 +34,7 @@
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
 
+#define WINDOW_TITLE "MI AMORE"
 typedef struct s_player
 {
 	int x;
@@ -70,9 +71,16 @@ typedef struct s_all
 
 typedef struct s_rays
 {
-	float ray_distance;
-	int wall_hit_x;
-	int wall_hit_y;
+	float	ray_distance;
+	int		wall_hit_x;
+	int		wall_hit_y;
+	int		found_horz_wall_hit;
+	int		found_ver_wall_hit;
+
+	int 	horzWallHitX;
+	int		horzWallHitY;
+	int		verWallHitX;
+	int		verWallHitY;
 }	t_rays;
 
 void werror(int i);
@@ -96,7 +104,7 @@ bool is_ray_facing_down(float ray_angle);
 bool is_ray_facing_up(float ray_angle);
 bool is_ray_facing_right(float ray_angle);
 bool is_ray_facing_left(float ray_angle);
-int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *horzWallHitY);
-int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *verWallHitY);
-float distanceBetweenPiints(int x1, int y1, int x2, int y2);
+void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
+void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
+float distance_between_points(int x1, int y1, int x2, int y2);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:19:44 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, i
 	int x_end = x + width;
 	int y_end = y + height;
     // mlx_texture_t *texture = mlx_load_png("./wall.png");
-
     
     if (x_end >= 0 && x_end <= WINDOW_WIDTH &&
         y_end >=0 && y_end <= WINDOW_HEIGHT && 
@@ -43,7 +42,7 @@ void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, i
 ------depends on this equetion------
 actual wall height    projected wall height
 ------------------ = ------------------------
-distance to weall     distance from player to project plane
+distance to wall     distance from player to project plane
 */
 
 void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i)

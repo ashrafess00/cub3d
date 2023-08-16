@@ -6,18 +6,18 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:50:52 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:02:16 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *verWallHitY)
+void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
 	//////////////////////////////////////
 	//------------vertical ray-grid intersection code------------//
 	//////////////////////////////////////
-	int foundVerWallHit = 0;
+	int	foundVerWallHit = 0;
 	t_player player = all->player;
 	int wallHitX = 0;
 	int wallHitY = 0;
@@ -39,38 +39,33 @@ int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *ver
 	//calculate the increment xStep and yStep
 	xStep = TILE_SIZE;             //xstep
 	if (is_ray_facing_left(rayAngle))
+	{
 		xStep *= -1;
+		xIntercept--;
+
+	}
 	yStep = TILE_SIZE * tan(rayAngle);//ystep
-	if (is_ray_facing_up(rayAngle) && yStep > 0)
+	if ((is_ray_facing_up(rayAngle) && yStep > 0) || (is_ray_facing_down(rayAngle) && yStep < 0))
 		yStep *= -1;
-	if (is_ray_facing_down(rayAngle) && yStep < 0)
-		yStep *= -1;
-	
-	float nextVerTouchX = xIntercept;
-	float nextVerTouchY = yIntercept;
-	if (is_ray_facing_left(rayAngle))
-		nextVerTouchX--;
 	
 	//incremet xstep and ystep until we find a wall
-	while (nextVerTouchX >= 0 && nextVerTouchX <= WINDOW_WIDTH
-		&& nextVerTouchY >= 0 && nextVerTouchY <= WINDOW_HEIGHT)
+	while (xIntercept >= 0 && xIntercept <= WINDOW_WIDTH
+		&& yIntercept >= 0 && yIntercept <= WINDOW_HEIGHT)
 	{
-		if (in_the_wall(nextVerTouchX, nextVerTouchY, all))
+		if (in_the_wall(xIntercept, yIntercept, all))
 		{
 			//we found a wall hit
-			foundVerWallHit = 1;
-			wallHitX = nextVerTouchX;
-			wallHitY = nextVerTouchY;			
+			ray->found_ver_wall_hit = 1;
+			wallHitX = xIntercept;
+			wallHitY = yIntercept;			
 			break;
 		}
 		else
 		{
-			nextVerTouchX += xStep;
-			nextVerTouchY += yStep;
+			xIntercept += xStep;
+			yIntercept += yStep;
 		}
 	}
-	*verWallHitX = wallHitX;
-	*verWallHitY = wallHitY;
-	
-	return (foundVerWallHit);
+	ray->verWallHitX = wallHitX;
+	ray->verWallHitY = wallHitY;
 }

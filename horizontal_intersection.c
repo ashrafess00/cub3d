@@ -6,13 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:54:53 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:02:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *horzWallHitY)
+int horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
 	t_player player = all->player;
 	int wallHitX = 0;
@@ -23,7 +23,8 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	float yIntercept;
 	float xStep;
 	float yStep;
-
+    int foundHorzWallHit = 0;
+	
 	//find the y-coordinate of the closest horizontal grid intersections
 	yIntercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
 	if (is_ray_facing_down(rayAngle))
@@ -34,39 +35,35 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 	//calculate the increment xStep and yStep
 	yStep = TILE_SIZE;                //ystep
 	if (is_ray_facing_up(rayAngle))
+    {
 		yStep *= -1;
+        yIntercept--;
+    }
 	xStep = TILE_SIZE / tan(rayAngle);//xstep
-	if (is_ray_facing_left(rayAngle) && xStep > 0)
-		xStep *= -1;
-	if (is_ray_facing_right(rayAngle) && xStep < 0)
+	if ((is_ray_facing_left(rayAngle) && xStep > 0) || (is_ray_facing_right(rayAngle) && xStep < 0))
 		xStep *= -1;
 	
-	float nextHorzTouchX = xIntercept;
-	float nextHorzTouchY = yIntercept;
-	if (is_ray_facing_up(rayAngle))
-		nextHorzTouchY--;
 	
-	int foundHorzWallHit = 0;
 	//incremet xstep and ystep until we find a wall
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH
-		&& nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
+	while (xIntercept >= 0 && xIntercept <= WINDOW_WIDTH
+		&& yIntercept >= 0 && yIntercept <= WINDOW_HEIGHT)
 	{
-		if (in_the_wall(nextHorzTouchX, nextHorzTouchY, all))
+		if (in_the_wall(xIntercept, yIntercept, all))
 		{
 			//we found a wall hit
-			foundHorzWallHit = 1;
-			wallHitX = nextHorzTouchX;
-			wallHitY = nextHorzTouchY;
+			ray->found_horz_wall_hit = 1;
+			wallHitX = xIntercept;
+			wallHitY = yIntercept;
 			break;
 		}
 		else
 		{
-			nextHorzTouchX += xStep;
-			nextHorzTouchY += yStep;
+			xIntercept += xStep;
+			yIntercept += yStep;
 		}
 	}
-	*horzWallHitX = wallHitX;
-	*horzWallHitY = wallHitY;
+	ray->horzWallHitX = wallHitX;
+	ray->horzWallHitY = wallHitY;
 	
-	return (foundHorzWallHit);
+	// return (foundHorzWallHit);
 }
