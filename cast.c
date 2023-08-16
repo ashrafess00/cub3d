@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 21:44:48 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:16:41 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,6 @@ int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *
 			foundHorzWallHit = 1;
 			wallHitX = nextHorzTouchX;
 			wallHitY = nextHorzTouchY;
-
-			// draw_line(all->mlx_img,
-			// all->player.x,
-			// all->player.y,
-			// wallHitX,
-			// wallHitY,
-			// get_rgba(0, 0, 0, 255));
 			break;
 		}
 		else
