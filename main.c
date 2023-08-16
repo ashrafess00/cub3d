@@ -32,6 +32,9 @@ void draw_update_all(t_all *all)
 	int new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
 	int new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
 	
+	if (new_player_x < 0 || new_player_x >= WINDOW_WIDTH || new_player_y < 0 || new_player_y >= WINDOW_HEIGHT)
+		return;
+
 	//check the wall collision
 	if (!in_the_wall(new_player_x, new_player_y, all))
 	{
@@ -43,8 +46,8 @@ void draw_update_all(t_all *all)
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_map(all);
 	//draw player
-	draw_player(all->mlx_img, all->player.x, all->player.y, all->player.radius, get_rgba(0, 255, 40, 255));
 	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(255, 0, 0, 255));
+	draw_player(all->mlx_img, all->player.x, all->player.y);
 	cast_rays(all);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }

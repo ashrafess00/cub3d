@@ -258,6 +258,9 @@ void render_ray(t_all *all, float rayAngle, int column, int i)
 		distance = verHitDistance;
 	}
 	
+	//to fix the distortion
+	distance = distance * cos(rayAngle - all->player.rotation_angle);
+	//render walls
 	render_3d_project_walls(all->mlx_img, distance, i);
 	draw_line(all->mlx_img,
 			all->player.x,
@@ -282,7 +285,7 @@ void cast_rays(t_all *all)
 	{
 		render_ray(all, rayAngle, column, i);
 		rayAngle += (FOV_ANGLE / NUM_RAYS);
-		printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
+		// printf("[[[[[[ray angle: %f]]]]]]\n", rayAngle);
 		column++;
 		// break;
 	}	
