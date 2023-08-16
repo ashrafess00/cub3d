@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 08:08:36 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 08:38:38 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
-#define MINIMAP_SCALE_FACTOR 0.9
+#define MINIMAP_SCALE_FACTOR 0.2
 
 typedef struct s_player
 {
@@ -75,7 +75,7 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
-bool in_the_wall(int x, int y);
+bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
 void render_3d_project_walls(mlx_image_t *mlx_img, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
