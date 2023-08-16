@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/16 08:05:21 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
+#include "cub3d_header.h"
 int extract_2(struct s_map *map, int start)
 {
     int i;

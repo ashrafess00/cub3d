@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:44:19 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 11:25:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
+#include "cub3d_header.h"
 
 void move_mama(mlx_key_data_t keydata, void *param)
 {

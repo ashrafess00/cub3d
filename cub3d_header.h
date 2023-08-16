@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cub3dHeader.h                                      :+:      :+:    :+:   */
+/*   cub3d_header.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -96,4 +96,7 @@ bool is_ray_facing_down(float ray_angle);
 bool is_ray_facing_up(float ray_angle);
 bool is_ray_facing_right(float ray_angle);
 bool is_ray_facing_left(float ray_angle);
+int horizontal_intersection(t_all *all, float rayAngle, int *horzWallHitX, int *horzWallHitY);
+int vertical_intersection(t_all *all, float rayAngle, int *verWallHitX, int *verWallHitY);
+float distanceBetweenPiints(int x1, int y1, int x2, int y2);
 #endif

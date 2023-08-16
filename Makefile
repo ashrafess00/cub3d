@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/16 12:43:38 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/08/16 13:53:01 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT_DIR=libft/
 
 HEADERS=  -I$(LIBFT_DIR)
 LIBS=MLX42/libmlx42.a
-SRCS=main.c draw_me.c key_me.c checker.c extract_map.c cast.c render_wall.c draw_update_objects.c is_ray_facing_.c
+SRCS=main.c draw_me.c key_me.c checker.c extract_map.c cast.c render_wall.c draw_update_objects.c is_ray_facing_.c horizontal_intersection.c vertical_intersection.c utils.c
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
@@ -29,7 +29,7 @@ MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"
 all: $(OBJS_DIR) $(NAME)
 
 
-$(NAME): $(LIBFT_A) $(OBJS) Cub3dHeader.h
+$(NAME): $(LIBFT_A) $(OBJS) cub3d_header.h
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) -o $(NAME) 
 	@echo $(NAME) was created :\)
 

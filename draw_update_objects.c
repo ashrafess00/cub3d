@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 12:53:40 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
+#include "cub3d_header.h"
 
 void draw_update_all(t_all *all)
 {

@@ -6,20 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 11:54:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:52:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
-
-bool in_the_wall(int x, int y, t_all *all)
-{
-
-	int map_grip_index_x = floor(x / TILE_SIZE);
-	int map_grip_index_y = floor(y / TILE_SIZE);
-	// printf("[]: %d\n", Map[map_grip_index_y][map_grip_index_x]);
-	return (all->map.pure_map[map_grip_index_y][map_grip_index_x] != '0');
-}
+#include "cub3d_header.h"
 
 void werror(int i)
 {

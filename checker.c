@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/14 12:15:54 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
+#include "cub3d_header.h"
 
 int	error_ber(char *av)
 {

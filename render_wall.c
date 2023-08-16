@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 10:18:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3dHeader.h"
+#include "cub3d_header.h"
 
 //from chatgpt
 void draw_rectangle(mlx_image_t *mlx_img, int x, int y, int width, int height, int color)
