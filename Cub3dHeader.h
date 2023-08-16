@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:52 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/15 21:54:19 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/16 07:41:01 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #define WALL_STRIP_WIDTH 1
 #define NUM_RAYS  (WINDOW_WIDTH / WALL_STRIP)
 #define MINIMAP_SCALE_FACTOR 0.3
-#define PLAYER_RADIUS 10
+#define PLAYER_RADIUS 5
 #define PLAYER_COLOR 16744448
 
 typedef struct s_player
