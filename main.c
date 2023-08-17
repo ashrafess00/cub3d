@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 09:52:25 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:22:12 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void werror(int i)
 	}
 }
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_all *all)
 {
-	player->x = WINDOW_WIDTH / 2;
-	player->y = WINDOW_HEIGHT / 2;
+	player->x = all->map.window_wid / 2;
+	player->y = all->map.window_heig / 2;
 	player->radius = 15;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
@@ -65,12 +65,12 @@ int main(int c, char **args)
 	t_all all;
 	t_player player;
 	//init mlx window
-	mlx_t *mlx = mlx_init(WINDOW_WIDTH,WINDOW_HEIGHT, WINDOW_TITLE, true);
-	mlx_image_t *mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	mlx_t *mlx = mlx_init(map.window_wid,map.window_heig, WINDOW_TITLE, true);
+	mlx_image_t *mlx_img = mlx_new_image(mlx, map.window_heig,map.window_wid);
 	all.map = map;
 	all.rgb = map.rgb;
 	//init player
-	init_player(&player);
+	init_player(&player, &all);
 
 	all.mlx = mlx;
 	all.player = player;
