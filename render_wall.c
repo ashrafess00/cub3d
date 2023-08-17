@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 10:41:00 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 11:28:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,35 @@ void draw_rectangle(mlx_image_t *mlx_img, t_rays ray, int x, int y, int width, i
     printf("[left : %d]\n", ray.is_ray_facing_left);
     printf("[right : %d]\n", ray.is_ray_facing_right);
 
-    // if (ray.found_horz_wall_hit)
-    // {
-    //     if (ray.)
-    // }
+    // mlx_texture_t *texture = mlx_load_png("./wall.png");
+    if (ray.found_horz_wall_hit)
+    {
+        if (ray.is_ray_facing_up)
+        {
+            //////
+        }
+        else
+        {
+            //////
+        }
+    }
+    else
+    {
+        if (ray.is_ray_facing_left)
+        {
+            ////////
+        }
+        else
+        {
+            /////////
+        }
+    }
 
 
     
 	int x_end = x + width;
 	int y_end = y + height;
-    // mlx_texture_t *texture = mlx_load_png("./wall.png");
+    
     
     // static int x_end_s = 0;
     // static int y_end_s = 0;
@@ -56,18 +75,28 @@ void draw_rectangle(mlx_image_t *mlx_img, t_rays ray, int x, int y, int width, i
 
 }
 
+/*
+   actual wall height              projected wall height
+----------------------- = -------------------------------------------
+    distance to wall         distance from player to project plane
+
+actuall wall height                = TAIL_SIZE
+distance to wall                   = ray distance
+distance from player to proj.plane = adjacent = (win_w / 2) / tan(30)
+*/
 void render_3d_project_walls(t_all *all, t_rays ray, int i)
 {
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
-    int j = -1;
+
     float distance_projection_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
     //projected wall height
     int wall_strip_height = (TILE_SIZE /  ray.ray_distance) * distance_projection_plane;
     //draw rectangle
-    draw_rectangle(all->mlx_img, ray, i * WALL_STRIP_WIDTH,
-                    (WINDOW_HEIGHT / 2) - (wall_strip_height / 2),
-                    WALL_STRIP_WIDTH,
-                    wall_strip_height,
+    int x = i;
+    int y = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+    int width = WALL_STRIP_WIDTH * 8;
+    int height = wall_strip_height;
+    draw_rectangle(all->mlx_img, ray, x, y, width, height,
                     get_rgba(236, 120, 160, 255));
 }

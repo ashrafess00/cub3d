@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 10:14:27 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 11:29:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ void cast_rays(t_all *all)
 		column++;
 	}
 
+	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
 	while (++i < NUM_RAYS)
+	{
 		render_3d_project_walls(all, rays[i], i);
+		// break;
+	}
 	draw_casts(all, rays);
 }
 
