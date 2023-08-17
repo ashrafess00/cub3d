@@ -6,11 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 16:21:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:27:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
+
+
 
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
@@ -23,26 +25,28 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 	float yIntercept;
 	float xStep;
 	float yStep;
-    int foundHorzWallHit = 0;
-	
+    // int foundHorzWallHit = 0;
+	ray->found_horz_wall_hit = 0;
+	ray->horzWallHitX = 0;
+	ray->horzWallHitY = 0;
+	*ray = fill_ray_direction(*ray, rayAngle);
 	//find the y-coordinate of the closest horizontal grid intersections
 	yIntercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
-	if (is_ray_facing_down(rayAngle))
+	if (ray->is_ray_facing_down)
 		yIntercept += TILE_SIZE;
 	//find the x-coordinate of the closest horizontal grid intersections
-	xIntercept = player.x + (yIntercept - player.y) / tan(rayAngle);//warning
+	xIntercept = player.x + (yIntercept - player.y) / tan(rayAngle);
 
 	//calculate the increment xStep and yStep
 	yStep = TILE_SIZE;                //ystep
-	if (is_ray_facing_up(rayAngle))
+	if (ray->is_ray_facing_up)
     {
 		yStep *= -1;
         yIntercept--;
     }
 	xStep = TILE_SIZE / tan(rayAngle);//xstep
-	if ((is_ray_facing_left(rayAngle) && xStep > 0) || (is_ray_facing_right(rayAngle) && xStep < 0))
+	if ((ray->is_ray_facing_left && xStep > 0) || (ray->is_ray_facing_right && xStep < 0))
 		xStep *= -1;
-	
 	
 	//incremet xstep and ystep until we find a wall
 	while (xIntercept >= 0 && xIntercept <= WINDOW_WIDTH
@@ -65,5 +69,4 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 	ray->horzWallHitX = wallHitX;
 	ray->horzWallHitY = wallHitY;
 	
-	// return (foundHorzWallHit);
 }

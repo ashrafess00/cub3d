@@ -80,13 +80,18 @@ typedef struct s_rays
 	float	ray_distance;
 	int		wall_hit_x;
 	int		wall_hit_y;
-	int		found_horz_wall_hit;
-	int		found_ver_wall_hit;
+	bool		found_horz_wall_hit;
+	bool		found_ver_wall_hit;
 
 	int 	horzWallHitX;
 	int		horzWallHitY;
 	int		verWallHitX;
 	int		verWallHitY;
+
+	bool is_ray_facing_down;
+	bool is_ray_facing_up;
+	bool is_ray_facing_left;
+	bool is_ray_facing_right;
 }	t_rays;
 
 void werror(int i);
@@ -102,7 +107,6 @@ void draw_update_all(t_all *all);
 void cast_rays(t_all *all);
 bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
-void render_3d_project_walls(t_all *all, float ray_distance, int i);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
 
@@ -113,5 +117,6 @@ bool is_ray_facing_left(float ray_angle);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
 float distance_between_points(int x1, int y1, int x2, int y2);
-void render_3d_project_walls(t_all *all, float ray_distance, int i);
+void render_3d_project_walls(t_all *all, t_rays ray, int i);
+t_rays fill_ray_direction(t_rays ray, float ray_angle);
 #endif
