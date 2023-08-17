@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 15:19:24 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:38:20 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float distanceBetweenPoint(int x1, int y1, int x2, int y2)
 float adjastAngle(float rayAngle)
 {
 	rayAngle = fmod(rayAngle, (2 * M_PI));
-	if (rayAngle < 0)
+	if (rayAngle <= 0)
 		rayAngle = (2 * M_PI) + rayAngle;
 	return (rayAngle);
 }

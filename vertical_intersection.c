@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 16:02:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:07:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 	//////////////////////////////////////
 	//------------vertical ray-grid intersection code------------//
 	//////////////////////////////////////
-	int	foundVerWallHit = 0;
 	t_player player = all->player;
 	int wallHitX = 0;
 	int wallHitY = 0;
@@ -27,7 +26,9 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 	float yIntercept;
 	float xStep;
 	float yStep;
-
+	ray->found_ver_wall_hit = 0;
+	ray->verWallHitX = 0;
+	ray->verWallHitY = 0;
 	
 	//find the x-coordinate of the closest horizontal grid intersections
 	xIntercept = floor(all->player.x / TILE_SIZE) * TILE_SIZE;
@@ -42,7 +43,6 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 	{
 		xStep *= -1;
 		xIntercept--;
-
 	}
 	yStep = TILE_SIZE * tan(rayAngle);//ystep
 	if ((is_ray_facing_up(rayAngle) && yStep > 0) || (is_ray_facing_down(rayAngle) && yStep < 0))
@@ -62,6 +62,38 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 		}
 		else
 		{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
 			xIntercept += xStep;
 			yIntercept += yStep;
 		}

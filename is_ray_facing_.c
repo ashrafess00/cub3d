@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:39:56 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 08:46:36 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool is_ray_facing_up(float ray_angle)
 
 bool is_ray_facing_right(float ray_angle)
 {
-    return (ray_angle < (M_PI / 2) || ray_angle > 1.5 * M_PI);
+    return (ray_angle < (0.5 * M_PI) || ray_angle > (1.5 * M_PI));
 }
 
 bool is_ray_facing_left(float ray_angle)
