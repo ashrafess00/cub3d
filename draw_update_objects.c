@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 09:37:30 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:38:57 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ void draw_update_all(t_all *all)
 		all->player.y = new_player_y;
 	}
 	
-	mlx_delete_image(all->mlx, all->mlx_img);
+	// mlx_delete_image(all->mlx, all->mlx_img);
 	all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	//draw player
 	draw_c_f(all);
+	//draw player
 	draw_map(all);
 	cast_rays(all);
-	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(170, 200, 250, 255));
-	draw_player(all->mlx_img, all->player.x, all->player.y);
+	// draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(170, 200, 250, 255));
+	// draw_player(all->mlx_img, all->player.x, all->player.y);
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
