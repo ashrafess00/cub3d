@@ -109,7 +109,7 @@ bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
-
+void	init_player(t_player *player, t_all *all);
 bool is_ray_facing_down(float ray_angle);
 bool is_ray_facing_up(float ray_angle);
 bool is_ray_facing_right(float ray_angle);

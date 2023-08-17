@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 11:29:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:21:20 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 {
 	float horzHitDistance;
 	float verHitDistance;
-
+	printf("hna\n");
 	horizontal_intersection(all, rayAngle, &rays);
-	vertical_intersection(all, rayAngle, &rays);
+	printf("awalo\n");
+	vertical_intersection(all, rayAngle, &rays);   //segv hna
+	printf("awalo mlqitsh\n");
+
 	if (rays.found_horz_wall_hit)
 	{
 		horzHitDistance = distance_between_points(all->player.x,
@@ -28,6 +31,7 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 	}
 	else
 		horzHitDistance = 1111111111111;
+	printf("hna2\n");
 	if (rays.found_ver_wall_hit)
 	{
 		verHitDistance = distance_between_points(all->player.x,
@@ -65,20 +69,24 @@ void	draw_casts(t_all *all, t_rays *rays)
 void cast_rays(t_all *all)
 {
 	int column = 0;
-	t_rays rays[NUM_RAYS];
+	int hi = all->map.window_heig;
+	t_rays rays[hi];
 	// start first ray substracting half of the fov
 	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
 	rayAngle = adjastAngle(rayAngle);
 	//fill rays with info
 	int i = -1;
-	while (++i < NUM_RAYS)
+	while (++i < hi)
 	{
+		printf("dkhl\n");
 		rays[i] = render_ray(all, rayAngle, column, i, rays[i]);
-		rayAngle += (FOV_ANGLE / NUM_RAYS);
+		printf("1\n");
+		rayAngle += (FOV_ANGLE / hi);
+		printf("2\n");
 		rayAngle = adjastAngle(rayAngle);
 		column++;
+		printf("%d %d\n", column, i);
 	}
-
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
