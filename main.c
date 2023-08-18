@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 20:47:47 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 16:12:54 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,31 @@ void	init_player(t_player *player, t_all *all)
 	player->walk_direction = 0;
 	player->rotation_angle = M_PI / 2;
 	player->move_speed = 15.0;
-	player->rotation_speed = 15 * (M_PI / 180); //convert to radian
+	player->rotation_speed = 6 * (M_PI / 180); //convert to radian
+}
+
+void init_mlx(t_all *all)
+{
+
 }
 
 int main(int c, char **args)
 {
+	struct s_map	map;
+	int				fd;
+	char			s[120];
+	int				i;
+	t_all			all;
+	t_player		player;
+	mlx_t			*mlx;
+	mlx_image_t		*mlx_img;
 
-	if(c != 2)
-		werror(1);
-	struct s_map map;
-	if(checker_1(args) == -1)
+	if(c != 2 || checker_1(args) == -1)
 		werror(1);
 	map.tmp = 1;
-	int fd = open(args[1], O_RDONLY);
+	fd = open(args[1], O_RDONLY);
 	if(fd < 0)
 		werror(1);
-	char s[120];
 	while(map.tmp != 0)
 	{
 		map.tmp = read(fd, s, 100);
@@ -53,20 +62,23 @@ int main(int c, char **args)
 	}
 	close(fd);
 	fd = open(args[1], O_RDONLY);
-	map.whole_map = malloc(map.char_in_map * sizeof(char) + 1);
+	// map.whole_map = malloc(map.char_in_map * sizeof(char) + 1); //no needed
+	map.whole_map = ft_calloc(map.char_in_map + 1, 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
-	map.whole_map[map.char_in_map] = '\0';
-	map.my_map = malloc(1 * sizeof(char*));
-	map.my_map[0] = NULL;
+	// map.whole_map[map.char_in_map] = '\0';                     //no needed
+	
+	// map.my_map = malloc(1 * sizeof(char*));                 //no needed
+	// map.my_map[0] = NULL;                                  //no needed
+	map.my_map = ft_calloc(1, 1);
 	map.my_map = ft_split(map.whole_map, '\n');
-	int i = -1;
+	
 	checker_2(&map);
 	exctract(&map);
-	t_all all;
-	t_player player;
+	
+	//////////////////////////////////////////////////////////////////////
 	//init mlx window
-	mlx_t *mlx = mlx_init(map.window_wid,map.window_heig, WINDOW_TITLE, true);
-	mlx_image_t *mlx_img = mlx_new_image(mlx, map.window_heig,map.window_wid);
+	mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, true);
+	mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	all.map = map;
 	all.rgb = map.rgb;
 	//init player
@@ -75,8 +87,6 @@ int main(int c, char **args)
 	all.mlx = mlx;
 	all.player = player;
 	all.mlx_img = mlx_img;
-	//draw map
-	// draw_map(mlx_img);
 
 	//draw all
 	draw_update_all(&all);

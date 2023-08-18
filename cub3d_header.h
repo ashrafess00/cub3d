@@ -128,5 +128,6 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
 float distance_between_points(int x1, int y1, int x2, int y2);
 void render_3d_project_walls(t_all *all, t_rays ray, int i);
+// void render_3d_project_walls(t_all *all, t_rays *rays);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
 #endif
