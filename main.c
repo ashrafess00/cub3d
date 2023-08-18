@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 20:47:47 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:44:43 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void werror(int i)
 
 void	init_player(t_player *player, t_all *all)
 {
-	player->x = all->map.window_wid / 2;
-	player->y = all->map.window_heig / 2;
 	player->radius = 15;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
@@ -39,6 +37,7 @@ int main(int c, char **args)
 	if(c != 2)
 		werror(1);
 	struct s_map map;
+	t_player player;
 	if(checker_1(args) == -1)
 		werror(1);
 	map.tmp = 1;
@@ -61,14 +60,14 @@ int main(int c, char **args)
 	map.my_map = ft_split(map.whole_map, '\n');
 	int i = -1;
 	checker_2(&map);
-	exctract(&map);
+	exctract(&map, &player);
 	t_all all;
-	t_player player;
 	//init mlx window
 	mlx_t *mlx = mlx_init(map.window_wid,map.window_heig, WINDOW_TITLE, true);
 	mlx_image_t *mlx_img = mlx_new_image(mlx, map.window_heig,map.window_wid);
 	all.map = map;
 	all.rgb = map.rgb;
+	
 	//init player
 	init_player(&player, &all);
 

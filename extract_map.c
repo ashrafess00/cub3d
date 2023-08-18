@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/18 11:11:20 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:44:56 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,32 @@ int check_mty_line(struct s_map *map, int start)
     }
     return 0;
 }
-void info_txt(struct s_map *map, char *s)
+int is_player(char *s, int i)
 {
-    
+    if(s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
+        return 1;
+    return 0;
+}
+int get_ply_cor(struct s_map *map, t_player *player)
+{
+    int i = 0;
+    int j = 0;
+    while(map->pure_map[i])
+    {
+        j = 0;
+        while(map->pure_map[i][j])
+        {
+            if(is_player(map->pure_map[i], j))
+            {
+                player->x = j * TILE_SIZE;
+                player->y = i * TILE_SIZE;
+                return 0;
+            }
+            j++;
+        }
+        i++;
+    }
+    return 0;
 }
 int get_wi_he(struct s_map *map)
 {
@@ -144,7 +167,7 @@ int get_wi_he(struct s_map *map)
     map->window_heig = i * TILE_SIZE;
     return 0;
 }
-int exctract(struct s_map *map)
+int exctract(struct s_map *map, t_player *player)
 {
     int i = 6;
     int j = 0;
@@ -172,5 +195,6 @@ int exctract(struct s_map *map)
     check_valid(map);
     check_mty_line(map, start);
     get_wi_he(map);
+    get_ply_cor(map, player);
     return 0;
 }

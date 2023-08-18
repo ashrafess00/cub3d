@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 11:54:03 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 13:46:18 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void draw_map(t_all *all)
 				int z = -1;
 				while (++z < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 				{
-					if (all->map.pure_map[i][j] != '0' && all->map.pure_map[i][j] != ' ' )
+					if (all->map.pure_map[i][j] != '0' && all->map.pure_map[i][j] != ' ' && is_player(all->map.pure_map[i], j) == 0)
                         mlx_put_pixel(all->mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(0, 0, 0, 255));
                     else
                         mlx_put_pixel(all->mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(255, 255, 255, 255));

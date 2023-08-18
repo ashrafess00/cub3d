@@ -103,12 +103,13 @@ typedef struct s_rays
 	bool is_ray_facing_left;
 	bool is_ray_facing_right;
 }	t_rays;
+int is_player(char *s, int i);
 void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
 void draw_map(t_all *all);
-int exctract(struct s_map *map);
+int exctract(struct s_map *map, t_player *player);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
 int get_rgba(int r, int g, int b, int a);
 void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
@@ -129,4 +130,8 @@ void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
 float distance_between_points(int x1, int y1, int x2, int y2);
 void render_3d_project_walls(t_all *all, t_rays ray, int i);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
+int load_text_n(struct s_map *map, int i, int j);
+int load_text_s(struct s_map *map, int i, int j);
+int load_text_e(struct s_map *map, int i, int j);
+int load_text_w(struct s_map *map, int i, int j);
 #endif
