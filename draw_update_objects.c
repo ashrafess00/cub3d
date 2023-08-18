@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 19:24:49 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:07:00 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,21 @@ void draw_c_f(t_all *all)
 {
 	int i = 0;
 	int j = 0;
-	while(j < all->map.window_wid / 2)//sky
+	while(j < all->map.window_heig / 2)//sky
 	{
 		i =0;
-		while(i < all->map.window_heig)
+		while(i < all->map.window_wid )
 		{
 			mlx_put_pixel(all->mlx_img, i, j, get_rgba(all->rgb.c[0],all->rgb.c[1],all->rgb.c[2],255));
 			i++;
 		}
 		j++;
 	}
-	while(j < all->map.window_wid + 63)//gorunf //manual dik plus
+	
+	while(j < all->map.window_heig)//sky
 	{
 		i =0;
-		while(i < all->map.window_heig )
+		while(i < all->map.window_wid )
 		{
 			mlx_put_pixel(all->mlx_img, i, j, get_rgba(all->rgb.f[0],all->rgb.f[1],all->rgb.f[2],255));
 			i++;
@@ -96,11 +97,15 @@ void draw_update_all(t_all *all)
 	
 	// mlx_delete_image(all->mlx, all->mlx_img);
 	all->mlx_img = mlx_new_image(all->mlx, all->map.window_wid, all->map.window_heig);
+	printf("here\n");
 	draw_c_f(all);
+	// exit(0);
 	//draw player
-	draw_map(all);
-	cast_rays(all);
+
+	cast_rays(all);//until here	
+	draw_map(all);//kolsh nice l7d hna
+
 	draw_player(all->mlx_img, all->player.x, all->player.y);
-	draw_line(all->mlx_img, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(170, 200, 250, 255));
+	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 60, all->player.y + sin(all->player.rotation_angle) * 60, get_rgba(170, 200, 250, 255));
 	mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }

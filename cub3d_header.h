@@ -34,7 +34,7 @@
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
 
-#define WINDOW_TITLE "MI AMORE"
+#define WINDOW_TITLE "بوسة فالفم خير من الدنيا وما فيها"
 typedef struct s_player
 {
 	int x;
@@ -52,6 +52,15 @@ struct s_rgb
 	int f[3];
 	int c[3];	
 };
+
+struct s_txt
+{
+	char *so_txt;
+	char *we_txt;
+	char *no_txt;
+	char *ea_txt;
+};
+
 struct s_map
 {
 	char *first_line;
@@ -65,6 +74,7 @@ struct s_map
 	int window_wid;
 	int window_heig;
 	struct s_rgb rgb;
+	struct s_txt txt;
 };
 typedef struct s_all
 {
@@ -93,7 +103,7 @@ typedef struct s_rays
 	bool is_ray_facing_left;
 	bool is_ray_facing_right;
 }	t_rays;
-
+void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
@@ -101,7 +111,7 @@ void draw_map(t_all *all);
 int exctract(struct s_map *map);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
 int get_rgba(int r, int g, int b, int a);
-void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color);
+void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
 void cast_rays(t_all *all);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/16 16:12:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:50:44 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,31 @@ int check_color(struct s_map *map, int i, char c)
         werror(1);
     return 1;
 }
+int load_text_n(struct s_map *map, int i, int j)
+{
+    int k = 0;
+    while(map->my_map[i][j] == ' ')
+        j++;
+    k = j;
+    while(map->my_map[i][j] != ' ')
+        j++;
+    map->txt.no_txt = malloc((j) * sizeof(char));
+    j = 0;
+    while(map->my_map[i][k] != '\0' && map->my_map[i][k] != ' ')
+    {
+        map->txt.no_txt[j] = map->my_map[i][k];
+        printf("%c",  map->txt.no_txt[j]);
+        k++;
+        j++;
+    }
+    printf("\n");
+    if(map->my_map[i][k] != '\0')
+        werror(1);
+    map->txt.no_txt[j] = '\0';
+    printf("%s\n",  map->txt.no_txt);
+    // exit(0);
+    return 1;
+}
 int checker_2(struct s_map *map)
 {
     int i= 0;
@@ -114,7 +139,7 @@ int checker_2(struct s_map *map)
         while(map->my_map[i][j] == ' ')
             j++;
         if(map->my_map[i][j] == 'N' && map->my_map[i][j+1] == 'O' && map->my_map[i][j+2] == ' ')
-            n++;
+            n += load_text_n(map, i, j+2);
         else if(map->my_map[i][j] == 'S' && map->my_map[i][j+1] == 'O' && map->my_map[i][j+2] == ' ')
             s++;
         else if(map->my_map[i][j] == 'W' && map->my_map[i][j+1] == 'E' && map->my_map[i][j+2] == ' ')
