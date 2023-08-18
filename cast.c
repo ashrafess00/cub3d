@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 11:00:15 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 16:28:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 													rays.horzWallHitY);
 	}
 	else
-		horzHitDistance = 1111111111111;
+		horzHitDistance = 1111111;
 	if (rays.found_ver_wall_hit)
 	{
 		verHitDistance = distance_between_points(all->player.x,
@@ -36,7 +36,7 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 													rays.verWallHitY);
 	}
 	else
-		verHitDistance = 1111111111111;
+		verHitDistance = 1111111;
 
 	if (horzHitDistance < verHitDistance)
 	{
@@ -50,6 +50,8 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 		rays.wall_hit_y = rays.verWallHitY;
 		rays.ray_distance = verHitDistance;
 	}
+	// rays.wall_hit_x = rays.horzWallHitX;
+	// rays.wall_hit_y = rays.horzWallHitY;
 	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);
 }
@@ -59,19 +61,31 @@ void	draw_casts(t_all *all, t_rays *rays)
 	int	i;
 
 	i = -1;
-	while (++i < all->map.window_heig)
+	while (++i < all->map.window_wid)
+	{
 		draw_line(all, all->player.x, all->player.y, rays[i].wall_hit_x, rays[i].wall_hit_y, get_rgba(255, 0, 0, 255));
+		// printf("up : %d\n", rays[i].is_ray_facing_up);
+		// printf("down : %d\n", rays[i].is_ray_facing_down);
+		// printf("left : %d\n", rays[i].is_ray_facing_left);
+		// printf("right : %d\n", rays[i].is_ray_facing_right);
+		// printf("wall_hit_x : %d\n", rays[i].wall_hit_x);
+		// printf("wall_hit_y : %d\n\n", rays[i].wall_hit_y);
+		// break;
+	}
 }
 void cast_rays(t_all *all)
 {
 	int column = 0;
+	int	i;
+	
 	int hi = all->map.window_wid;
-	t_rays rays[hi];
+	t_rays	rays[NUM_RAYS];
 	// start first ray substracting half of the fov
 	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
 	rayAngle = adjastAngle(rayAngle);
 	//fill rays with info
-	int i = -1;
+	i = -1;
+	printf("hi there : %f\n", all->player.rotation_angle);
 	while (++i < hi)
 	{
 		rays[i] = render_ray(all, rayAngle, column, i, rays[i]);
@@ -79,14 +93,12 @@ void cast_rays(t_all *all)
 		rayAngle = adjastAngle(rayAngle);
 		column++;
 	}
+	// printf("[[%d]]\n", column);
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
 	while (++i < hi)
-	{
 		render_3d_project_walls(all, rays[i], i);
-		// break;
-	}
 	draw_casts(all, rays);
 }
 

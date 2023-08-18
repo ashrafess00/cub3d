@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 11:48:27 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 16:26:23 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,21 @@ void render_3d_project_walls(t_all *all, t_rays ray, int i)
 {
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
+    float   distance_projection_plane;
+    int     wall_strip_height;
+    int     x;
+    int     y;
+    int     width;
+    int     height;
 
-    float distance_projection_plane = (all->map.window_wid / 2) / tan(FOV_ANGLE / 2);
+    distance_projection_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
     //projected wall height
-    int wall_strip_height = (TILE_SIZE /  ray.ray_distance) * distance_projection_plane;
+    wall_strip_height = (TILE_SIZE /  ray.ray_distance) * distance_projection_plane;
     //draw rectangle
-    int x = i;
-    int y = (all->map.window_heig / 2) - (wall_strip_height / 2);
-    int width = WALL_STRIP_WIDTH * 2;
-    int height = wall_strip_height;
+    x = i;
+    y = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+    width = WALL_STRIP_WIDTH * 2;
+    height = wall_strip_height;
     draw_rectangle(all, ray, x, y, width, height,
                     get_rgba(236, 120, 160, 255));
 }
