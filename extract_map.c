@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/17 15:03:42 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:11:20 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,10 @@ int check_mty_line(struct s_map *map, int start)
         start++;
     }
     return 0;
+}
+void info_txt(struct s_map *map, char *s)
+{
+    
 }
 int get_wi_he(struct s_map *map)
 {

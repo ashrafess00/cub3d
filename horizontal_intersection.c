@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_intersection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/17 10:27:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:05:42 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 		xStep *= -1;
 	
 	//incremet xstep and ystep until we find a wall
-	while (xIntercept >= 0 && xIntercept <= WINDOW_WIDTH
-		&& yIntercept >= 0 && yIntercept <= WINDOW_HEIGHT)
+	while (xIntercept >= 0 && xIntercept <= all->map.window_wid
+		&& yIntercept >= 0 && yIntercept <= all->map.window_heig)
 	{
 		if (in_the_wall(xIntercept, yIntercept, all))
 		{

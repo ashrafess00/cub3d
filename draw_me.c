@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_me.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 16:13:22 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:54:03 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	get_steps(int dx, int dy)
 		return (abs(dy));
 }
 
-void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
+void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color)
 {
     x1 *= MINIMAP_SCALE_FACTOR;
     x2 *= MINIMAP_SCALE_FACTOR;
@@ -78,9 +78,9 @@ void	draw_line(mlx_image_t *mlx_img, int x1, int y1, int x2, int y2, int color)
 	i = -1;
 	while (++i <= steps)
 	{
-        if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+        if (x < 0 || x >= all->map.window_wid || y < 0 || y >= all->map.window_heig)
             return ;
-		mlx_put_pixel(mlx_img, (int)round(x), (int)round(y), color);
+		mlx_put_pixel(all->mlx_img, (int)round(x), (int)round(y), color);
         x += incx;
         y += incy;
     }
@@ -104,7 +104,7 @@ void draw_map(t_all *all)
 				int z = -1;
 				while (++z < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 				{
-					if (all->map.pure_map[i][j] != '0' && all->map.pure_map[i][j] != ' ')
+					if (all->map.pure_map[i][j] != '0' && all->map.pure_map[i][j] != ' ' )
                         mlx_put_pixel(all->mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(0, 0, 0, 255));
                     else
                         mlx_put_pixel(all->mlx_img, j * TILE_SIZE * MINIMAP_SCALE_FACTOR + z, i * TILE_SIZE * MINIMAP_SCALE_FACTOR + u, get_rgba(255, 255, 255, 255));
