@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 13:22:49 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:28:03 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,19 @@ void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height,
         x >= 0 && x <= all->map.window_wid  &&
         y >= 0 && y <=  all->map.window_heig)
     {
-        for (int i = x; i < x_end; i++) {
+        i = x;
+        while (i < x_end)
+        {
             mlx_put_pixel(all->mlx_img, i, y, color);
             mlx_put_pixel(all->mlx_img, i, y_end - 1, color);
+            i++;
         }
-
-        for (int i = y + 1; i < y_end - 1; i++) {
+        i = y;
+        while (i < y_end)
+        {
             mlx_put_pixel(all->mlx_img, x, i, color);
             mlx_put_pixel(all->mlx_img, x_end - 1, i, color);
+            i++;
         }
     }
 }
