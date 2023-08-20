@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 16:12:54 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:26:23 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void werror(int i)
 
 void	init_player(t_player *player, t_all *all)
 {
-	player->x = all->map.window_wid / 2;
-	player->y = all->map.window_heig / 2;
 	player->radius = 15;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
@@ -38,6 +36,15 @@ void init_mlx(t_all *all)
 
 }
 
+void load_txt(struct s_map *map, struct s_textures *text)
+{
+	text->s_txt = mlx_load_png(map->txt.so_txt);
+	text->w_txt = mlx_load_png(map->txt.we_txt);
+	text->n_txt = mlx_load_png(map->txt.no_txt);
+	text->e_txt = mlx_load_png(map->txt.ea_txt);
+	if(!(text->s_txt && text->w_txt && text->n_txt && text->e_txt))
+		werror(1);
+}
 int main(int c, char **args)
 {
 	struct s_map	map;
@@ -48,6 +55,7 @@ int main(int c, char **args)
 	t_player		player;
 	mlx_t			*mlx;
 	mlx_image_t		*mlx_img;
+	struct s_textures text;
 
 	if(c != 2 || checker_1(args) == -1)
 		werror(1);
@@ -62,18 +70,14 @@ int main(int c, char **args)
 	}
 	close(fd);
 	fd = open(args[1], O_RDONLY);
-	// map.whole_map = malloc(map.char_in_map * sizeof(char) + 1); //no needed
 	map.whole_map = ft_calloc(map.char_in_map + 1, 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
-	// map.whole_map[map.char_in_map] = '\0';                     //no needed
-	
-	// map.my_map = malloc(1 * sizeof(char*));                 //no needed
-	// map.my_map[0] = NULL;                                  //no needed
 	map.my_map = ft_calloc(1, 1);
 	map.my_map = ft_split(map.whole_map, '\n');
 	
 	checker_2(&map);
-	exctract(&map);
+	exctract(&map, &player);
+	// load_txt(&map, &text); texture are ready for use but it's off 7ta nbdaw nkhdmo bihum
 	
 	//////////////////////////////////////////////////////////////////////
 	//init mlx window
@@ -89,9 +93,9 @@ int main(int c, char **args)
 	all.mlx_img = mlx_img;
 
 	//draw all
+	mlx_image_to_window(mlx, mlx_img, 0, 0);
 	draw_update_all(&all);
 	mlx_key_hook(mlx, move_mama, &all);
-	mlx_image_to_window(mlx, mlx_img, 0, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);

@@ -20,15 +20,15 @@
 #include <math.h>
 
 #define TILE_SIZE 32
-#define MAP_COLS 24
-#define MAP_ROWS 24
+#define MAP_COLS 20
+#define MAP_ROWS 20
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
 #define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 
-#define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP)
+#define NUM_RAYS (WINDOW_WIDTH)
 
 #define MINIMAP_SCALE_FACTOR 0.2
 #define PLAYER_RADIUS 10
@@ -52,6 +52,13 @@ struct s_rgb
 	int f[3];
 	int c[3];	
 };
+struct s_textures
+{
+	mlx_texture_t *s_txt;
+	mlx_texture_t *w_txt;
+	mlx_texture_t *n_txt;
+	mlx_texture_t *e_txt;
+};
 
 struct s_txt
 {
@@ -60,7 +67,6 @@ struct s_txt
 	char *no_txt;
 	char *ea_txt;
 };
-
 struct s_map
 {
 	char *first_line;
@@ -103,12 +109,13 @@ typedef struct s_rays
 	bool is_ray_facing_left;
 	bool is_ray_facing_right;
 }	t_rays;
+int is_player(char *s, int i);
 void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
 void draw_map(t_all *all);
-int exctract(struct s_map *map);
+int exctract(struct s_map *map, t_player *player);
 void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
 int get_rgba(int r, int g, int b, int a);
 void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
@@ -130,4 +137,8 @@ float distance_between_points(int x1, int y1, int x2, int y2);
 void render_3d_project_walls(t_all *all, t_rays ray, int i);
 // void render_3d_project_walls(t_all *all, t_rays *rays);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
+int load_text_n(struct s_map *map, int i, int j);
+int load_text_s(struct s_map *map, int i, int j);
+int load_text_e(struct s_map *map, int i, int j);
+int load_text_w(struct s_map *map, int i, int j);
 #endif
