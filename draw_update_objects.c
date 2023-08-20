@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_update_objects.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 20:41:08 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/20 14:43:48 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void draw_update_all(t_all *all)
 	int	move_step;
 	int	new_player_x;
 	int	new_player_y;
+    t_rays	rays[NUM_RAYS];
+
+
 	//rotation_angle
 	all->player.rotation_angle = adjastAngle(all->player.rotation_angle);
 	all->player.rotation_angle += all->player.turn_direction * all->player.rotation_speed;
@@ -99,11 +102,14 @@ void draw_update_all(t_all *all)
 	// all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	draw_c_f(all);
 	//draw player
+	// cast_rays(all);
+	get_rays(all, rays);
+	render_3d_project_walls(all, rays);
 	draw_map(all);
 	draw_player(all->mlx_img, all->player.x, all->player.y);
 	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(170, 200, 250, 255));
-	cast_rays(all);
-
+	draw_casts(all, rays);
+	
 	// no needed
 	// mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }

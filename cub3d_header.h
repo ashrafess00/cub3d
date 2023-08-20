@@ -22,8 +22,8 @@
 #define TILE_SIZE 32
 #define MAP_COLS 20
 #define MAP_ROWS 20
-#define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
-#define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 640
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
@@ -121,7 +121,9 @@ int get_rgba(int r, int g, int b, int a);
 void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
-void cast_rays(t_all *all);
+// void cast_rays(t_all *all);
+// t_rays *get_rays(t_all *all);
+void	get_rays(t_all *all, t_rays	*rays);
 bool in_the_wall(int x, int y, t_all *all);
 float adjastAngle(float rayAngle);
 int get_wi_he(struct s_map *map);
@@ -141,4 +143,5 @@ int load_text_n(struct s_map *map, int i, int j);
 int load_text_s(struct s_map *map, int i, int j);
 int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
+void	draw_casts(t_all *all, t_rays *rays);
 #endif
