@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/19 10:20:12 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/20 13:22:49 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ actuall wall height                = TAIL_SIZE
 distance to wall                   = ray distance
 distance from player to proj.plane = adjacent = (win_w / 2) / tan(30)
 */
-void render_3d_project_walls(t_all *all, t_rays ray, int i)
+void render_3d_project_walls(t_all *all, t_rays *rays)
 {
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
@@ -94,14 +94,18 @@ void render_3d_project_walls(t_all *all, t_rays ray, int i)
     int     width;
     int     height;
 
-    distance_projection_plane = (WINDOW_HEIGHT / 2) / tan(FOV_ANGLE / 2);
-    //projected wall height
-    wall_strip_height = (TILE_SIZE /  ray.ray_distance) * distance_projection_plane;
-    //draw rectangle
-    x = i;
-    y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
-    width =  2;
-    height = wall_strip_height;
-    draw_rectangle(all, ray, x, y, width, height,
-                    get_rgba(236, 120, 160, 255));
+    int i = -1;
+    while (++i < NUM_RAYS)
+    {
+        distance_projection_plane = (WINDOW_HEIGHT / 2) / tan(FOV_ANGLE / 2);
+        //projected wall height
+        wall_strip_height = (TILE_SIZE /  rays[i].ray_distance) * distance_projection_plane;
+        //draw rectangle
+        x = i;
+        y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
+        width =  2;
+        height = wall_strip_height;
+        draw_rectangle(all, rays[i], x, y, width, height,
+                        get_rgba(236, 120, 160, 255));
+    }
 }
