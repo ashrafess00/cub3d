@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 13:23:14 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:25:40 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void cast_rays(t_all *all)
 		rayAngle = adjastAngle(rayAngle);
 		column++;
 	}
-	// printf("[[%d]]\n", column);
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
