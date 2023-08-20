@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 13:28:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:41:23 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,67 +15,28 @@
 //horizontal and verical 
 //horizontal -> up and down
 //vertical -> left or right
-void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color)
-{
-    // printf("[down : %d]\n", ray.is_ray_facing_down);
-    // printf("[up : %d]\n", ray.is_ray_facing_up);
-    // printf("[left : %d]\n", ray.is_ray_facing_left);
-    // printf("[right : %d]\n", ray.is_ray_facing_right);
 
-    // mlx_texture_t *texture = mlx_load_png("./wall.png");
-    if (ray.found_horz_wall_hit)
-    {
-        if (ray.is_ray_facing_up)
-        {
-            //////
-        }
-        else
-        {
-            //////
-        }
-    }
-    else
-    {
-        if (ray.is_ray_facing_left)
-        {
-            ////////
-        }
-        else
-        {
-            /////////
-        }
-    }
-
-
+void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color) {
+    int x_end = x + width;
+    int y_end = y + height;
+    int i;
+    int j;
     
-	int x_end = x + width;
-	int y_end = y + height;
-    int i = 0;
-    int j = 0;
-    
-    // static int x_end_s = 0;
-    // static int y_end_s = 0;
-    // static int x_s = 0;
-    // static int y_s = 0;
-    if (x_end >= 0 && x_end <= all->map.window_wid &&
-        y_end >=0 && y_end <=  all->map.window_heig && 
-        x >= 0 && x <= all->map.window_wid  &&
-        y >= 0 && y <=  all->map.window_heig)
+    i = x;
+    while (i < x_end)
     {
-        i = x;
-        while (i < x_end)
+        j = y;
+        while (j < y_end)
         {
-            mlx_put_pixel(all->mlx_img, i, y, color);
-            mlx_put_pixel(all->mlx_img, i, y_end - 1, color);
-            i++;
+            if (i < 0 || i > WINDOW_WIDTH || j < 0 || j > WINDOW_HEIGHT)
+            {
+                j++;
+                continue;
+            }
+            mlx_put_pixel(all->mlx_img, i, j, color);
+            j++;
         }
-        i = y;
-        while (i < y_end)
-        {
-            mlx_put_pixel(all->mlx_img, x, i, color);
-            mlx_put_pixel(all->mlx_img, x_end - 1, i, color);
-            i++;
-        }
+        i++;
     }
 }
 
