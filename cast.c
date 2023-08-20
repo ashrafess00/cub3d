@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/19 10:19:18 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/20 13:23:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 		rays.wall_hit_y = rays.verWallHitY;
 		rays.ray_distance = verHitDistance;
 	}
-	// rays.wall_hit_x = rays.horzWallHitX;
-	// rays.wall_hit_y = rays.horzWallHitY;
 	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);
 }
@@ -62,16 +60,7 @@ void	draw_casts(t_all *all, t_rays *rays)
 
 	i = -1;
 	while (++i < NUM_RAYS)
-	{
 		draw_line(all, all->player.x, all->player.y, rays[i].wall_hit_x, rays[i].wall_hit_y, get_rgba(255, 0, 0, 255));
-		// printf("up : %d\n", rays[i].is_ray_facing_up);
-		// printf("down : %d\n", rays[i].is_ray_facing_down);
-		// printf("left : %d\n", rays[i].is_ray_facing_left);
-		// printf("right : %d\n", rays[i].is_ray_facing_right);
-		// printf("wall_hit_x : %d\n", rays[i].wall_hit_x);
-		// printf("wall_hit_y : %d\n\n", rays[i].wall_hit_y);
-		// break;
-	}
 }
 void cast_rays(t_all *all)
 {
@@ -96,8 +85,7 @@ void cast_rays(t_all *all)
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
-	while (++i < NUM_RAYS )
-		render_3d_project_walls(all, rays[i], i);
+	render_3d_project_walls(all, rays);
 	draw_casts(all, rays);
 }
 
