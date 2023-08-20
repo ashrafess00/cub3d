@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 16:26:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/19 10:20:12 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height,
     // static int y_end_s = 0;
     // static int x_s = 0;
     // static int y_s = 0;
-    printf("%d %d\n", x_end, y_end);
     if (x_end >= 0 && x_end <= all->map.window_wid &&
         y_end >=0 && y_end <=  all->map.window_heig && 
         x >= 0 && x <= all->map.window_wid  &&
         y >= 0 && y <=  all->map.window_heig)
     {
-        printf("dkhat\n");
         for (int i = x; i < x_end; i++) {
             mlx_put_pixel(all->mlx_img, i, y, color);
             mlx_put_pixel(all->mlx_img, i, y_end - 1, color);
@@ -96,13 +94,13 @@ void render_3d_project_walls(t_all *all, t_rays ray, int i)
     int     width;
     int     height;
 
-    distance_projection_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+    distance_projection_plane = (WINDOW_HEIGHT / 2) / tan(FOV_ANGLE / 2);
     //projected wall height
     wall_strip_height = (TILE_SIZE /  ray.ray_distance) * distance_projection_plane;
     //draw rectangle
     x = i;
-    y = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
-    width = WALL_STRIP_WIDTH * 2;
+    y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
+    width =  2;
     height = wall_strip_height;
     draw_rectangle(all, ray, x, y, width, height,
                     get_rgba(236, 120, 160, 255));

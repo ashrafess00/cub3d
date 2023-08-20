@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/18 16:28:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/19 10:19:18 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_casts(t_all *all, t_rays *rays)
 	int	i;
 
 	i = -1;
-	while (++i < all->map.window_wid)
+	while (++i < NUM_RAYS)
 	{
 		draw_line(all, all->player.x, all->player.y, rays[i].wall_hit_x, rays[i].wall_hit_y, get_rgba(255, 0, 0, 255));
 		// printf("up : %d\n", rays[i].is_ray_facing_up);
@@ -78,7 +78,6 @@ void cast_rays(t_all *all)
 	int column = 0;
 	int	i;
 	
-	int hi = all->map.window_wid;
 	t_rays	rays[NUM_RAYS];
 	// start first ray substracting half of the fov
 	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
@@ -86,10 +85,10 @@ void cast_rays(t_all *all)
 	//fill rays with info
 	i = -1;
 	printf("hi there : %f\n", all->player.rotation_angle);
-	while (++i < hi)
+	while (++i < NUM_RAYS)
 	{
 		rays[i] = render_ray(all, rayAngle, column, i, rays[i]);
-		rayAngle += (FOV_ANGLE / hi);
+		rayAngle += (FOV_ANGLE / NUM_RAYS);
 		rayAngle = adjastAngle(rayAngle);
 		column++;
 	}
@@ -97,7 +96,7 @@ void cast_rays(t_all *all)
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
 	//render walls
 	i = -1;
-	while (++i < hi)
+	while (++i < NUM_RAYS )
 		render_3d_project_walls(all, rays[i], i);
 	draw_casts(all, rays);
 }

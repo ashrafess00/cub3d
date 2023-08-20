@@ -20,15 +20,15 @@
 #include <math.h>
 
 #define TILE_SIZE 32
-#define MAP_COLS 24
-#define MAP_ROWS 24
+#define MAP_COLS 20
+#define MAP_ROWS 20
 #define WINDOW_WIDTH (TILE_SIZE * MAP_COLS)
 #define WINDOW_HEIGHT (TILE_SIZE * MAP_ROWS)
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 
-#define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP)
+#define NUM_RAYS (WINDOW_WIDTH)
 
 #define MINIMAP_SCALE_FACTOR 0.2
 #define PLAYER_RADIUS 10
@@ -52,6 +52,13 @@ struct s_rgb
 	int f[3];
 	int c[3];	
 };
+struct s_textures
+{
+	mlx_texture_t *s_txt;
+	mlx_texture_t *w_txt;
+	mlx_texture_t *n_txt;
+	mlx_texture_t *e_txt;
+};
 
 struct s_txt
 {
@@ -60,7 +67,6 @@ struct s_txt
 	char *no_txt;
 	char *ea_txt;
 };
-
 struct s_map
 {
 	char *first_line;
