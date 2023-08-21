@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 11:41:34 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:58:19 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
 	t_player player = all->player;
-	float wallHitX = 0;
-	float wallHitY = 0;
-	float distance = 0;
 
 	float xIntercept;
 	float yIntercept;
@@ -56,8 +53,8 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 		{
 			//we found a wall hit
 			ray->found_horz_wall_hit = 1;
-			wallHitX = xIntercept;
-			wallHitY = yIntercept;
+			ray->horzWallHitX = xIntercept;
+			ray->horzWallHitY = yIntercept;
 			break;
 		}
 		else
@@ -66,7 +63,4 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 			yIntercept += yStep;
 		}
 	}
-	ray->horzWallHitX = wallHitX;
-	ray->horzWallHitY = wallHitY;
-	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 18:36:29 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 18:53:07 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, fl
         y++;
     }
 }
-void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
+void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
 {
     if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
         for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,1);
@@ -112,7 +112,7 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
         y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
         width =  2;
         height = wall_strip_height;
-        draw_rectangle(all, rays[i], x, y, width, height,
+        draw_walls(all, rays[i], x, y, width, height,
                         get_rgba(255, 0, 0, 255));
     }
 }
