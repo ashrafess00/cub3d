@@ -37,11 +37,11 @@
 #define WINDOW_TITLE "بوسة فالفم خير من الدنيا وما فيها"
 typedef struct s_player
 {
-	int x;
-	int y;
-	int radius;
-	int turn_direction;
-	int walk_direction;
+	float x;
+	float y;
+	float radius;
+	float turn_direction;
+	float walk_direction;
 	float rotation_angle;
 	float move_speed;
 	float rotation_speed;
@@ -100,7 +100,7 @@ typedef struct s_rays
 	bool		found_horz_wall_hit;
 	bool		found_ver_wall_hit;
 
-	float		horzWallHitX;
+	float 	horzWallHitX;
 	float		horzWallHitY;
 	float		verWallHitX;
 	float		verWallHitY;
@@ -111,7 +111,7 @@ typedef struct s_rays
 	bool is_ray_facing_right;
 }	t_rays;
 int is_player(char *s, int i);
-void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color);
+void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);

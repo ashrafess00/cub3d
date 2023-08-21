@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 13:00:38 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 13:32:34 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,40 @@ int x_end_f(mlx_texture_t *txt , t_rays ray)
     int x_end;
     if (ray.found_ver_wall_hit)
 		x_end = (txt->width / TILE_SIZE)
-			* ( ray.wall_hit_y - (ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
+			* ( ray.wall_hit_y - (int)(ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
 	else
 		x_end = (txt->width / TILE_SIZE)
-			* ( ray.wall_hit_x - (ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
+			* ( ray.wall_hit_x - (int)(ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
     return x_end;
 }
-void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color) 
+void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
 {
     int x_en = x + width;
     int y_en = y + height;
     int x_end = x + width;
     int y_end = y + height;
-    int i;
-    int j;
     int fl;
     
 //--------
 
-    x_end = x_end_f(all->txt.n_txt, ray);
+    x_end = x_end_f(all->txt.s_txt, ray);
 //--------
-    i = x;
     fl = y;
-        while (j < y_en)
+    while (y < y_en)
+    {
+        if (fl >= WINDOW_HEIGHT)
+            break ;
+        y_end = (y - fl) * (all->txt.s_txt->height / height);
+        if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
         {
-            if (fl >= WINDOW_HEIGHT)
-			    break ;
-            y_end = (j - fl) * (all->txt.n_txt->height / height);
-            if (i < 0 || i > WINDOW_WIDTH || j < 0 || j > WINDOW_HEIGHT)
-            {
-                j++;
-                continue;
-            }        
-            if (y_end < all->txt.n_txt->height)
-                mlx_put_pixel(all->mlx_img, i, j, txt_pixel(all->txt.n_txt,x_end, y_end));
-            j++;
+            y++;
+            continue;
         }
+        color =  txt_pixel(all->txt.s_txt,x_end, y_end);
+        if (y_end < all->txt.s_txt->height)
+            mlx_put_pixel(all->mlx_img, x, y, color);
+        y++;
+    }
 }
 
 /*
