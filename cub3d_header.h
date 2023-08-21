@@ -39,9 +39,9 @@ typedef struct s_player
 {
 	int x;
 	int y;
-	int radius;
-	int turn_direction;
-	int walk_direction;
+	float radius;
+	float turn_direction;
+	float walk_direction;
 	float rotation_angle;
 	float move_speed;
 	float rotation_speed;
@@ -89,20 +89,23 @@ typedef struct s_all
 	mlx_image_t *mlx_img;
 	struct s_map map;
 	struct s_rgb rgb;
+	struct s_textures txt;
 }	t_all;
 
 typedef struct s_rays
 {
-	float	ray_distance;
-	float		wall_hit_x;
-	float		wall_hit_y;
+	float		ray_distance;
+	
 	bool		found_horz_wall_hit;
 	bool		found_ver_wall_hit;
 
-	float		horzWallHitX;
-	float		horzWallHitY;
-	float		verWallHitX;
-	float		verWallHitY;
+	int 	horzWallHitX;
+	int		horzWallHitY;
+	int		verWallHitX;
+	int		verWallHitY;
+
+	int			wall_hit_x;
+	int			wall_hit_y;
 
 	bool is_ray_facing_down;
 	bool is_ray_facing_up;
@@ -110,7 +113,7 @@ typedef struct s_rays
 	bool is_ray_facing_right;
 }	t_rays;
 int is_player(char *s, int i);
-void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color);
+void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, float color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
@@ -124,7 +127,7 @@ void draw_update_all(t_all *all);
 // void cast_rays(t_all *all);
 // t_rays *get_rays(t_all *all);
 void	get_rays(t_all *all, t_rays	*rays);
-bool in_the_wall(int x, int y, t_all *all);
+bool in_the_wall(float x, float y, t_all *all);
 float adjastAngle(float rayAngle);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 12:42:49 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 18:53:07 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,69 @@
 //horizontal -> up and down
 //vertical -> left or right
 
-void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height, int color) {
-    int x_end = x + width;
-    int y_end = y + height;
-    int i;
-    int j;
-    
-    i = x;
-    // red
-    if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
-        color = get_rgba(255, 0, 0, 255);
-    //orange
-    else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
-       color =  get_rgba(255, 171, 0, 255);
-    //blue
-    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
-       color =  get_rgba(43, 0, 255, 255);
+uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
+{
+	uint32_t	p;
 
-    //violet
-    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
-       color =  get_rgba(205, 0, 255, 255);
-       
-    j = y;
-    while (j < y_end)
+	p = ((uint32_t *)texture->pixels)[texture->width * y + x];
+	return ((p & 0xFF000000) >> 24 | (p & 0x00FF0000) >> 8
+		| (p & 0x0000FF00) << 8 | (p & 0x000000FF) << 24);
+}
+
+float x_end_f(mlx_texture_t *txt , t_rays ray)
+{
+    float x_end;
+    if (ray.found_ver_wall_hit)
+		x_end = (txt->width / TILE_SIZE)
+			* ( ray.wall_hit_y - (int)(ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
+	else
+		x_end = (txt->width / TILE_SIZE)
+			* ( ray.wall_hit_x - (int)(ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
+    return x_end;
+}
+void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, float width, float y, float height, float flag)
+{
+    float x_en = x + width;
+    float y_en = y + height;
+    int x_end = 0;
+    int y_end = 0;
+    int fl;
+    
+    fl = y;
+    x_end = x_end_f(txt, ray);
+    while (y <= y_en)
     {
-        if (i < 0 || i > WINDOW_WIDTH || j < 0 || j > WINDOW_HEIGHT)
+        if (y >= WINDOW_HEIGHT)
+            break ;
+        y_end = (y - fl) * (txt->height / height);
+        if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
         {
-            j++;
+            y++;
             continue;
         }
-        // else
-        mlx_put_pixel(all->mlx_img, i, j, color);
-        j++;
+        if(flag == 0)
+        {
+            if (y_end < txt->height)
+                mlx_put_pixel(all->mlx_img, x, y,txt_pixel(txt, x_end, y_end));
+        }
+        else if(flag == 1)
+        {
+            if (y_end < txt->height)
+                mlx_put_pixel(all->mlx_img, x, y,txt_pixel(txt, txt->width - x_end, y_end));
+        }
+        y++;
     }
+}
+void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
+{
+    if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
+        for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,1);
+    else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
+       for_every_deriction(all->txt.s_txt, ray, all, x,width, y, height,0);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
+       for_every_deriction(all->txt.w_txt, ray, all, x,width, y, height,1);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
+        for_every_deriction(all->txt.n_txt, ray, all, x,width, y, height,0);
 }
 
 /*
@@ -65,11 +95,11 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
     float   distance_projection_plane;
-    int     wall_strip_height;
-    int     x;
-    int     y;
-    int     width;
-    int     height;
+    float     wall_strip_height;
+    float     x;
+    float     y;
+    float     width;
+    float     height;
 
     int i = -1;
     while (++i < NUM_RAYS)
@@ -82,7 +112,7 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
         y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
         width =  2;
         height = wall_strip_height;
-        draw_rectangle(all, rays[i], x, y, width, height,
+        draw_walls(all, rays[i], x, y, width, height,
                         get_rgba(255, 0, 0, 255));
     }
 }
