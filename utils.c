@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 13:09:49 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 18:38:39 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ float distance_between_points(float x1, float y1, float x2, float y2)
 }
 
 
-bool in_the_wall(int x, int y, t_all *all)
+bool in_the_wall(float x, float y, t_all *all)
 {
 
 	int m_x = x / TILE_SIZE;

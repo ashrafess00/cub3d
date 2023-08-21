@@ -125,7 +125,7 @@ void draw_update_all(t_all *all);
 // void cast_rays(t_all *all);
 // t_rays *get_rays(t_all *all);
 void	get_rays(t_all *all, t_rays	*rays);
-bool in_the_wall(int x, int y, t_all *all);
+bool in_the_wall(float x, float y, t_all *all);
 float adjastAngle(float rayAngle);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);

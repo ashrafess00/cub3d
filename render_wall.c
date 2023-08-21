@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 17:06:30 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 18:36:29 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
 	return ((p & 0xFF000000) >> 24 | (p & 0x00FF0000) >> 8
 		| (p & 0x0000FF00) << 8 | (p & 0x000000FF) << 24);
 }
+
 float x_end_f(mlx_texture_t *txt , t_rays ray)
 {
     float x_end;
@@ -35,22 +36,22 @@ float x_end_f(mlx_texture_t *txt , t_rays ray)
 			* ( ray.wall_hit_x - (int)(ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
     return x_end;
 }
-void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, int x, int width, int y, int height, int flag)
+void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, float width, float y, float height, float flag)
 {
     float x_en = x + width;
     float y_en = y + height;
-    int x_end = x + width;
-    int y_end = y + height;
+    int x_end = 0;
+    int y_end = 0;
     int fl;
     
     fl = y;
     x_end = x_end_f(txt, ray);
-    while (y < y_en)
+    while (y <= y_en)
     {
         if (y >= WINDOW_HEIGHT)
             break ;
         y_end = (y - fl) * (txt->height / height);
-        if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+        if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
         {
             y++;
             continue;
@@ -94,11 +95,11 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
     float   distance_projection_plane;
-    int     wall_strip_height;
-    int     x;
-    int     y;
-    int     width;
-    int     height;
+    float     wall_strip_height;
+    float     x;
+    float     y;
+    float     width;
+    float     height;
 
     int i = -1;
     while (++i < NUM_RAYS)
