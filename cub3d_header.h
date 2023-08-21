@@ -94,15 +94,15 @@ typedef struct s_all
 typedef struct s_rays
 {
 	float	ray_distance;
-	int		wall_hit_x;
-	int		wall_hit_y;
+	float		wall_hit_x;
+	float		wall_hit_y;
 	bool		found_horz_wall_hit;
 	bool		found_ver_wall_hit;
 
-	int 	horzWallHitX;
-	int		horzWallHitY;
-	int		verWallHitX;
-	int		verWallHitY;
+	float		horzWallHitX;
+	float		horzWallHitY;
+	float		verWallHitX;
+	float		verWallHitY;
 
 	bool is_ray_facing_down;
 	bool is_ray_facing_up;
@@ -131,7 +131,7 @@ void draw_update_all(t_all *all);
 void	init_player(t_player *player, t_all *all);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
-float distance_between_points(int x1, int y1, int x2, int y2);
+float distance_between_points(float x1, float y1, float x2, float y2);
 // void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
