@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 14:59:27 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 08:56:15 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height,
     int j;
     
     i = x;
+    if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
+        color = get_rgba(255, 0, 0, 255);
+    else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
+       color =  get_rgba(236, 120, 160, 255);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
+       color =  get_rgba(0, 128, 0, 255);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
+       color =  get_rgba(255, 165, 0, 255);
     while (i < x_end)
     {
         j = y;
@@ -33,7 +41,16 @@ void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height,
                 j++;
                 continue;
             }
+            // else
             mlx_put_pixel(all->mlx_img, i, j, color);
+            
+        //     draw_rectangle(all, rays[i], x, y, width, height,
+        //                 get_rgba(236, 120, 160, 255));
+        //     draw_rectangle(all, rays[i], x, y, width, height,
+        //                 get_rgba(0, 128, 0, 255));
+        // else
+        //     draw_rectangle(all, rays[i], x, y, width, height,
+        //                 get_rgba(255, 165, 0, 255));
             j++;
         }
         i++;
@@ -72,6 +89,6 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
         width =  2;
         height = wall_strip_height;
         draw_rectangle(all, rays[i], x, y, width, height,
-                        get_rgba(236, 120, 160, 255));
+                        get_rgba(255, 0, 0, 255));
     }
 }

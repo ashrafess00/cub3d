@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 14:49:33 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 08:56:07 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,16 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 		rays.wall_hit_x = rays.horzWallHitX;
 		rays.wall_hit_y = rays.horzWallHitY;
 		rays.ray_distance = horzHitDistance;
+		rays.found_horz_wall_hit = 1;
+		rays.found_ver_wall_hit = 0;
 	}
 	else
 	{
 		rays.wall_hit_x = rays.verWallHitX;
 		rays.wall_hit_y = rays.verWallHitY;
 		rays.ray_distance = verHitDistance;
+		rays.found_ver_wall_hit = 1;
+		rays.found_horz_wall_hit = 0;
 	}
 	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);

@@ -141,4 +141,5 @@ int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
 void	draw_casts(t_all *all, t_rays *rays);
 void	init_player(t_player *player, t_all *all);
+
 #endif

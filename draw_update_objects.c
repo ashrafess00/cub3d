@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 14:58:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 08:56:04 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void draw_update_all(t_all *all)
 	draw_player(all->mlx_img, all->player.x, all->player.y);
 	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(170, 200, 250, 255));
 	draw_casts(all, rays);
-	
+
+
 	// no needed
 	// mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
