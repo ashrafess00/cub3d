@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 13:32:34 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 15:34:38 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
 	return ((p & 0xFF000000) >> 24 | (p & 0x00FF0000) >> 8
 		| (p & 0x0000FF00) << 8 | (p & 0x000000FF) << 24);
 }
-int x_end_f(mlx_texture_t *txt , t_rays ray)
+float x_end_f(mlx_texture_t *txt , t_rays ray)
 {
-    int x_end;
+    float x_end;
     if (ray.found_ver_wall_hit)
 		x_end = (txt->width / TILE_SIZE)
 			* ( ray.wall_hit_y - (int)(ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
@@ -37,20 +37,20 @@ int x_end_f(mlx_texture_t *txt , t_rays ray)
 }
 void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
 {
-    int x_en = x + width;
-    int y_en = y + height;
+    float x_en = x + width;
+    float y_en = y + height;
     int x_end = x + width;
     int y_end = y + height;
     int fl;
     
 //--------
 
-    x_end = x_end_f(all->txt.s_txt, ray);
 //--------
     fl = y;
+    x_end = x_end_f(all->txt.s_txt, ray);
     while (y < y_en)
     {
-        if (fl >= WINDOW_HEIGHT)
+        if (y >= WINDOW_HEIGHT)
             break ;
         y_end = (y - fl) * (all->txt.s_txt->height / height);
         if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
@@ -58,9 +58,8 @@ void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float
             y++;
             continue;
         }
-        color =  txt_pixel(all->txt.s_txt,x_end, y_end);
         if (y_end < all->txt.s_txt->height)
-            mlx_put_pixel(all->mlx_img, x, y, color);
+            mlx_put_pixel(all->mlx_img, x, y,txt_pixel(all->txt.s_txt,x_end, y_end));
         y++;
     }
 }
