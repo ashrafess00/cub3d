@@ -89,6 +89,7 @@ typedef struct s_all
 	mlx_image_t *mlx_img;
 	struct s_map map;
 	struct s_rgb rgb;
+	struct s_textures txt;
 }	t_all;
 
 typedef struct s_rays

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 08:56:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:42:06 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void init_mlx(t_all *all)
 
 }
 
-void load_txt(struct s_map *map, struct s_textures *text)
+void load_txt(struct s_map *map, t_all *all)
 {
-	text->s_txt = mlx_load_png(map->txt.so_txt);
-	text->w_txt = mlx_load_png(map->txt.we_txt);
-	text->n_txt = mlx_load_png(map->txt.no_txt);
-	text->e_txt = mlx_load_png(map->txt.ea_txt);
-	if(!(text->s_txt && text->w_txt && text->n_txt && text->e_txt))
+	all->txt.s_txt = mlx_load_png(map->txt.so_txt);
+	all->txt.w_txt = mlx_load_png(map->txt.we_txt);
+	all->txt.n_txt = mlx_load_png(map->txt.no_txt);
+	all->txt.e_txt = mlx_load_png(map->txt.ea_txt);
+	if(!(all->txt.s_txt && all->txt.w_txt && all->txt.n_txt && all->txt.e_txt))
 		werror(1);
 }
 
@@ -79,7 +79,7 @@ int main(int c, char **args)
 	
 	checker_2(&map);
 	exctract(&map, &player);
-	// load_txt(&map, &text); texture are ready for use but it's off 7ta nbdaw nkhdmo bihum
+	load_txt(&map, &all);
 	
 	//////////////////////////////////////////////////////////////////////
 	//init mlx window

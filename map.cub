@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_ea
+NO wall1.png
+SO wall1.png
+WE wall1.png
+EA wall1.png
 C 160,248,255
 F 0,128,0
 
