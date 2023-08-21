@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 18:53:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 23:20:59 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
 		| (p & 0x0000FF00) << 8 | (p & 0x000000FF) << 24);
 }
 
-float x_end_f(mlx_texture_t *txt , t_rays ray)
+int x_end_f(mlx_texture_t *txt , t_rays ray)
 {
-    float x_end;
+    int x_end;
     if (ray.found_ver_wall_hit)
 		x_end = (txt->width / TILE_SIZE)
 			* ( ray.wall_hit_y - (int)(ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
@@ -69,7 +69,7 @@ void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, fl
         y++;
     }
 }
-void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
+void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color)
 {
     if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
         for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,1);
@@ -95,9 +95,9 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
     // printf("{ray distance : %f}\n", ray_distance);
     // calculate the distance to the projection plane
     float   distance_projection_plane;
-    float     wall_strip_height;
-    float     x;
-    float     y;
+    int     wall_strip_height;
+    int     x;
+    int     y;
     float     width;
     float     height;
 

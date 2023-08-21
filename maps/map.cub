@@ -1,7 +1,7 @@
-NO l7it.png
-SO S.png
-WE W.png
-EA E.png
+NO walls/North.png
+SO walls/S.png
+WE walls/E.png
+EA walls/l7it.png
 C 160,248,255
 F 0,128,0
 
