@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 08:56:15 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:42:49 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,31 @@ void draw_rectangle(t_all *all, t_rays ray, int x, int y, int width, int height,
     int j;
     
     i = x;
+    // red
     if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
         color = get_rgba(255, 0, 0, 255);
+    //orange
     else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
-       color =  get_rgba(236, 120, 160, 255);
+       color =  get_rgba(255, 171, 0, 255);
+    //blue
     else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
-       color =  get_rgba(0, 128, 0, 255);
+       color =  get_rgba(43, 0, 255, 255);
+
+    //violet
     else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
-       color =  get_rgba(255, 165, 0, 255);
-    while (i < x_end)
+       color =  get_rgba(205, 0, 255, 255);
+       
+    j = y;
+    while (j < y_end)
     {
-        j = y;
-        while (j < y_end)
+        if (i < 0 || i > WINDOW_WIDTH || j < 0 || j > WINDOW_HEIGHT)
         {
-            if (i < 0 || i > WINDOW_WIDTH || j < 0 || j > WINDOW_HEIGHT)
-            {
-                j++;
-                continue;
-            }
-            // else
-            mlx_put_pixel(all->mlx_img, i, j, color);
-            
-        //     draw_rectangle(all, rays[i], x, y, width, height,
-        //                 get_rgba(236, 120, 160, 255));
-        //     draw_rectangle(all, rays[i], x, y, width, height,
-        //                 get_rgba(0, 128, 0, 255));
-        // else
-        //     draw_rectangle(all, rays[i], x, y, width, height,
-        //                 get_rgba(255, 165, 0, 255));
             j++;
+            continue;
         }
-        i++;
+        // else
+        mlx_put_pixel(all->mlx_img, i, j, color);
+        j++;
     }
 }
 
