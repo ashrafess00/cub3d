@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 16:04:39 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 08:56:07 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,26 @@ void	draw_casts(t_all *all, t_rays *rays)
 	while (++i < NUM_RAYS)
 		draw_line(all, all->player.x, all->player.y, rays[i].wall_hit_x, rays[i].wall_hit_y, get_rgba(255, 0, 0, 255));
 }
+
 void	get_rays(t_all *all, t_rays	*rays)
 {
 	int column = 0;
 	int	i;
-	
+	float	ray_angle;
 	// t_rays	rays[NUM_RAYS];
 	// start first ray substracting half of the fov
-	float rayAngle = all->player.rotation_angle - (FOV_ANGLE / 2);
-	rayAngle = adjastAngle(rayAngle);
+	ray_angle = all->player.rotation_angle - (FOV_ANGLE / 2);
+	ray_angle = adjastAngle(ray_angle);
 	//fill rays with info
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
-		rays[i] = render_ray(all, rayAngle, column, i, rays[i]);
-		rayAngle += (FOV_ANGLE / NUM_RAYS);
-		rayAngle = adjastAngle(rayAngle);
+		rays[i] = render_ray(all, ray_angle, column, i, rays[i]);
+		ray_angle += (FOV_ANGLE / NUM_RAYS);
+		ray_angle = adjastAngle(ray_angle);
 		column++;
 	}
 	mlx_texture_t *texture = mlx_load_png("./wall.png");
-	//render walls
-	i = -1;
-	// render_3d_project_walls(all, rays);
-	// draw_casts(all, rays);
 }
 
 //horizontal and verical 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_intersection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 16:04:06 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 11:41:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 {
 	t_player player = all->player;
-	int wallHitX = 0;
-	int wallHitY = 0;
+	float wallHitX = 0;
+	float wallHitY = 0;
 	float distance = 0;
 
 	float xIntercept;

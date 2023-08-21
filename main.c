@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/20 16:25:08 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 08:56:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void werror(int i)
 		write(1, "Error\n", 6);
 		exit(1);
 	}
-}
-
-void	init_player(t_player *player, t_all *all)
-{
-	player->radius = 15;
-	player->turn_direction = 0;
-	player->walk_direction = 0;
-	player->rotation_angle = M_PI / 2;
-	player->move_speed = 15.0;
-	player->rotation_speed = 6 * (M_PI / 180); //convert to radian
 }
 
 void init_mlx(t_all *all)
@@ -44,6 +34,18 @@ void load_txt(struct s_map *map, struct s_textures *text)
 	text->e_txt = mlx_load_png(map->txt.ea_txt);
 	if(!(text->s_txt && text->w_txt && text->n_txt && text->e_txt))
 		werror(1);
+}
+
+void	open_file(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if(fd < 0)
+	{
+		werror(1);
+	}
+		
 }
 int main(int c, char **args)
 {

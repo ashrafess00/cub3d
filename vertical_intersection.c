@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/19 09:04:42 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 12:06:53 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 	//------------vertical ray-grid intersection code------------//
 	//////////////////////////////////////
 	t_player player = all->player;
-	int wallHitX = 0;
-	int wallHitY = 0;
+	float wallHitX = 0;
+	float wallHitY = 0;
 	int distance = 0;
 
 	float xIntercept;
