@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 08:56:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 23:18:48 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,45 @@
 
 t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 {
-	float horzHitDistance;
-	float verHitDistance;
+	float horz_hit_distance;
+	float ver_hit_distance;
+	
 	horizontal_intersection(all, rayAngle, &rays);
-	vertical_intersection(all, rayAngle, &rays);   //segv hna
-
+	vertical_intersection(all, rayAngle, &rays);
 	if (rays.found_horz_wall_hit)
 	{
-		horzHitDistance = distance_between_points(all->player.x,
+		horz_hit_distance = distance_between_points(all->player.x,
 													all->player.y,
 													rays.horzWallHitX,
 													rays.horzWallHitY);
 	}
 	else
-		horzHitDistance = 1111111;
+		horz_hit_distance = INT_MAX;
 	if (rays.found_ver_wall_hit)
 	{
-		verHitDistance = distance_between_points(all->player.x,
+		ver_hit_distance = distance_between_points(all->player.x,
 													all->player.y,
 													rays.verWallHitX,
 													rays.verWallHitY);
 	}
 	else
-		verHitDistance = 1111111;
+		ver_hit_distance = INT_MAX;
 
-	if (horzHitDistance < verHitDistance)
+	if (horz_hit_distance <= ver_hit_distance)
 	{
 		rays.wall_hit_x = rays.horzWallHitX;
 		rays.wall_hit_y = rays.horzWallHitY;
-		rays.ray_distance = horzHitDistance;
-		rays.found_horz_wall_hit = 1;
-		rays.found_ver_wall_hit = 0;
+		rays.ray_distance = horz_hit_distance;
+		rays.found_horz_wall_hit = true;
+		rays.found_ver_wall_hit = false;
 	}
 	else
 	{
 		rays.wall_hit_x = rays.verWallHitX;
 		rays.wall_hit_y = rays.verWallHitY;
-		rays.ray_distance = verHitDistance;
-		rays.found_ver_wall_hit = 1;
-		rays.found_horz_wall_hit = 0;
+		rays.ray_distance = ver_hit_distance;
+		rays.found_ver_wall_hit = true;
+		rays.found_horz_wall_hit = false;
 	}
 	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);

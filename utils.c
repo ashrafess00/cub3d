@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 18:38:39 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 23:12:59 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ float adjastAngle(float rayAngle)
 
 float distance_between_points(float x1, float y1, float x2, float y2)
 {
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+	// return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
-
 
 bool in_the_wall(float x, float y, t_all *all)
 {
-
-	int m_x = x / TILE_SIZE;
-	int may = y / TILE_SIZE;
-	int fl= 0;
+	int	m_x;
+	int	may;
+	m_x = x / TILE_SIZE;
+	may = y / TILE_SIZE;
 	if(all->map.pure_map[may][m_x] != '0' && is_player(all->map.pure_map[may], m_x) == 0)
-		fl = 1;
-	return (fl);
+		return (1);
+	return (0);
 }
 
 t_rays fill_ray_direction(t_rays ray, float ray_angle)

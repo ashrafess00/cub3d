@@ -33,15 +33,15 @@
 #define MINIMAP_SCALE_FACTOR 0.2
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
-
+#define FLOAT_EPSILON 1e-5
 #define WINDOW_TITLE "بوسة فالفم خير من الدنيا وما فيها"
 typedef struct s_player
 {
-	int x;
-	int y;
+	float x;
+	float y;
 	float radius;
-	float turn_direction;
-	float walk_direction;
+	int		turn_direction;
+	int		walk_direction;
 	float rotation_angle;
 	float move_speed;
 	float rotation_speed;
@@ -99,21 +99,20 @@ typedef struct s_rays
 	bool		found_horz_wall_hit;
 	bool		found_ver_wall_hit;
 
-	int 	horzWallHitX;
-	int		horzWallHitY;
-	int		verWallHitX;
-	int		verWallHitY;
+	float 		horzWallHitX;
+	float		horzWallHitY;
+	float		verWallHitX;
+	float		verWallHitY;
 
-	int			wall_hit_x;
-	int			wall_hit_y;
-
-	bool is_ray_facing_down;
-	bool is_ray_facing_up;
-	bool is_ray_facing_left;
-	bool is_ray_facing_right;
+	float			wall_hit_x;
+	float			wall_hit_y;
+	int is_ray_facing_down;
+	int is_ray_facing_up;
+	int is_ray_facing_left;
+	int is_ray_facing_right;
 }	t_rays;
 int is_player(char *s, int i);
-void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, float color);
+void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
 void werror(int i);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
@@ -124,8 +123,6 @@ int get_rgba(int r, int g, int b, int a);
 void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
-// void cast_rays(t_all *all);
-// t_rays *get_rays(t_all *all);
 void	get_rays(t_all *all, t_rays	*rays);
 bool in_the_wall(float x, float y, t_all *all);
 float adjastAngle(float rayAngle);
@@ -135,6 +132,7 @@ void	init_player(t_player *player, t_all *all);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
 float distance_between_points(float x1, float y1, float x2, float y2);
+// float distance_between_points(int x1, int y1, int x2, int y2);
 // void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);

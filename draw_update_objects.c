@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 19:38:53 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/21 22:12:29 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void draw_update_all(t_all *all)
 	move_step = all->player.walk_direction * all->player.move_speed;
 	new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
 	new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
-	printf("x : %f\n", new_player_x);
-	printf("y : %f\n", new_player_y);
+	// printf("x : %f\n", new_player_x);
+	// printf("y : %f\n", new_player_y);
 	if (new_player_x < 0 || new_player_x >= all->map.window_wid || new_player_y < 0 || new_player_y >= all->map.window_heig)
 		return;
 	//check the wall collision
@@ -67,21 +67,12 @@ void draw_update_all(t_all *all)
 		all->player.x = new_player_x;
 		all->player.y = new_player_y;
 	}
-	// mlx_delete_image(all->mlx, all->mlx_img);
-	// all->mlx_img = mlx_new_image(all->mlx, all->map.window_wid, all->map.window_heig);
-	// all->mlx_img = mlx_new_image(all->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	draw_c_f(all);
-	//draw player
-	// cast_rays(all);
 	get_rays(all, rays);
 	render_3d_project_walls(all, rays);
 	draw_map(all);
 	draw_player(all->mlx_img, all->player.x, all->player.y);
 	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(170, 200, 250, 255));
 	draw_casts(all, rays);
-
-	
-	// no needed
-	// mlx_image_to_window(all->mlx, all->mlx_img, 0, 0);
 }
