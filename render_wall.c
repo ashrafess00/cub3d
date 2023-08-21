@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 15:34:38 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/21 17:06:30 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float x_end_f(mlx_texture_t *txt , t_rays ray)
 			* ( ray.wall_hit_x - (int)(ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
     return x_end;
 }
-void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
+void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, int x, int width, int y, int height, int flag)
 {
     float x_en = x + width;
     float y_en = y + height;
@@ -43,25 +43,41 @@ void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float
     int y_end = y + height;
     int fl;
     
-//--------
-
-//--------
     fl = y;
-    x_end = x_end_f(all->txt.s_txt, ray);
+    x_end = x_end_f(txt, ray);
     while (y < y_en)
     {
         if (y >= WINDOW_HEIGHT)
             break ;
-        y_end = (y - fl) * (all->txt.s_txt->height / height);
+        y_end = (y - fl) * (txt->height / height);
         if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
         {
             y++;
             continue;
         }
-        if (y_end < all->txt.s_txt->height)
-            mlx_put_pixel(all->mlx_img, x, y,txt_pixel(all->txt.s_txt,x_end, y_end));
+        if(flag == 0)
+        {
+            if (y_end < txt->height)
+                mlx_put_pixel(all->mlx_img, x, y,txt_pixel(txt, x_end, y_end));
+        }
+        else if(flag == 1)
+        {
+            if (y_end < txt->height)
+                mlx_put_pixel(all->mlx_img, x, y,txt_pixel(txt, txt->width - x_end, y_end));
+        }
         y++;
     }
+}
+void draw_rectangle(t_all *all, t_rays ray, float x, float y, float width, float height, float color)
+{
+    if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
+        for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,1);
+    else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
+       for_every_deriction(all->txt.s_txt, ray, all, x,width, y, height,0);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
+       for_every_deriction(all->txt.w_txt, ray, all, x,width, y, height,1);
+    else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
+        for_every_deriction(all->txt.n_txt, ray, all, x,width, y, height,0);
 }
 
 /*

@@ -1,7 +1,7 @@
-NO wall1.png
-SO wall1.png
-WE wall1.png
-EA wall1.png
+NO North.png
+SO S.png
+WE W.png
+EA E.png
 C 160,248,255
 F 0,128,0
 
