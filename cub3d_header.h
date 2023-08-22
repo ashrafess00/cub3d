@@ -45,6 +45,7 @@ typedef struct s_player
 	float rotation_angle;
 	float move_speed;
 	float rotation_speed;
+	char *c;
 }	t_player;
 
 struct s_rgb

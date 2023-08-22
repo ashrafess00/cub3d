@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/18 13:44:56 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 16:36:41 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int check_around(struct s_map *map, int i, int j)
 {
     if(i == 0 || i == map->last_line)
         werror(1);
-    if(map->pure_map[i][j + 1] != '1' && map->pure_map[i][j + 1] != '0' && map->pure_map[i][j + 1] != 'N')
+    if(map->pure_map[i][j + 1] != '1' && map->pure_map[i][j + 1] != '0' && !is_player(map->pure_map[i], j+1))
         werror(1);
-    if(map->pure_map[i][j - 1] != '1' && map->pure_map[i][j - 1] != '0' && map->pure_map[i][j - 1] != 'N')
+    if(map->pure_map[i][j - 1] != '1' && map->pure_map[i][j - 1] != '0' && !is_player(map->pure_map[i], j-1))
         werror(1);
-    if(map->pure_map[i + 1][j] != '1' && map->pure_map[i + 1][j] != '0' && map->pure_map[i + 1][j] != 'N')
+    if(map->pure_map[i + 1][j] != '1' && map->pure_map[i + 1][j] != '0' && !is_player(map->pure_map[i+1], j))
         werror(1);
-    if(map->pure_map[i - 1][j] != '1' && map->pure_map[i - 1][j] != '0' && map->pure_map[i - 1][j] != 'N')
+    if(map->pure_map[i - 1][j] != '1' && map->pure_map[i - 1][j] != '0' && !is_player(map->pure_map[i-1], j))
         werror(1);  
     return 0;
 }
@@ -142,6 +142,9 @@ int get_ply_cor(struct s_map *map, t_player *player)
             {
                 player->x = j * TILE_SIZE;
                 player->y = i * TILE_SIZE;
+                player->c = malloc(3 * sizeof(char));
+                player->c[0] = map->pure_map[i][j];
+                player->c[1] = '\0';
                 return 0;
             }
             j++;
