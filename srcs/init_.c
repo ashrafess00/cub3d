@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:34:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:03:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:32:52 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float get_angle_for_play(t_player *player)
 	else if(player-> c[0] == 'E')
 		return(0);
 	else
-		return 4.17239;
+		return 4.7277;
 }
 void	init_player(t_player *player, t_all *all)
 {
