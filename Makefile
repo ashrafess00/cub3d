@@ -6,7 +6,7 @@
 #    By: kslik <kslik@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/21 12:42:34 by kslik            ###   ########.fr        #
+#    Updated: 2023/08/22 17:44:03 by kslik            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS=main.c draw_me.c key_me.c init_.c checker.c extract_map.c cast.c render_wal
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
-# CFLAGS = -fsanitize=addres s
+# CFLAGS = -fsanitize=address
 
 CC=cc
 RM=rm -rf

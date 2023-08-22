@@ -80,6 +80,7 @@ struct s_map
 	int last_line;
 	int window_wid;
 	int window_heig;
+	int lines;
 	struct s_rgb rgb;
 	struct s_txt txt;
 };
