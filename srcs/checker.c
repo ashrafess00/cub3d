@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/18 13:15:05 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 15:53:35 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int check_color(struct s_map *map, int i, char c)
     int comma = 0;
     int vld  =0;
     char *q;
-    while(map->my_map[i][j] == ' ')
+    while(map->my_map[i][j] == ' ' && map->my_map[i][j] != '\0')
         j++;
-    if(map->my_map[i][j] == c && map->my_map[i][j+1] == ' ')
+    if(map->my_map[i][j] == c && map->my_map[i][j+1] == ' '  && map->my_map[i][j+1] != '\0')
         j++;
-    while(map->my_map[i][j] == ' ')
+    while(map->my_map[i][j] == ' '&& map->my_map[i][j] != '\0')
         j++;
     while(map->my_map[i][j] != '\0')
     {
@@ -111,7 +111,7 @@ int checker_2(struct s_map *map)
     while(i < k)
     {
         j = 0;
-        while(map->my_map[i][j] == ' ')
+        while(map->my_map[i][j] == ' ' && map->my_map[i][j] != '\0')
             j++;
         if(map->my_map[i][j] == 'N' && map->my_map[i][j+1] == 'O' && map->my_map[i][j+2] == ' ')
             n += load_text_n(map, i, j+2);

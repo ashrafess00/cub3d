@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 09:57:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:50:31 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	get_rays(t_all *all, t_rays	*rays)
 		ray_angle = adjastAngle(ray_angle);
 		column++;
 	}
-	mlx_texture_t *texture = mlx_load_png("./wall.png");
 }
 
 //horizontal and verical 

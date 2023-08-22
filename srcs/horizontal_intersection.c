@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 09:54:49 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:50:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,52 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 	t_player player = all->player;
 
 	float	xIntercept;
-	float	yIntercept;
-	float xStep;
-	float yStep;
-    
+	float	y_intercept;
+	float x_step;
+	float y_step;
+    float x_to_check;
+	float	y_to_check;
+
 	ray->found_horz_wall_hit = 0;
 	ray->horzWallHitX = 0;
 	ray->horzWallHitY = 0;
 	*ray = fill_ray_direction(*ray, rayAngle);
 	//find the y-coordinate of the closest horizontal grid intersections
-	yIntercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
+	y_intercept = floor(all->player.y / TILE_SIZE) * TILE_SIZE;
 	if (ray->is_ray_facing_down)
-		yIntercept += TILE_SIZE;
+		y_intercept += TILE_SIZE;
 	//find the x-coordinate of the closest horizontal grid intersections
-	xIntercept = player.x + (yIntercept - player.y) / tan(rayAngle);
+	xIntercept = player.x + (y_intercept - player.y) / tan(rayAngle);
 
-	//calculate the increment xStep and yStep
-	yStep = TILE_SIZE;                //ystep
+	//calculate the increment x_step and y_step
+	y_step = TILE_SIZE;                //y_step
 	if (ray->is_ray_facing_up)
-		yStep *= -1;
-	xStep = TILE_SIZE / tan(rayAngle);//xstep
-	if ((ray->is_ray_facing_left && xStep > 0) || (ray->is_ray_facing_right && xStep < 0))
-		xStep *= -1;
+		y_step *= -1;
+	x_step = TILE_SIZE / tan(rayAngle);//x_step
+	if ((ray->is_ray_facing_left && x_step > 0) || (ray->is_ray_facing_right && x_step < 0))
+		x_step *= -1;
 	
-	//incremet xstep and ystep until we find a wall
+	//incremet x_step and y_step until we find a wall
 	while (xIntercept >= 0 && xIntercept < all->map.window_wid
-		&& yIntercept >= 0 && yIntercept < all->map.window_heig)
+		&& y_intercept >= 0 && y_intercept < all->map.window_heig)
 	{
-		float xToCheck = xIntercept;
-		float yToCheck = yIntercept + (ray->is_ray_facing_up ? -1 : 0);
-		if (in_the_wall(xToCheck, yToCheck, all))
+		x_to_check = xIntercept;
+		// y_to_check = y_intercept + (ray->is_ray_facing_up ? -1 : 0);
+		if (ray->is_ray_facing_up)
+			y_to_check = y_intercept - 1;
+		else
+			y_to_check = y_intercept;
+		if (in_the_wall(x_to_check, y_to_check, all))
 		{
 			ray->horzWallHitX = xIntercept;
-			ray->horzWallHitY = yIntercept;
+			ray->horzWallHitY = y_intercept;
 			ray->found_horz_wall_hit = 1;
 			break;
 		}
 		else
 		{
-			xIntercept += xStep;
-			yIntercept += yStep;
+			xIntercept += x_step;
+			y_intercept += y_step;
 		}
 	}
 }
