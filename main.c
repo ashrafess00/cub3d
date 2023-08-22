@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 14:46:53 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:00:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,14 @@ void load_txt(struct s_map *map, struct s_all *all)
 	}
 }
 
-int main(int c, char **args)
+void	init_map(t_all *all, t_player *player, char *file)
 {
 	struct s_map	map;
 	int				fd;
 	char			s[120];
-	int				i;
-	t_all			all;
-	t_player		player;
-	mlx_t			*mlx;
-	mlx_image_t		*mlx_img;
-	struct s_textures text;
-
-	if(c != 2 || checker_1(args) == -1)
-		werror(1);
+	
 	map.tmp = 1;
-	fd = open(args[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if(fd < 0)
 		werror(1);
 	while(map.tmp != 0)
@@ -66,24 +58,29 @@ int main(int c, char **args)
 		map.char_in_map += map.tmp;
 	}
 	close(fd);
-	fd = open(args[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	map.whole_map = ft_calloc(map.char_in_map + 1, 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
-	map.my_map = ft_calloc(1, 1);
+	map.my_map = ft_calloc(1, 1); //will be deleted later, perhaps
 	map.my_map = ft_split(map.whole_map, '\n');
-	
 	checker_2(&map);
-	exctract(&map, &player);
-	load_txt(&map, &all);
-	//  texture are ready for use but it's off 7ta nbdaw nkhdmo bihum
-	//////////////////////////////////////////////////////////////////////
-	init_mlx(&all);
-	all.map = map;
-	all.rgb = map.rgb;
-	//init player
-	init_player(&player, &all);
+	exctract(&map, player);
+	load_txt(&map, all);
+	all->map = map;
+	all->rgb = map.rgb;
+}
 
-	all.player = player;
+int main(int c, char **args)
+{
+	t_all			all;
+	t_player		player;
+
+	if(c != 2 || checker_1(args) == -1)
+		werror(1);
+
+	init_map(&all, &player, args[1]);
+	init_mlx(&all);
+	init_player(&player, &all);
 
 	//draw all
 	mlx_image_to_window(all.mlx, all.mlx_img, 0, 0);
