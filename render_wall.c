@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 23:20:59 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:56:21 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int x_end_f(mlx_texture_t *txt , t_rays ray)
     int x_end;
     if (ray.found_ver_wall_hit)
 		x_end = (txt->width / TILE_SIZE)
-			* ( ray.wall_hit_y - (int)(ray.wall_hit_y / TILE_SIZE) * TILE_SIZE);
+			* ( ray.main_wall_hit_y - (int)(ray.main_wall_hit_y / TILE_SIZE) * TILE_SIZE);
 	else
 		x_end = (txt->width / TILE_SIZE)
-			* ( ray.wall_hit_x - (int)(ray.wall_hit_x / TILE_SIZE) * TILE_SIZE);
+			* ( ray.main_wall_hit_x - (int)(ray.main_wall_hit_x / TILE_SIZE) * TILE_SIZE);
     return x_end;
 }
 void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, float width, float y, float height, float flag)

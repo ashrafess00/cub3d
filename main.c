@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 15:27:49 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 14:46:53 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ void werror(int i)
 		exit(1);
 	}
 }
-
-void init_mlx(t_all *all)
-{
-
-}
-
 
 
 void load_txt(struct s_map *map, struct s_all *all)
@@ -47,6 +41,7 @@ void load_txt(struct s_map *map, struct s_all *all)
 		werror(1);
 	}
 }
+
 int main(int c, char **args)
 {
 	struct s_map	map;
@@ -82,24 +77,20 @@ int main(int c, char **args)
 	load_txt(&map, &all);
 	//  texture are ready for use but it's off 7ta nbdaw nkhdmo bihum
 	//////////////////////////////////////////////////////////////////////
-	//init mlx window
-	mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, true);
-	mlx_img = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	init_mlx(&all);
 	all.map = map;
 	all.rgb = map.rgb;
 	//init player
 	init_player(&player, &all);
 
-	all.mlx = mlx;
 	all.player = player;
-	all.mlx_img = mlx_img;
 
 	//draw all
-	mlx_image_to_window(mlx, mlx_img, 0, 0);
+	mlx_image_to_window(all.mlx, all.mlx_img, 0, 0);
 	draw_update_all(&all);
-	mlx_key_hook(mlx, move_mama, &all);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	mlx_key_hook(all.mlx, move_mama, &all);
+	mlx_loop(all.mlx);
+	mlx_terminate(all.mlx);
 	return (0);
 }
 
