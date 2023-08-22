@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:06:27 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:52:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void draw_c_f(t_all *all)
 {
 	int i = 0;
 	int j = 0;
+
 	while(j < WINDOW_HEIGHT / 2)//sky
 	{
 		i =0;
@@ -56,18 +57,20 @@ void draw_update_all(t_all *all)
 	move_step = all->player.walk_direction * all->player.move_speed;
 	new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
 	new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
-	// printf("x : %f\n", new_player_x);
-	// printf("y : %f\n", new_player_y);
 	if (new_player_x < 0 || new_player_x >= all->map.window_wid || new_player_y < 0 || new_player_y >= all->map.window_heig)
 		return;
 	//check the wall collision
+
+	if (in_the_wall(all->player.x, new_player_y, all) && in_the_wall(new_player_x, all->player.y, all))
+		return ;
+
 	if (!in_the_wall(new_player_x, new_player_y, all))
 	{
+		if (all->player.x + 1)
+		
 		all->player.x = new_player_x;
 		all->player.y = new_player_y;
 	}
-	
-	
 	draw_c_f(all);
 	get_rays(all, rays);
 	render_3d_project_walls(all, rays);
