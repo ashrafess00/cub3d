@@ -45,6 +45,7 @@ typedef struct s_player
 	float rotation_angle;
 	float move_speed;
 	float rotation_speed;
+	char *c;
 }	t_player;
 
 struct s_rgb
@@ -144,5 +145,7 @@ int load_text_w(struct s_map *map, int i, int j);
 void	draw_casts(t_all *all, t_rays *rays);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
+
+void    put_settings(t_all *all);
 
 #endif

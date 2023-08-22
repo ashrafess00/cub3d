@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 15:55:15 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:05:22 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	main(int c, char **args)
 	init_map(&all, &player, args[1]);
 	init_mlx(&all);
 	init_player(&player, &all);
+	
+	//draw all
 	mlx_image_to_window(all.mlx, all.mlx_img, 0, 0);
 	draw_update_all(&all);
 	mlx_key_hook(all.mlx, move_mama, &all);
