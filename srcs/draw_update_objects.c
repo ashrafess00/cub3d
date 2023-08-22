@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 18:56:33 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:59:09 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ void draw_update_all(t_all *all)
 	new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
 	new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
 	
-	new_player_x += all->player.move_side * all->player.move_speed;
+	new_player_x += all->player.move_side * sin(all->player.rotation_angle) * move_step;
+	new_player_y -= all->player.move_side * cos(all->player.rotation_angle) * move_step;
+	
+	new_player_x += all->player.move_side * cos(all->player.rotation_angle + M_PI / 2) * all->player.move_speed;
+	new_player_y += all->player.move_side * sin(all->player.rotation_angle + M_PI / 2) * all->player.move_speed;
 	
 	if (new_player_x < 0 || new_player_x >= all->map.window_wid || new_player_y < 0 || new_player_y >= all->map.window_heig)
 		return;

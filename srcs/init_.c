@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:34:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 19:32:52 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 19:49:44 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_player(t_player *player, t_all *all)
 	player->rotation_angle = get_angle_for_play(player);
 	player->move_speed = 15.0;
 	player->rotation_speed = 6 * (M_PI / 180);
+	player->move_side = 0;
 	all->player = *player;
 }
 
