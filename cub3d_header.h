@@ -34,7 +34,7 @@
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
 #define FLOAT_EPSILON 1e-5
-#define WINDOW_TITLE "بوسة فالفم خير من الدنيا وما فيها"
+#define WINDOW_TITLE "MOLAT LMLWI TAJSID DYAL ILAHAT LJAMAL"
 typedef struct s_player
 {
 	float x;
