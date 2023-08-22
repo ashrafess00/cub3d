@@ -104,13 +104,14 @@ typedef struct s_rays
 	float		verWallHitX;
 	float		verWallHitY;
 
-	float			wall_hit_x;
-	float			wall_hit_y;
+	float			main_wall_hit_x;
+	float			main_wall_hit_y;
 	int is_ray_facing_down;
 	int is_ray_facing_up;
 	int is_ray_facing_left;
 	int is_ray_facing_right;
 }	t_rays;
+
 int is_player(char *s, int i);
 void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
 void werror(int i);
@@ -131,7 +132,7 @@ void draw_update_all(t_all *all);
 void	init_player(t_player *player, t_all *all);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
-float distance_between_points(float x1, float y1, float x2, float y2);
+float	distance_between_points(float x1, float y1, float x2, float y2);
 // float distance_between_points(int x1, int y1, int x2, int y2);
 // void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
@@ -142,5 +143,6 @@ int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
 void	draw_casts(t_all *all, t_rays *rays);
 void	init_player(t_player *player, t_all *all);
+void	init_mlx(t_all *all);
 
 #endif

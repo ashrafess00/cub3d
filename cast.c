@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/21 23:18:48 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:57:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 {
-	float horz_hit_distance;
-	float ver_hit_distance;
+	float	horz_hit_distance;
+	float	ver_hit_distance;
 	
 	horizontal_intersection(all, rayAngle, &rays);
 	vertical_intersection(all, rayAngle, &rays);
@@ -40,19 +40,19 @@ t_rays render_ray(t_all *all, float rayAngle, int column, int i, t_rays rays)
 
 	if (horz_hit_distance <= ver_hit_distance)
 	{
-		rays.wall_hit_x = rays.horzWallHitX;
-		rays.wall_hit_y = rays.horzWallHitY;
+		rays.main_wall_hit_x = rays.horzWallHitX;
+		rays.main_wall_hit_y = rays.horzWallHitY;
 		rays.ray_distance = horz_hit_distance;
 		rays.found_horz_wall_hit = true;
 		rays.found_ver_wall_hit = false;
 	}
 	else
 	{
-		rays.wall_hit_x = rays.verWallHitX;
-		rays.wall_hit_y = rays.verWallHitY;
+		rays.main_wall_hit_x = rays.verWallHitX;
+		rays.main_wall_hit_y = rays.verWallHitY;
 		rays.ray_distance = ver_hit_distance;
-		rays.found_ver_wall_hit = true;
 		rays.found_horz_wall_hit = false;
+		rays.found_ver_wall_hit = true;
 	}
 	rays.ray_distance = rays.ray_distance * cos(rayAngle - all->player.rotation_angle);
 	return (rays);
@@ -64,7 +64,7 @@ void	draw_casts(t_all *all, t_rays *rays)
 
 	i = -1;
 	while (++i < NUM_RAYS)
-		draw_line(all, all->player.x, all->player.y, rays[i].wall_hit_x, rays[i].wall_hit_y, get_rgba(255, 0, 0, 255));
+		draw_line(all, all->player.x, all->player.y, rays[i].main_wall_hit_x, rays[i].main_wall_hit_y, get_rgba(255, 0, 0, 255));
 }
 
 void	get_rays(t_all *all, t_rays	*rays)
