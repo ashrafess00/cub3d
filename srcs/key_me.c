@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:44:19 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/16 13:48:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:10:25 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ void move_mama(mlx_key_data_t keydata, void *param)
 		all->player.turn_direction += 1;
 	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 		all->player.turn_direction -= 1;
+	else if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_PRESS)
+		all->player.move_speed += 1;
+	else if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == MLX_PRESS)
+		all->player.move_speed -= 1;
+	// else if (keydata.key == MLX_KEY_1 && keydata.action == MLX_PRESS)
+	// 	all->player.rotation_speed += 1;
+	// else if (keydata.key == MLX_KEY_KP_2 && keydata.action == MLX_PRESS)
+	// 	all->player.rotation_speed -= 1;
 
 
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)

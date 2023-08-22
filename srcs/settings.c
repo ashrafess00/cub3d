@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:58:48 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:00:34 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:16:02 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ void    put_settings(t_all *all)
 
 	str = mlx_put_string(all->mlx, "+ to increse player speed", WINDOW_WIDTH - 200 , 10);
 	fill_image_with_color(str, get_rgba(255, 0, 0, 255));
-	free(str);
+	str = mlx_put_string(all->mlx, "- to increse player speed", WINDOW_WIDTH - 200 , 30);
+	fill_image_with_color(str, get_rgba(255, 0, 0, 255));
+	// str = mlx_put_string(all->mlx, "1 to increse rotation speed", WINDOW_WIDTH - 200 , 10);
+	// fill_image_with_color(str, get_rgba(255, 0, 0, 255));
+	// str = mlx_put_string(all->mlx, "2 to increse rotation speed", WINDOW_WIDTH - 200 , 30);
+	// fill_image_with_color(str, get_rgba(255, 0, 0, 255));
 }

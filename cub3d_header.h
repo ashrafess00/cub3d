@@ -146,4 +146,6 @@ void	draw_casts(t_all *all, t_rays *rays);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
 
+void    put_settings(t_all *all);
+
 #endif
