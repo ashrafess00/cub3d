@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kslik <kslik@student.42.fr>                +#+  +:+       +#+         #
+#    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/21 12:42:34 by kslik            ###   ########.fr        #
+#    Updated: 2023/08/22 15:25:17 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=cub3D
 LIBFT_DIR=libft/
-
-HEADERS=  -I$(LIBFT_DIR)
+SRCS_DIR=srcs/
+INCLUDE=  -I$(LIBFT_DIR) -I./
 LIBS=MLX42/libmlx42.a
 SRCS=main.c draw_me.c key_me.c init_.c checker.c extract_map.c cast.c render_wall.c draw_update_objects.c horizontal_intersection.c vertical_intersection.c utils.c extract_texture.c
 OBJS_DIR=objs/
@@ -30,7 +30,7 @@ all: $(OBJS_DIR) $(NAME)
 
 
 $(NAME): $(LIBFT_A) $(OBJS) cub3d_header.h
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) $(INCLUDE) -o $(NAME) 
 	@echo $(NAME) was created :\)
 
 $(OBJS_DIR):
@@ -39,8 +39,8 @@ $(OBJS_DIR):
 $(LIBFT_A):
 	make -C $(LIBFT_DIR)
 
-$(OBJS_DIR)%.o:%.c
-	$(CC) $(CFLAGS) $(HEADERS) -O3 -c -o $@ $^
+$(OBJS_DIR)%.o:$(SRCS_DIR)%.c
+	$(CC) $(CFLAGS) $(INCLUDE) -O3 -c -o $@ $^
 
 clean:
 	make clean -C $(LIBFT_DIR)
