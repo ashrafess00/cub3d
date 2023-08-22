@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:54:33 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/14 14:29:53 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 17:30:06 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	create_arr(const char *s, char **main_arr, char c)
 		while (s[i] && s[i] != c)
 			i++;
 	}
-	free((char *)s);
+	// free((char *)s);
 }
 
 char	**ft_split(char const *s, char c)

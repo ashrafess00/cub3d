@@ -6,19 +6,23 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/22 16:36:41 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 17:29:37 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
+int lines(struct s_map *map)
+{
+    return map->lines;
+}
 int extract_2(struct s_map *map, int start)
 {
     int i;
     int j;
-    map->pure_map = malloc((map->char_in_map / 4) * sizeof(char*) + 1);
+    map->pure_map = malloc(lines(map) * sizeof(char*) + 1);
     i = 0;
     
-    while(map->my_map[start] != NULL)
+    while(map->my_map[start] != '\0')
     {
         j = 0;
         map->pure_map[i] = malloc(ft_strlen(map->my_map[start]) * sizeof(char) + 1);
@@ -32,7 +36,6 @@ int extract_2(struct s_map *map, int start)
         start++;
         i++;
     }
-    i = -1;
     map->last_line = i - 1;
     map->pure_map[i] =  NULL;
     return 1;
@@ -103,7 +106,7 @@ int check_mty_line(struct s_map *map, int start)
     int k = 0;
     start = 0;
     int fl = 0;
-    while(map->whole_map[start])
+    while(map->whole_map[start] != '\0')
     {
         if(map->whole_map[start] == '1')
             k++;
@@ -172,11 +175,11 @@ int get_wi_he(struct s_map *map)
 }
 int exctract(struct s_map *map, t_player *player)
 {
-    int i = 6;
+    int i = 5;
     int j = 0;
     int ma = 0;
     int start;
-    while(map->my_map[i][j] != '\0')
+    while(map->my_map[i] != '\0')
     {
         while(map->my_map[i][j] == ' ' && map->my_map[i][j] != '\0')     
            j++;

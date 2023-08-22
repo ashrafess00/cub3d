@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 09:56:21 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:44:51 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, fl
     
     fl = y;
     x_end = x_end_f(txt, ray);
-    while (y <= y_en)
+    while (y < y_en)
     {
         if (y >= WINDOW_HEIGHT)
             break ;
