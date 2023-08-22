@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:07:36 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/22 15:53:35 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 19:21:09 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,29 @@ int check_color(struct s_map *map, int i, char c)
         j++;
     if(map->my_map[i][j] == c && map->my_map[i][j+1] == ' '  && map->my_map[i][j+1] != '\0')
         j++;
-    while(map->my_map[i][j] == ' '&& map->my_map[i][j] != '\0')
+    while(map->my_map[i][j] == ' ' && map->my_map[i][j] != '\0')
         j++;
     while(map->my_map[i][j] != '\0')
     {
         tmp = j;
         while(map->my_map[i][j] != ',' && map->my_map[i][j] != '\0')
         {
-            if(map->my_map[i][j] > 33 && map->my_map[i][j] < 126 && map->my_map[i][j+1] != '\0')
+            if(map->my_map[i][j] > 31 && map->my_map[i][j] < 126 && map->my_map[i][j+1] != '\0')
             {
                 if(map->my_map[i][j] < 48 || map->my_map[i][j] > 57)
                     werror(1);
             }
+            else if(map->my_map[i][j] > 31 && map->my_map[i][j] < 126 && map->my_map[i][j] != '\0')
+            {
+                if(map->my_map[i][j] < 48 || map->my_map[i][j] > 57)
+                    werror(1);
+            } 
             j++;
         }
         if(map->my_map[i][j] == ',')
             comma++;
+        else if(map->my_map[i][j] != '\0')
+            werror(1);
         if(tmp - j == 0)
             werror(1);
         q = ft_substr(map->my_map[i], tmp , j-tmp);
@@ -127,7 +134,6 @@ int checker_2(struct s_map *map)
             f += check_color(map, i, 'F');
         i++;
     }
-    
     if(n != 1 || s != 1 ||we != 1 ||ea != 1 || c != 1|| f != 1)
         werror(1);
     return 1;
