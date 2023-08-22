@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/22 17:29:37 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 19:24:01 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int check_mty_line(struct s_map *map, int start)
             k++;
         else if(map->whole_map[start] != '1' || map->whole_map[start] != ' ')
             k = 0;
-        if(k > 2)
+        if(k > 4)
         {
             while(map->whole_map[start] != '\0')
             {
@@ -192,7 +192,7 @@ int exctract(struct s_map *map, t_player *player)
         j++;
         ma++;
     }
-    if(ma >= 3)
+    if(ma >= 4)
         start = i;
     else
         werror(1);
