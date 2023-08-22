@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:28:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool in_the_wall(float x, float y, t_all *all)
 	int	m_x;
 	int	m_y;
 
-	if (x < 0 || x > all->map.window_wid || y < 0 || y > all->map.window_heig)
+	if (x < 0 || x > all->map.win_w || y < 0 || y > all->map.win_h)
 		return (1);
 	m_x = floor(x / TILE_SIZE);
 	m_y = floor(y / TILE_SIZE);

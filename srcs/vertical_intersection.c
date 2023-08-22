@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 15:50:38 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
 		y_step *= -1;
 	
 	//incremet x_step and y_step until we find a wall
-	while (x_intercept >= 0 && x_intercept <= all->map.window_wid
-		&& y_intercept >= 0 && y_intercept <= all->map.window_heig)
+	while (x_intercept >= 0 && x_intercept <= all->map.win_w
+		&& y_intercept >= 0 && y_intercept <= all->map.win_h)
 	{
 		// float xToCheck = x_intercept + (ray->is_ray_facing_left ? -1 : 0);
 		y_to_check = y_intercept;

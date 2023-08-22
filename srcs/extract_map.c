@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/22 19:24:01 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,17 +160,17 @@ int get_wi_he(struct s_map *map)
 {
     int i = 0;
     int j=0;
-    map->window_wid = 0;
+    map->win_w = 0;
     while(map->pure_map[i])
     {
         j=0;
         while(map->pure_map[i][j])
             j++;
-        if(j > map->window_wid)
-            map->window_wid = j * TILE_SIZE;
+        if(j > map->win_w)
+            map->win_w = j * TILE_SIZE;
         i++;
     }
-    map->window_heig = i * TILE_SIZE;
+    map->win_h = i * TILE_SIZE;
     return 0;
 }
 int exctract(struct s_map *map, t_player *player)
