@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 19:22:40 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 20:47:29 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	init_map(t_all *all, t_player *player, char *file)
 	map.whole_map = ft_calloc(map.char_in_map + 1, 1);
 	map.index = read(fd, map.whole_map, map.char_in_map);
 	count_line(&map);
-	map.my_map = ft_calloc(1, 1); //will be deleted later, perhaps
 	map.my_map = ft_split(map.whole_map, '\n');
 	checker_2(&map);
 	exctract(&map, player);
