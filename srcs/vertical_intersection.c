@@ -3,70 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:42:44 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
+static void	init_ray_values(t_rays *ray)
 {
-	//////////////////////////////////////
-	//------------vertical ray-grid intersection code------------//
-	//////////////////////////////////////
-	t_player player = all->player;
-
-	float	x_intercept;
-	float	y_intercept;
-	float	x_step;
-	float	y_step;
-	float	y_to_check;
-	float	x_to_check;
-
 	ray->found_ver_wall_hit = 0;
 	ray->verWallHitX = 0;
 	ray->verWallHitY = 0;
-	*ray = fill_ray_direction(*ray, rayAngle);
-	//find the x-coordinate of the closest horizontal grid intersections
-	x_intercept = floor(all->player.x / TILE_SIZE) * TILE_SIZE;
-	if (ray->is_ray_facing_right)
-		x_intercept += TILE_SIZE;
-	//find the y-coordinate of the closest horizontal grid intersections
-	y_intercept = player.y + (x_intercept - player.x) * tan(rayAngle);//warning
+}
 
-	//calculate the increment x_step and y_step
-	x_step = TILE_SIZE;             //x_step
+//calculate the increment x_step and y_step
+static void	set_x_y_step(t_rays *ray, t_intrc_dt *intrc_dt, float rayAngle)
+{
+	intrc_dt->x_step = TILE_SIZE;
 	if (ray->is_ray_facing_left)
-		x_step *= -1;
-	y_step = TILE_SIZE * tan(rayAngle);//y_step
-	if ((ray->is_ray_facing_up && y_step > 0) || (ray->is_ray_facing_down && y_step < 0))
-		y_step *= -1;
-	
-	//incremet x_step and y_step until we find a wall
-	while (x_intercept >= 0 && x_intercept <= all->map.win_w
-		&& y_intercept >= 0 && y_intercept <= all->map.win_h)
+		intrc_dt->x_step *= -1;
+	intrc_dt->y_step = TILE_SIZE * tan(rayAngle);
+	if ((ray->is_ray_facing_up && intrc_dt->y_step > 0)
+		|| (ray->is_ray_facing_down && intrc_dt->y_step < 0))
+		intrc_dt->y_step *= -1;
+}
+
+static void	find_the_interception(t_all *all, t_rays *ray, t_intrc_dt intrc_dt)
+{
+	float	x_to_check;
+	float	y_to_check;
+
+	while (intrc_dt.x_intercept >= 0 && intrc_dt.x_intercept <= all->map.win_w
+		&& intrc_dt.y_intercept >= 0 && intrc_dt.y_intercept <= all->map.win_h)
 	{
-		// float xToCheck = x_intercept + (ray->is_ray_facing_left ? -1 : 0);
-		y_to_check = y_intercept;
+		y_to_check = intrc_dt.y_intercept;
 		if (ray->is_ray_facing_left)
-			x_to_check = x_intercept - 1;
+			x_to_check = intrc_dt.x_intercept - 1;
 		else
-			x_to_check = x_intercept;
+			x_to_check = intrc_dt.x_intercept;
 		if (in_the_wall(x_to_check, y_to_check, all))
 		{
-			//we found a wall hit
 			ray->found_ver_wall_hit = 1;
-			ray->verWallHitX = x_intercept;
-			ray->verWallHitY = y_intercept;			
-			break;
+			ray->verWallHitX = intrc_dt.x_intercept;
+			ray->verWallHitY = intrc_dt.y_intercept;
+			break ;
 		}
 		else
 		{	
-			x_intercept += x_step;
-			y_intercept += y_step;
+			intrc_dt.x_intercept += intrc_dt.x_step;
+			intrc_dt.y_intercept += intrc_dt.y_step;
 		}
 	}
+}
+
+void	vertical_intersection(t_all *all, float rayAngle, t_rays *ray)
+{
+	t_intrc_dt	intrc_dt;
+
+	init_ray_values(ray);
+	*ray = fill_ray_direction(*ray, rayAngle);
+	intrc_dt.x_intercept = floor(all->player.x / TILE_SIZE) * TILE_SIZE;
+	if (ray->is_ray_facing_right)
+		intrc_dt.x_intercept += TILE_SIZE;
+	intrc_dt.y_intercept = all->player.y
+		+ (intrc_dt.x_intercept - all->player.x) * tan(rayAngle);
+	set_x_y_step(ray, &intrc_dt, rayAngle);
+	find_the_interception(all, ray, intrc_dt);
 }

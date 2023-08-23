@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal_intersection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:45:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:38:20 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	init_ray_values(t_rays *ray)
 	ray->horzWallHitY = 0;
 }
 
+//calculate the increment x_step and y_step
 static void	set_x_y_step(t_rays *ray, t_intrc_dt *intrc_dt, float rayAngle)
 {
 	intrc_dt->y_step = TILE_SIZE;

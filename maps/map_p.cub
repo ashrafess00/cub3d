@@ -1,7 +1,7 @@
-SO  ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-NO  ./path_to_the_north_texture
-EA ./path_to_the_east_texture
+SO  walls/l7it.png
+WE walls/path_to_the_west_texture
+NO  walls/path_to_the_north_texture
+EA walls/path_to_the_east_texture
 C 160,248,255
 F 0,128,0
 
