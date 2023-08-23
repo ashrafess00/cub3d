@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 09:49:02 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:19:30 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void draw_c_f(t_all *all)
 	int i = 0;
 	int j = 0;
 
-	while(j < win_hHT / 2)//sky
+	while(j < WIN_H / 2)
 	{
 		i =0;
-		while(i < win_wTH)
+		while(i < WIN_W)
 		{
 			mlx_put_pixel(all->mlx_img, i, j, get_rgba(all->rgb.c[0],all->rgb.c[1],all->rgb.c[2],255));
 			i++;
@@ -29,10 +29,10 @@ void draw_c_f(t_all *all)
 		j++;
 	}
 	
-	while(j < win_hHT )//sky
+	while(j < WIN_H)
 	{
 		i =0;
-		while(i < win_wTH )
+		while(i < WIN_W )
 		{
 			mlx_put_pixel(all->mlx_img, i, j, get_rgba(all->rgb.f[0],all->rgb.f[1],all->rgb.f[2],255));
 			i++;
@@ -48,7 +48,6 @@ void draw_update_all(t_all *all)
 	float	new_player_y;
     t_rays	rays[NUM_RAYS];
 
-
 	//rotation_angle
 	all->player.rotation_angle = adjastAngle(all->player.rotation_angle);
 	all->player.rotation_angle += all->player.turn_direction * all->player.rotation_speed;
@@ -57,10 +56,6 @@ void draw_update_all(t_all *all)
 	move_step = all->player.walk_direction * all->player.move_speed;
 	new_player_x = all->player.x + cos(all->player.rotation_angle) * move_step;
 	new_player_y = all->player.y + sin(all->player.rotation_angle) * move_step;
-	
-	// new_player_x += all->player.move_side * sin(all->player.rotation_angle) * move_step;
-	// new_player_y -= all->player.move_side * cos(all->player.rotation_angle) * move_step;
-	
 	new_player_x += all->player.move_side * cos(all->player.rotation_angle + M_PI / 2) * all->player.move_speed;
 	new_player_y += all->player.move_side * sin(all->player.rotation_angle + M_PI / 2) * all->player.move_speed;
 	
@@ -81,6 +76,14 @@ void draw_update_all(t_all *all)
 	get_rays(all, rays);
 	render_3d_project_walls(all, rays);
 	draw_map(all);
-	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(170, 200, 250, 255));
-	draw_casts(all, rays);
+
+	t_line_cords line_cords;
+
+	line_cords.x1 = all->player.x;
+	line_cords.y1 = all->player.y;
+	line_cords.x2 = all->player.x + cos(all->player.rotation_angle) * 100;
+	line_cords.y2 = all->player.y + sin(all->player.rotation_angle) * 100;
+	int color = get_rgba(170, 200, 250, 255);
+
+	draw_player(all, line_cords, color);
 }

@@ -22,15 +22,15 @@
 #define TILE_SIZE 32
 #define MAP_COLS 20
 #define MAP_ROWS 20
-#define win_wTH 640
-#define win_hHT 640
+#define WIN_W 640
+#define WIN_H 640
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 
-#define NUM_RAYS (win_wTH)
+#define NUM_RAYS (WIN_W)
 
-#define MINIMAP_SCALE_FACTOR 0.2
+#define MINIMAP_SCALE 0.2
 #define PLAYER_RADIUS 10
 #define PLAYER_COLOR 16744448
 #define FLOAT_EPSILON 1e-5
@@ -40,7 +40,7 @@ typedef struct s_player
 	float x;
 	float y;
 	float radius;
-	int		turn_direction;
+	float		turn_direction;
 	int		walk_direction;
 	float rotation_angle;
 	float move_speed;
@@ -94,6 +94,16 @@ typedef struct s_all
 	struct s_rgb rgb;
 	struct s_textures txt;
 }	t_all;
+
+
+typedef struct s_intrc_dt
+{
+	float	x_step;
+	float	y_step;
+	float	x_intercept;
+	float	y_intercept;
+}	t_intrc_dt;
+
 struct s_checker
 {
 	int i;
@@ -112,6 +122,8 @@ struct s_checker
 	int vld;
 	char *q;
 };
+
+
 typedef struct s_rays
 {
 	float		ray_distance;
@@ -132,6 +144,26 @@ typedef struct s_rays
 	int is_ray_facing_right;
 }	t_rays;
 
+typedef struct s_dda_data
+{
+	float	x;
+	float	y;
+	float	incx;
+	float	incy;
+	int		steps;
+	int		i;
+	int		dx;
+	int		dy;
+}	t_dda_data;
+
+typedef struct s_line_cords
+{
+	int	x1;
+	int	x2;
+	int	y1;
+	int	y2;
+}	t_line_cords;
+
 
 int	checker_1(char **args);
 void	init_check(struct s_checker *check, int i);
@@ -143,9 +175,9 @@ int checker_2(struct s_map *map);
 int checker_1(char **args);
 void draw_map(t_all *all);
 int exctract(struct s_map *map, t_player *player);
-void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
+// void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
 int get_rgba(int r, int g, int b, int a);
-void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color);
+void	draw_player(t_all *all, t_line_cords line_cords, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
 void	get_rays(t_all *all, t_rays	*rays);
@@ -165,10 +197,6 @@ int load_text_n(struct s_map *map, int i, int j);
 int load_text_s(struct s_map *map, int i, int j);
 int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
-void	draw_casts(t_all *all, t_rays *rays);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
-
-void    put_settings(t_all *all);
-
 #endif
