@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/23 14:50:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:33:59 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int	get_wi_he(struct s_map *map)
 		i++;
 	}
 	map->win_h = i * TILE_SIZE;
+	if (map->win_h * MINIMAP_SCALE > WIN_H)
+		werror(1);
+	if (map->win_w * MINIMAP_SCALE > WIN_W)
+		werror(1);
 	return (0);
 }
 
