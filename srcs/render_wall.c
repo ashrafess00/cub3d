@@ -6,15 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:14:10 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:33:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
-
-//horizontal and verical
-//horizontal -> up and down
-//vertical -> left or right
 
 uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
 {

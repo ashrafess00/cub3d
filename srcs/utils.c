@@ -6,38 +6,35 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:28:46 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:58:05 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_header.h"
 
-float	adjastAngle(float rayAngle)
+float	get_angle_for_play(t_player *player)
 {
-	rayAngle = fmod(rayAngle, (2 * M_PI));
-	if (rayAngle <= 0)
-		rayAngle = (2 * M_PI) + rayAngle;
-	return (rayAngle);
+	if (player->c[0] == 'W')
+		return (M_PI);
+	else if (player->c[0] == 'S')
+		return (1.5708);
+	else if (player->c[0] == 'E')
+		return (0);
+	else
+		return (4.7277);
+}
+
+float	adjast_angle(float ray_angle)
+{
+	ray_angle = fmod(ray_angle, (2 * M_PI));
+	if (ray_angle <= 0)
+		ray_angle = (2 * M_PI) + ray_angle;
+	return (ray_angle);
 }
 
 float	distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
-
-bool	in_the_wall(float x, float y, t_all *all)
-{
-	int	m_x;
-	int	m_y;
-
-	if (x < 0 || x > all->map.win_w || y < 0 || y > all->map.win_h)
-		return (1);
-	m_x = floor(x / TILE_SIZE);
-	m_y = floor(y / TILE_SIZE);
-	if (all->map.pure_map[m_y][m_x] != '0' && is_player(all->map.pure_map[m_y],
-			m_x) == 0)
-		return (1);
-	return (0);
 }
 
 t_rays	fill_ray_direction(t_rays ray, float ray_angle)
