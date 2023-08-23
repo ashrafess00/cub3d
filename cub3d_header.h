@@ -22,13 +22,13 @@
 #define TILE_SIZE 32
 #define MAP_COLS 20
 #define MAP_ROWS 20
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 640
+#define win_wTH 640
+#define win_hHT 640
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP 1
 #define WALL_STRIP_WIDTH 1
 
-#define NUM_RAYS (WINDOW_WIDTH)
+#define NUM_RAYS (win_wTH)
 
 #define MINIMAP_SCALE_FACTOR 0.1
 #define PLAYER_RADIUS 10
@@ -79,8 +79,8 @@ struct s_map
 	int tmp;
 	char **pure_map;
 	int last_line;
-	int window_wid;
-	int window_heig;
+	int win_w;
+	int win_h;
 	int lines;
 	struct s_rgb rgb;
 	struct s_txt txt;
@@ -94,6 +94,14 @@ typedef struct s_all
 	struct s_rgb rgb;
 	struct s_textures txt;
 }	t_all;
+
+typedef struct s_intrc_dt
+{
+	float	x_step;
+	float	y_step;
+	float	x_intercept;
+	float	y_intercept;
+}	t_intrc_dt;
 
 typedef struct s_rays
 {
