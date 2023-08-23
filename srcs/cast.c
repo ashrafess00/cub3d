@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:26:20 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:35:24 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	get_horz_ver_distances(t_all *all, t_rays rays,
 		*ver_hit_distance = INT_MAX;
 }
 
-t_rays	render_ray(t_all *all, float rayAngle, int i, t_rays rays)
+t_rays	render_ray(t_all *all, float ray_angle, int i, t_rays rays)
 {
 	float	horz_hit_distance;
 	float	ver_hit_distance;
 
-	horizontal_intersection(all, rayAngle, &rays);
-	vertical_intersection(all, rayAngle, &rays);
+	horizontal_intersection(all, ray_angle, &rays);
+	vertical_intersection(all, ray_angle, &rays);
 	get_horz_ver_distances(all, rays, &horz_hit_distance, &ver_hit_distance);
 	if (horz_hit_distance <= ver_hit_distance)
 	{
@@ -60,7 +60,7 @@ t_rays	render_ray(t_all *all, float rayAngle, int i, t_rays rays)
 		rays.found_ver_wall_hit = true;
 	}
 	rays.ray_distance = rays.ray_distance * \
-		cos(rayAngle - all->player.rotation_angle);
+		cos(ray_angle - all->player.rotation_angle);
 	return (rays);
 }
 
@@ -70,12 +70,12 @@ void	get_rays(t_all *all, t_rays	*rays)
 	float	ray_angle;
 
 	ray_angle = all->player.rotation_angle - (FOV_ANGLE / 2);
-	ray_angle = adjastAngle(ray_angle);
+	ray_angle = adjast_angle(ray_angle);
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
 		rays[i] = render_ray(all, ray_angle, i, rays[i]);
 		ray_angle += (FOV_ANGLE / NUM_RAYS);
-		ray_angle = adjastAngle(ray_angle);
+		ray_angle = adjast_angle(ray_angle);
 	}
 }

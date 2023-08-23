@@ -12,11 +12,6 @@
 
 #include "cub3d_header.h"
 
-//horizontal and verical
-//horizontal -> up and down
-//vertical -> left or right
-
-
 void	put_texture(mlx_texture_t *txt, t_all *all, struct s_wall *wall,
 		int x_end)
 {

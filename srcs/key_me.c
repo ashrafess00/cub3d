@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 12:44:19 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:17:29 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:51:10 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	release_it(t_all *all, mlx_key_data_t keydata)
 		all->player.move_side = 0;
 }
 
-void	move_mama(mlx_key_data_t keydata, void *param)
+void	press_key(mlx_key_data_t keydata, void *param)
 {
 	t_all	*all;
 

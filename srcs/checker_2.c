@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:58:38 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/23 10:59:28 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:58:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,19 @@ void	while_check(struct s_map *map, struct s_checker *che, int i)
 	che->q = ft_substr(map->my_map[i], che->tmp, che->jj - che->tmp);
 	che->nmb = ft_atoi(che->q);
 	free(che->q);
+}
+
+bool	in_the_wall(float x, float y, t_all *all)
+{
+	int	m_x;
+	int	m_y;
+
+	if (x < 0 || x > all->map.win_w || y < 0 || y > all->map.win_h)
+		return (1);
+	m_x = floor(x / TILE_SIZE);
+	m_y = floor(y / TILE_SIZE);
+	if (all->map.pure_map[m_y][m_x] != '0' && is_player(all->map.pure_map[m_y],
+			m_x) == 0)
+		return (1);
+	return (0);
 }

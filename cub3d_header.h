@@ -175,7 +175,7 @@ typedef struct s_line_cords
 }	t_line_cords;
 
 
-int	checker_1(char **args);
+int		checker_1(char **args);
 void	init_check(struct s_checker *check, int i);
 void	while_check(struct s_map *map, struct s_checker *che, int i);
 int is_player(char *s, int i);
@@ -199,11 +199,9 @@ int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
 void	for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all,struct s_wall *wall);
 void	init_player(t_player *player, t_all *all);
-void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
-void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
+void	horizontal_intersection(t_all *all, float ray_angle, t_rays *ray);
+void	vertical_intersection(t_all *all, float ray_angle, t_rays *ray);
 float	distance_between_points(float x1, float y1, float x2, float y2);
-// float distance_between_points(int x1, int y1, int x2, int y2);
-// void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
 uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y);
 int	extract_2(struct s_map *map, int start);
@@ -215,4 +213,10 @@ int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
+
+//free
+void	free_exit(t_all *all);
+
+//init
+void	init_map(t_all *all, t_player *player, char *file);
 #endif
