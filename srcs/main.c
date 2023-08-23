@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 13:35:34 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:57:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	werror(int i)
 {
 	if (i == 1)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(1);
 	}
 	exit(0);
