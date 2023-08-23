@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 13:11:58 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 10:26:19 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:04:53 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,6 @@ t_rays	render_ray(t_all *all, float rayAngle, int i, t_rays rays)
 	rays.ray_distance = rays.ray_distance * \
 		cos(rayAngle - all->player.rotation_angle);
 	return (rays);
-}
-
-void	draw_casts(t_all *all, t_rays *rays)
-{
-	int				i;
-	t_line_cords	line_cords;
-	int				color;
-	
-	i = -1;
-	color = get_rgba(255, 0, 0, 255);
-	while (++i < NUM_RAYS)
-	{
-		line_cords.x1 = all->player.x;
-		line_cords.y1 = all->player.y;
-		line_cords.x2 = rays[i].main_wall_hit_x;
-		line_cords.y2 =rays[i].main_wall_hit_y;
-		draw_line(all, line_cords, color);
-	}
 }
 
 void	get_rays(t_all *all, t_rays	*rays)
