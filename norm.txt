@@ -1,0 +1,2 @@
+srcs/render_wall.c: Error!
+Error: TOO_MANY_FUNCS       (line: 115, col:   1):	Too many functions in file

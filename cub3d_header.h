@@ -143,7 +143,17 @@ typedef struct s_rays
 	int is_ray_facing_left;
 	int is_ray_facing_right;
 }	t_rays;
-
+struct s_wall
+{
+	float x;
+	float y;
+	float width;
+	float height;
+	int flag;
+	int fl;
+	int y_end;
+	float y_en;
+};
 typedef struct s_dda_data
 {
 	float	x;
@@ -169,7 +179,7 @@ int	checker_1(char **args);
 void	init_check(struct s_checker *check, int i);
 void	while_check(struct s_map *map, struct s_checker *che, int i);
 int is_player(char *s, int i);
-void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
+void	draw_walls(t_all *all, t_rays ray, struct s_wall *wall);
 void werror(int i);
 int	check_mty_line(struct s_map *map, int start);
 int checker_2(struct s_map *map);
@@ -187,6 +197,7 @@ bool in_the_wall(float x, float y, t_all *all);
 float adjastAngle(float rayAngle);
 int get_wi_he(struct s_map *map);
 void draw_update_all(t_all *all);
+void	for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all,struct s_wall *wall);
 void	init_player(t_player *player, t_all *all);
 void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray);
 void vertical_intersection(t_all *all, float rayAngle, t_rays *ray);
@@ -194,7 +205,9 @@ float	distance_between_points(float x1, float y1, float x2, float y2);
 // float distance_between_points(int x1, int y1, int x2, int y2);
 // void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
+uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y);
 int	extract_2(struct s_map *map, int start);
+int	x_end_f(mlx_texture_t *txt, t_rays ray);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
 int load_text_n(struct s_map *map, int i, int j);
 int load_text_s(struct s_map *map, int i, int j);

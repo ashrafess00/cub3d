@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:14:10 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:27:52 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,38 @@
 //horizontal -> up and down
 //vertical -> left or right
 
-uint32_t	txt_pixel(mlx_texture_t *texture, int x, int y)
-{
-	uint32_t	p;
 
-	p = ((uint32_t *)texture->pixels)[texture->width * y + x];
-	return ((p & 0xFF000000) >> 24 | (p & 0x00FF0000) >> 8 | (p & 0x0000FF00) << 8 | (p & 0x000000FF) << 24);
+void	put_texture(mlx_texture_t *txt, t_all *all, struct s_wall *wall,
+		int x_end)
+{
+	while (wall->y < wall->y_en)
+	{
+		if (wall->y >= WIN_H)
+			break ;
+		wall->y_end = (wall->y - wall->fl) * (txt->height / wall->height);
+		if (wall->x < 0 || wall->x >= WIN_W || wall->y < 0 || wall->y >= WIN_H)
+		{
+			wall->y++;
+			continue ;
+		}
+		if (wall->flag == 0)
+		{
+			if (wall->y_end < txt->height)
+				mlx_put_pixel(all->mlx_img, wall->x, wall->y, txt_pixel(txt,
+						x_end, wall->y_end));
+		}
+		else if (wall->flag == 1)
+		{
+			if (wall->y_end < txt->height)
+				mlx_put_pixel(all->mlx_img, wall->x, wall->y, txt_pixel(txt,
+						txt->width - x_end, wall->y_end));
+		}
+		wall->y++;
+	}
 }
 
-int	x_end_f(mlx_texture_t *txt, t_rays ray)
-{
-	int	x_end;
-
-	if (ray.found_ver_wall_hit)
-		x_end = (txt->width / TILE_SIZE) * (ray.main_wall_hit_y
-				- (int)(ray.main_wall_hit_y / TILE_SIZE) * TILE_SIZE);
-	else
-		x_end = (txt->width / TILE_SIZE) * (ray.main_wall_hit_x
-				- (int)(ray.main_wall_hit_x / TILE_SIZE) * TILE_SIZE);
-	return (x_end);
-}
-void	for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x,
-		float width, float y, float height, float flag)
+void	for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all,
+		struct s_wall *wall)
 {
 	float	x_en;
 	float	y_en;
@@ -45,77 +55,59 @@ void	for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x,
 	int		y_end;
 	int		fl;
 
-	x_en = x + width;
-	y_en = y + height;
+	x_en = wall->x + wall->width;
+	y_en = wall->y + wall->height;
 	x_end = 0;
 	y_end = 0;
-	fl = y;
+	fl = wall->y;
+	wall->fl = fl;
 	x_end = x_end_f(txt, ray);
-	while (y < y_en)
-	{
-		if (y >= WIN_H)
-			break ;
-		y_end = (y - fl) * (txt->height / height);
-		if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
-		{
-			y++;
-			continue ;
-		}
-		if (flag == 0)
-		{
-			if (y_end < txt->height)
-				mlx_put_pixel(all->mlx_img, x, y, txt_pixel(txt, x_end, y_end));
-		}
-		else if (flag == 1)
-		{
-			if (y_end < txt->height)
-				mlx_put_pixel(all->mlx_img, x, y, txt_pixel(txt, txt->width
-							- x_end, y_end));
-		}
-		y++;
-	}
+	wall->y_end = y_end;
+	wall->y_en = y_en;
+	put_texture(txt, all, wall, x_end);
 }
-void	draw_walls(t_all *all, t_rays ray, float x, float y, float width,
-		float height, int color)
+
+void	draw_walls(t_all *all, t_rays ray, struct s_wall *wall)
 {
 	if (ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
-		for_every_deriction(all->txt.s_txt, ray, all, x, width, y, height, 1);
+	{
+		wall->flag = 1;
+		for_every_deriction(all->txt.s_txt, ray, all, wall);
+	}
 	else if (ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
-		for_every_deriction(all->txt.n_txt, ray, all, x, width, y, height, 0);
+	{
+		wall->flag = 0;
+		for_every_deriction(all->txt.n_txt, ray, all, wall);
+	}
 	else if (ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
-		for_every_deriction(all->txt.w_txt, ray, all, x, width, y, height, 1);
+	{
+		wall->flag = 1;
+		for_every_deriction(all->txt.w_txt, ray, all, wall);
+	}
 	else if (ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
-		for_every_deriction(all->txt.e_txt, ray, all, x, width, y, height, 0);
+	{
+		wall->flag = 0;
+		for_every_deriction(all->txt.e_txt, ray, all, wall);
+	}
 }
 
-/*
-   actual wall height              projected wall height
------------------------ = -------------------------------------------
-    distance to wall         distance from player to project plane
-
-actuall wall	height                = TAIL_SIZE
-distance to		wall                   = ray distance
-distance from player to proj.plane = adjacent = (win_w / 2) / tan(30)
-*/
 void	render_3d_project_walls(t_all *all, t_rays *rays)
 {
-	float distance_projection_plane;
-	int wall_strip_height;
-	int x;
-	int y;
-	float width;
-	float height;
+	float			distance_projection_plane;
+	int				wall_strip_height;
+	struct s_wall	wall;
+	int				i;
 
-    int i = -1;
-    while (++i < NUM_RAYS)
-    {
-        distance_projection_plane = (WIN_H / 2) / tan(FOV_ANGLE / 2);
-        wall_strip_height = (TILE_SIZE /  rays[i].ray_distance) * distance_projection_plane;
-        x = i;
-        y = (WIN_W / 2) - (wall_strip_height / 2);
-        width =  2;
-        height = wall_strip_height;
-        draw_walls(all, rays[i], x, y, width, height,
-                        get_rgba(255, 0, 0, 255));
-    }
+	i = -1;
+	while (++i < NUM_RAYS)
+	{
+		distance_projection_plane = (WIN_H / 2) / tan(FOV_ANGLE / 2);
+		wall_strip_height = (TILE_SIZE / rays[i].ray_distance)
+			* distance_projection_plane;
+		wall.x = i;
+		wall.y = (WIN_W / 2) - (wall_strip_height / 2);
+		wall.width = 2;
+		wall.height = wall_strip_height;
+		draw_walls(all, rays[i], &wall);
+	}
 }
