@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 09:57:56 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 10:22:58 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	werror(int i)
 		write(1, "Error\n", 6);
 		exit(1);
 	}
+	exit(0);
 }
 
 void	load_txt(struct s_map *map, struct s_all *all)

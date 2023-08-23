@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/23 09:48:29 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/08/23 11:17:05 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT_DIR=libft/
 SRCS_DIR=srcs/
 INCLUDE=  -I$(LIBFT_DIR) -I./
 LIBS=MLX42/libmlx42.a
-SRCS=main.c draw_me.c key_me.c init_.c checker.c extract_map.c cast.c render_wall.c draw_update_objects.c horizontal_intersection.c vertical_intersection.c utils.c extract_texture.c
+SRCS=main.c draw_me.c key_me.c init_.c checker.c checker_2.c extract_map.c cast.c render_wall.c draw_update_objects.c horizontal_intersection.c vertical_intersection.c utils.c extract_texture.c
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
