@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_update_objects.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:49:02 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,4 @@ void draw_update_all(t_all *all)
 	draw_map(all);
 	draw_line(all, all->player.x, all->player.y, all->player.x + cos(all->player.rotation_angle) * 100, all->player.y + sin(all->player.rotation_angle) * 100, get_rgba(170, 200, 250, 255));
 	draw_casts(all, rays);
-
-	//buttons
-	put_settings(all);
-	
-	
 }
