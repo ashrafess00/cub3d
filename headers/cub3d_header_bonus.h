@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_header.h                                     :+:      :+:    :+:   */
+/*   cub3d_header_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 14:56:35 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:09:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_HEADER_H
-# define CUB3D_HEADER_H
+#ifndef CUB3D_HEADER_BONUS_H
+# define CUB3D_HEADER_BONUS_H
 
 # include "libft.h"
 # include <stdio.h>
 # include <fcntl.h>
-# include "MLX42/MLX42.h"
+# include "../MLX42/MLX42.h"
 # include <math.h>
 # define TILE_SIZE 32
 # define MAP_COLS 20
