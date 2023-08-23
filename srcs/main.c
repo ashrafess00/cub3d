@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 10:22:58 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 11:44:28 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	load_txt(struct s_map *map, struct s_all *all)
 	free(map->txt.no_txt);
 	free(map->txt.we_txt);
 	free(map->txt.ea_txt);
-
-
 }
-void count_line(struct s_map *map )
+void	count_line(struct s_map *map)
 {
-	int i = 0;
-	int j = 0;
-	while(map->whole_map[i] != '\0')
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map->whole_map[i] != '\0')
 	{
-		if(map->whole_map[i] == '\n')
+		if (map->whole_map[i] == '\n')
 			j++;
 		i++;
 	}
@@ -81,21 +82,23 @@ void	init_map(t_all *all, t_player *player, char *file)
 	count_line(&map);
 	map.my_map = ft_split(map.whole_map, '\n');
 	checker_2(&map);
-	exctract(&map, player);
+	exctract(&map, player, 0,0);
 	load_txt(&map, all);
 	all->map = map;
 	all->rgb = map.rgb;
 }
-void free_double(char **s)
+void	free_double(char **s)
 {
-	int i = 0;
-	while(s[i])
+	int	i;
+
+	i = 0;
+	while (s[i])
 	{
 		free(s[i]);
 		i++;
 	}
 }
-void free_exit(t_all *all)
+void	free_exit(t_all *all)
 {
 	if (all->txt.s_txt)
 		mlx_delete_texture(all->txt.s_txt);
@@ -105,25 +108,24 @@ void free_exit(t_all *all)
 		mlx_delete_texture(all->txt.n_txt);
 	if (all->txt.e_txt)
 		mlx_delete_texture(all->txt.e_txt);
-	if(all->map.my_map)
+	if (all->map.my_map)
 		free(all->map.my_map);
-	if(all->map.whole_map)
+	if (all->map.whole_map)
 		free(all->map.whole_map);
-	if(all->map.pure_map)
+	if (all->map.pure_map)
 		free_double(all->map.pure_map);
 	free(all->player.c);
 }
 int	main(int c, char **args)
 {
-	t_all			all;
-	t_player		player;
+	t_all		all;
+	t_player	player;
 
 	if (c != 2 || checker_1(args) == -1)
 		werror(1);
 	init_map(&all, &player, args[1]);
 	init_mlx(&all);
 	init_player(&player, &all);
-	
 	//draw all
 	mlx_image_to_window(all.mlx, all.mlx_img, 0, 0);
 	draw_update_all(&all);
@@ -138,8 +140,8 @@ int	main(int c, char **args)
 //1- substract 30 degrees from player rotaion angle fov/2
 //2- start at column 0
 //3- while(column < 320)
-	// *cast a ray
-	// tracet he rau until it intersects with a wall(map[i][j] == 1)
-	//record the intersection (x, y) and the distance (ray lenght)
-		//rayAngle += 60 / 320;  (60 will be converted to rad)
+// *cast a ray
+// tracet he rau until it intersects with a wall(map[i][j] == 1)
+//record the intersection (x, y) and the distance (ray lenght)
+//rayAngle += 60 / 320;  (60 will be converted to rad)
 ////render wall line 46
