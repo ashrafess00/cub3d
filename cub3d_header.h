@@ -95,6 +95,7 @@ typedef struct s_all
 	struct s_textures txt;
 }	t_all;
 
+
 typedef struct s_intrc_dt
 {
 	float	x_step;
@@ -102,6 +103,25 @@ typedef struct s_intrc_dt
 	float	x_intercept;
 	float	y_intercept;
 }	t_intrc_dt;
+
+struct s_checker
+{
+	int i;
+	int jj;
+    int k;
+    int n;
+    int s;
+    int we;
+    int ea;
+    int  j;
+    int c;
+    int f;
+	int nmb;
+	int tmp;
+	int comma;
+	int vld;
+	char *q;
+};
 
 typedef struct s_rays
 {
@@ -144,6 +164,9 @@ typedef struct s_line_cords
 }	t_line_cords;
 
 
+int	checker_1(char **args);
+void	init_check(struct s_checker *check, int i);
+void	while_check(struct s_map *map, struct s_checker *che, int i);
 int is_player(char *s, int i);
 void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
 void werror(int i);
