@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_update_objects.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
 /*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
@@ -66,7 +66,6 @@ void draw_update_all(t_all *all)
 	
 	if (new_player_x < 0 || new_player_x >= all->map.win_w || new_player_y < 0 || new_player_y >= all->map.win_h)
 		return;
-	//check the wall collision
 
 	if (in_the_wall(all->player.x, new_player_y, all) && in_the_wall(new_player_x, all->player.y, all))
 		return ;

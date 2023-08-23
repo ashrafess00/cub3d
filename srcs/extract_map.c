@@ -164,7 +164,7 @@ int get_wi_he(struct s_map *map)
     while(map->pure_map[i])
     {
         j=0;
-        while(map->pure_map[i][j])
+        while(map->pure_map[i][j] != '\0')
             j++;
         if(j > map->win_w)
             map->win_w = j * TILE_SIZE;

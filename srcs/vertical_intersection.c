@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_intersection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:50:39 by aessaoud          #+#    #+#             */
 /*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
