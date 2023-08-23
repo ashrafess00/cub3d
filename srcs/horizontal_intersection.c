@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 08:28:31 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 08:36:36 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ void horizontal_intersection(t_all *all, float rayAngle, t_rays *ray)
 	x_step = TILE_SIZE / tan(rayAngle);//x_step
 	if ((ray->is_ray_facing_left && x_step > 0) || (ray->is_ray_facing_right && x_step < 0))
 		x_step *= -1;
-	
 	//incremet x_step and y_step until we find a wall
 	while (xIntercept >= 0 && xIntercept < all->map.window_wid
 		&& y_intercept >= 0 && y_intercept < all->map.window_heig)
 	{
 		x_to_check = xIntercept;
-		// y_to_check = y_intercept + (ray->is_ray_facing_up ? -1 : 0);
 		if (ray->is_ray_facing_up)
 			y_to_check = y_intercept - 1;
 		else

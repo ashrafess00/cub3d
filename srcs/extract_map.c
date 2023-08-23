@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/22 19:24:01 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 08:38:25 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,9 @@ int get_wi_he(struct s_map *map)
     while(map->pure_map[i])
     {
         j=0;
-        while(map->pure_map[i][j])
+        while(map->pure_map[i][j] != '\0')
             j++;
-        if(j > map->window_wid)
+        if(j * TILE_SIZE > map->window_wid)
             map->window_wid = j * TILE_SIZE;
         i++;
     }
