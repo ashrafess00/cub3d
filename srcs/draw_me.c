@@ -6,9 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 11:05:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:25:27 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d_header.h"
 
 #include "cub3d_header.h"
 
@@ -36,9 +38,10 @@ void	draw_player(t_all *all, t_line_cords line_cords, int color)
 	dda_data.x = line_cords.x1;
 	dda_data.y = line_cords.y1;
 	dda_data.i = -1;
+	
 	while (++dda_data.i <= dda_data.steps)
 	{
-		if (dda_data.x < 0 || dda_data.x >= all->map.win_w
+			if (dda_data.x < 0 || dda_data.x >= all->map.win_w
 			|| dda_data.y < 0 || dda_data.y >= all->map.win_h)
 			return ;
 		mlx_put_pixel(all->mlx_img, (int)round(dda_data.x),

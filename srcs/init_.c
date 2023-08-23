@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:34:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 10:29:39 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:18:26 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ float	get_angle_for_play(t_player *player)
 		return (M_PI);
 	else if (player->c[0] == 'S')
 		return (1.5708);
-	else if (player-> c[0] == 'E')
+	else if (player->c[0] == 'E')
 		return (0);
 	else
 		return (4.7277);

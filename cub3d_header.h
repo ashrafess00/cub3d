@@ -40,7 +40,7 @@ typedef struct s_player
 	float x;
 	float y;
 	float radius;
-	int		turn_direction;
+	float		turn_direction;
 	int		walk_direction;
 	float rotation_angle;
 	float move_speed;
@@ -123,6 +123,7 @@ struct s_checker
 	char *q;
 };
 
+
 typedef struct s_rays
 {
 	float		ray_distance;
@@ -170,15 +171,17 @@ void	while_check(struct s_map *map, struct s_checker *che, int i);
 int is_player(char *s, int i);
 void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
 void werror(int i);
+int	check_mty_line(struct s_map *map, int start);
 int checker_2(struct s_map *map);
 int checker_1(char **args);
 void draw_map(t_all *all);
-int exctract(struct s_map *map, t_player *player);
-// void draw_player(mlx_image_t *mlx_img, int center_x, int center_y);
+int	exctract(struct s_map *map, t_player *player, int ma, int j);
 int get_rgba(int r, int g, int b, int a);
 void	draw_player(t_all *all, t_line_cords line_cords, int color);
 void move_mama(mlx_key_data_t keydata, void *param);
 void draw_update_all(t_all *all);
+int	checker_map(struct s_map *map, int ply, int j);
+int	check_valid(struct s_map *map);
 void	get_rays(t_all *all, t_rays	*rays);
 bool in_the_wall(float x, float y, t_all *all);
 float adjastAngle(float rayAngle);
@@ -191,6 +194,7 @@ float	distance_between_points(float x1, float y1, float x2, float y2);
 // float distance_between_points(int x1, int y1, int x2, int y2);
 // void render_3d_project_walls(t_all *all, t_rays ray, int i);
 void render_3d_project_walls(t_all *all, t_rays *rays);
+int	extract_2(struct s_map *map, int start);
 t_rays fill_ray_direction(t_rays ray, float ray_angle);
 int load_text_n(struct s_map *map, int i, int j);
 int load_text_s(struct s_map *map, int i, int j);
@@ -198,7 +202,4 @@ int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
-
-void    put_settings(t_all *all);
-
 #endif
