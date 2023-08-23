@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:05:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, fl
 void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color)
 {
     if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_down == 1)
-        for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,1);
+        for_every_deriction(all->txt.s_txt, ray, all, x,width, y, height,1);
     else if(ray.found_horz_wall_hit == 1 && ray.is_ray_facing_up == 1)
-       for_every_deriction(all->txt.s_txt, ray, all, x,width, y, height,0);
+       for_every_deriction(all->txt.n_txt, ray, all, x,width, y, height,0);
     else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_left == 1)
        for_every_deriction(all->txt.w_txt, ray, all, x,width, y, height,1);
     else if(ray.found_ver_wall_hit == 1 && ray.is_ray_facing_right == 1)
-        for_every_deriction(all->txt.n_txt, ray, all, x,width, y, height,0);
+        for_every_deriction(all->txt.e_txt, ray, all, x,width, y, height,0);
 }
 
 /*
