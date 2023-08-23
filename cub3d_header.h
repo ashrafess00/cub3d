@@ -94,15 +94,24 @@ typedef struct s_all
 	struct s_rgb rgb;
 	struct s_textures txt;
 }	t_all;
-
-typedef struct s_intrc_dt
+struct s_checker
 {
-	float	x_step;
-	float	y_step;
-	float	x_intercept;
-	float	y_intercept;
-}	t_intrc_dt;
-
+	int i;
+	int jj;
+    int k;
+    int n;
+    int s;
+    int we;
+    int ea;
+    int  j;
+    int c;
+    int f;
+	int nmb;
+	int tmp;
+	int comma;
+	int vld;
+	char *q;
+};
 typedef struct s_rays
 {
 	float		ray_distance;
@@ -123,6 +132,10 @@ typedef struct s_rays
 	int is_ray_facing_right;
 }	t_rays;
 
+
+int	checker_1(char **args);
+void	init_check(struct s_checker *check, int i);
+void	while_check(struct s_map *map, struct s_checker *che, int i);
 int is_player(char *s, int i);
 void draw_walls(t_all *all, t_rays ray, float x, float y, float width, float height, int color);
 void werror(int i);
