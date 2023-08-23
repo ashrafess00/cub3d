@@ -6,9 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 11:36:04 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:25:27 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d_header.h"
 
 #include "cub3d_header.h"
 
