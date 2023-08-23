@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kslik <kslik@student.42.fr>                +#+  +:+       +#+         #
+#    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#              #
-#    Updated: 2023/08/23 13:28:15 by kslik            ###   ########.fr        #
+#    Updated: 2023/08/23 14:53:33 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,12 @@ LIBFT_DIR=libft/
 SRCS_DIR=srcs/
 INCLUDE=  -I$(LIBFT_DIR) -I./
 LIBS=MLX42/libmlx42.a
-SRCS=main.c draw_me.c key_me.c init_.c checker.c checker_2.c extract_map.c cast.c render_wall.c draw_update_objects.c horizontal_intersection.c vertical_intersection.c utils.c extract_texture.c extract_mbp.c extract_mcp.c render_wall2.c
+SRCS=main.c draw_me.c key_me.c init_.c checker.c checker_2.c extract_map.c cast.c render_wall.c draw_update_objects.c horizontal_intersection.c vertical_intersection.c utils.c extract_texture.c extract_mbp.c extract_mcp.c render_wall2.c mouse_me.c free_me.c
 OBJS_DIR=objs/
 OBJS=$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT_A=$(LIBFT_DIR)libft.a
-# CFLAGS = -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
+HEADER=cub3d_header.h
 
 CC=cc
 RM=rm -rf
@@ -28,8 +29,7 @@ MLX_FLAGS=$(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"
 
 all: $(OBJS_DIR) $(NAME)
 
-
-$(NAME): $(LIBFT_A) $(OBJS) cub3d_header.h
+$(NAME): $(LIBFT_A) $(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_FLAGS) $(INCLUDE) -o $(NAME) 
 	@echo $(NAME) was created :\)
 
@@ -40,7 +40,7 @@ $(LIBFT_A):
 	make -C $(LIBFT_DIR)
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.c
-	$(CC) $(CFLAGS) $(INCLUDE) -O3 -c -o $@ $^
+	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $^
 
 clean:
 	make clean -C $(LIBFT_DIR)

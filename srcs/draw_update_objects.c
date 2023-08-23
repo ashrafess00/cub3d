@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:44:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:51:50 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	set_player_data(t_all *all, float *new_player_x, float *new_player_y)
 
 void	draw_update_all(t_all *all)
 {
-	float	move_step;
 	float	new_player_x;
 	float	new_player_y;
 	t_rays	rays[NUM_RAYS];

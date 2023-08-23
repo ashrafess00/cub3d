@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 13:27:52 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:51:38 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	put_texture(mlx_texture_t *txt, t_all *all, struct s_wall *wall,
 		}
 		if (wall->flag == 0)
 		{
-			if (wall->y_end < txt->height)
+			if ((uint32_t)wall->y_end < (uint32_t)txt->height)
 				mlx_put_pixel(all->mlx_img, wall->x, wall->y, txt_pixel(txt,
 						x_end, wall->y_end));
 		}
 		else if (wall->flag == 1)
 		{
-			if (wall->y_end < txt->height)
+			if ((uint32_t)wall->y_end < (uint32_t)txt->height)
 				mlx_put_pixel(all->mlx_img, wall->x, wall->y, txt_pixel(txt,
 						txt->width - x_end, wall->y_end));
 		}

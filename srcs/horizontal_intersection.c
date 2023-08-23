@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:48:02 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:34:21 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:48:27 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	init_ray_values(t_rays *ray)
 {
 	ray->found_horz_wall_hit = 0;
-	ray->horzWallHitX = 0;
-	ray->horzWallHitY = 0;
+	ray->horz_wall_hit_x = 0;
+	ray->horz_wall_hit_y = 0;
 }
 
 //calculate the increment x_step and y_step
@@ -47,8 +47,8 @@ static void	find_the_interception(t_all *all, t_rays *ray, t_intrc_dt intrc_dt)
 			y_to_check = intrc_dt.y_intercept;
 		if (in_the_wall(x_to_check, y_to_check, all))
 		{
-			ray->horzWallHitX = intrc_dt.x_intercept;
-			ray->horzWallHitY = intrc_dt.y_intercept;
+			ray->horz_wall_hit_x = intrc_dt.x_intercept;
+			ray->horz_wall_hit_y = intrc_dt.y_intercept;
 			ray->found_horz_wall_hit = 1;
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:56:01 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:35:34 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,3 @@ int	main(int c, char **args)
 	free_exit(&all);
 	return (0);
 }
-
-//ray casting steps
-//1- substract 30 degrees from player rotaion angle fov/2
-//2- start at column 0
-//3- while(column < 320)
-// *cast a ray
-// tracet he rau until it intersects with a wall(map[i][j] == 1)
-//record the intersection (x, y) and the distance (ray lenght)
-//ray_angle += 60 / 320;  (60 will be converted to rad)
-////render wall line 46

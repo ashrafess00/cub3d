@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/23 12:28:17 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:50:07 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	exctract(struct s_map *map, t_player *player, int ma, int j)
 	int	start;
 
 	i = 5;
+	start = 0;
 	while (map->my_map[i] != '\0')
 	{
 		while (map->my_map[i][j] == ' ' && map->my_map[i][j] != '\0')

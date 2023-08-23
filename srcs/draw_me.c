@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 12:48:37 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:49:22 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	draw_square(t_all *all, int i, int j)
 void	draw_map(t_all *all)
 {
 	int	i;
-	int	u;
 	int	j;
 
 	i = -1;

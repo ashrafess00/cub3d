@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:54:33 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:30:06 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 14:47:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,13 @@ static void	create_arr(const char *s, char **main_arr, char c)
 		{
 			main_arr[main_i] = (char *)ft_calloc(count + 1, sizeof(char));
 			if (main_arr[main_i] != NULL)
-			{
 				ft_memmove(main_arr[main_i], s + i, count);
-			}
 			main_i++;
 			i++;
 		}
 		while (s[i] && s[i] != c)
 			i++;
 	}
-	// free((char *)s);
 }
 
 char	**ft_split(char const *s, char c)
