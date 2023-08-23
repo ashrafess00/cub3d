@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 11:05:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:19:30 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,4 @@ void draw_update_all(t_all *all)
 	int color = get_rgba(170, 200, 250, 255);
 
 	draw_player(all, line_cords, color);
-	// draw_casts(all, rays);
 }

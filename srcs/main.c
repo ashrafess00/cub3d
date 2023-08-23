@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 10:22:58 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:03:19 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,33 @@ void free_exit(t_all *all)
 		free_double(all->map.pure_map);
 	free(all->player.c);
 }
+
+// typedef enum mouse_mode
+// {
+// 	MLX_MOUSE_NORMAL	= 0x00034001,
+// 	MLX_MOUSE_HIDDEN	= 0x00034002,
+// 	MLX_MOUSE_DISABLED	= 0x00034003,
+// }	mouse_mode_t;
+
+void 	move_mouse(double xpos, double ypos, void* param)
+{
+	t_all *all;
+	static double	p_xpos = 0;
+	// static double	p_ypos = 0;
+	
+	all = param;
+	if (xpos >= 0 && xpos < WIN_W && ypos >= 0 && ypos < WIN_H)
+	{
+		if (xpos > p_xpos)
+			all->player.turn_direction += 0.3;
+		else
+			all->player.turn_direction -= 0.3;
+		p_xpos = xpos;
+	draw_update_all(all);
+	}
+	all->player.turn_direction = 0;
+}
+
 int	main(int c, char **args)
 {
 	t_all			all;
@@ -128,6 +155,8 @@ int	main(int c, char **args)
 	mlx_image_to_window(all.mlx, all.mlx_img, 0, 0);
 	draw_update_all(&all);
 	mlx_key_hook(all.mlx, move_mama, &all);
+	mlx_cursor_hook(all.mlx, move_mouse, &all);
+
 	mlx_loop(all.mlx);
 	mlx_terminate(all.mlx);
 	free_exit(&all);

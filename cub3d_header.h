@@ -40,7 +40,7 @@ typedef struct s_player
 	float x;
 	float y;
 	float radius;
-	int		turn_direction;
+	float		turn_direction;
 	int		walk_direction;
 	float rotation_angle;
 	float move_speed;
@@ -94,7 +94,6 @@ typedef struct s_all
 	struct s_rgb rgb;
 	struct s_textures txt;
 }	t_all;
-
 
 typedef struct s_intrc_dt
 {
@@ -198,7 +197,4 @@ int load_text_e(struct s_map *map, int i, int j);
 int load_text_w(struct s_map *map, int i, int j);
 void	init_player(t_player *player, t_all *all);
 void	init_mlx(t_all *all);
-
-void    put_settings(t_all *all);
-
 #endif
