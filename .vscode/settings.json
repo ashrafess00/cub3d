@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "cub3d_header.h": "c",
-        "__locale": "c",
-        "bitset": "c",
-        "ios": "c"
-    }
-}
