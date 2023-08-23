@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:51:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:27:47 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ t_rays fill_ray_direction(t_rays ray, float ray_angle)
 	ray.is_ray_facing_right = ray_angle < (0.5 * M_PI) || ray_angle > (1.5 * M_PI);
 	ray.is_ray_facing_left = !ray.is_ray_facing_right;
 	return ray;
+}
+
+int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:34:57 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:22:48 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	init_player(t_player *player, t_all *all)
 
 void	init_mlx(t_all *all)
 {
-	all->mlx = mlx_init(win_wTH, win_hHT, WINDOW_TITLE, true);
-	all->mlx_img = mlx_new_image(all->mlx, win_wTH, win_hHT);
+	all->mlx = mlx_init(WIN_W, WIN_H, WINDOW_TITLE, true);
+	all->mlx_img = mlx_new_image(all->mlx, WIN_W, WIN_H);
 }
