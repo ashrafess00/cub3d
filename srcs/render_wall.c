@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:38:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 17:44:51 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/22 21:10:12 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void for_every_deriction(mlx_texture_t *txt, t_rays ray, t_all *all, float x, fl
     x_end = x_end_f(txt, ray);
     while (y < y_en)
     {
-        if (y >= WINDOW_HEIGHT)
+        if (y >= win_hHT)
             break ;
         y_end = (y - fl) * (txt->height / height);
-        if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+        if (x < 0 || x >= win_wTH || y < 0 || y >= win_hHT)
         {
             y++;
             continue;
@@ -104,12 +104,12 @@ void render_3d_project_walls(t_all *all, t_rays *rays)
     int i = -1;
     while (++i < NUM_RAYS)
     {
-        distance_projection_plane = (WINDOW_HEIGHT / 2) / tan(FOV_ANGLE / 2);
+        distance_projection_plane = (win_hHT / 2) / tan(FOV_ANGLE / 2);
         //projected wall height
         wall_strip_height = (TILE_SIZE /  rays[i].ray_distance) * distance_projection_plane;
         //draw rectangle
         x = i;
-        y = (WINDOW_WIDTH / 2) - (wall_strip_height / 2);
+        y = (win_wTH / 2) - (wall_strip_height / 2);
         width =  2;
         height = wall_strip_height;
         draw_walls(all, rays[i], x, y, width, height,
