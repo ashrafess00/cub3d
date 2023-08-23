@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:28:15 by kslik             #+#    #+#             */
-/*   Updated: 2023/08/23 15:33:59 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:41:35 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	get_ply_cor(struct s_map *map, t_player *player)
 		{
 			if (is_player(map->pure_map[i], j))
 			{
-				player->x = j * TILE_SIZE;
-				player->y = i * TILE_SIZE;
+				player->x = j * TILE_SIZE - (TILE_SIZE / 2);
+				player->y = i * TILE_SIZE + (TILE_SIZE / 2);
 				player->c = malloc(3 * sizeof(char));
 				player->c[0] = map->pure_map[i][j];
 				player->c[1] = '\0';
