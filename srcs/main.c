@@ -6,7 +6,7 @@
 /*   By: kslik <kslik@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/22 20:47:29 by kslik            ###   ########.fr       */
+/*   Updated: 2023/08/23 08:59:08 by kslik            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	werror(int i)
 		write(1, "Error\n", 6);
 		exit(1);
 	}
-	printf("zbi\n");
-	exit(0);
 }
 
 void	load_txt(struct s_map *map, struct s_all *all)
