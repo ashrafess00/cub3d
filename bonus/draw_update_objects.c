@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:53:18 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 16:03:00 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:45:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,5 @@ void	draw_update_all(t_all *all)
 	render_3d_project_walls(all, rays);
 	draw_map(all);
 	draw_player(all);
+	draw_casts(all, rays);
 }

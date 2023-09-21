@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:44 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 16:02:58 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:43:23 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,43 @@ void	draw_map(t_all *all)
 		while (all->map.pure_map[i][++j])
 			draw_square(all, i, j);
 	}
+}
+
+void	draw_line(t_all *all, int x1, int y1, int x2, int y2, int color)
+{
+    x1 *= MINIMAP_SCALE;
+    x2 *= MINIMAP_SCALE;
+    y1 *= MINIMAP_SCALE;
+    y2 *= MINIMAP_SCALE;
+    
+	float	incx;
+	float	incy;
+	int		steps;
+	int		i;
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    
+	steps = get_steps(dx, dy);
+	incx = dx / (float) steps;
+	incy = dy / (float) steps;
+    float x = x1;
+    float y = y1;
+	i = -1;
+	while (++i <= steps)
+	{
+        if (x < 0 || x >= all->map.win_w || y < 0 || y >= all->map.win_h)
+            return ;
+		mlx_put_pixel(all->mlx_img, (int)round(x), (int)round(y), color);
+        x += incx;
+        y += incy;
+    }
+}
+
+void	draw_casts(t_all *all, t_rays *rays)
+{
+	int	i;
+
+	i = -1;
+	while (++i < NUM_RAYS)
+		draw_line(all, all->player.x, all->player.y, rays[i].main_wall_hit_x, rays[i].main_wall_hit_y, get_rgba(255, 0, 0, 255));
 }

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:51:49 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/08/23 16:09:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:42:24 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,4 +219,7 @@ int			load_text_n(struct s_map *map, int i, int j);
 int			load_text_s(struct s_map *map, int i, int j);
 int			load_text_e(struct s_map *map, int i, int j);
 int			load_text_w(struct s_map *map, int i, int j);
+
+//draw
+void		draw_casts(t_all *all, t_rays *rays);
 #endif
